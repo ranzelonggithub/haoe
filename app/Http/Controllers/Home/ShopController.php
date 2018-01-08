@@ -14,9 +14,10 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function shop_list()
     {
-        //
+        //加载店铺详情页
+        return view('Home/Shop/shop_list') ;
     }
 
     /**
