@@ -16,7 +16,8 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        //加载登陆界面
+        return view('Home/Login/login') ;
     }
 
     /**
