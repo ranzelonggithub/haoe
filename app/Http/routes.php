@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//商铺路由组
+Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
+	
+});
