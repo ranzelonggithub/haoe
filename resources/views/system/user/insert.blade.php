@@ -37,7 +37,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>确认密码：</th>
                                 <td>
-                                    <input type="password" name='repass' value=''>
+                                    <input type="passWord" name='repass' value=''>
                                 </td>
                             </tr>
                             <tr>

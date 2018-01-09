@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+use App\Model\User_log;
+use App\Model\User_info;
 class UserController extends Controller
 {
     /**
@@ -16,15 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {   
-
-
-        $res = DB::table('user_infos')->first();
-        // ->join('user_infos','user_logs.id','=','user_infos.uid')
-        // ->select('user_logs.*','user_infos.auth')
-        // ->get();
-        dump($res);
+        $res = User_log::get();
+        //dump($res);
         //加载用户管理视图
         return view('system.user.design',['res'=>$res]);
+
     }
 
     /**
@@ -83,6 +80,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        echo 123;
     }
 
     /**
@@ -94,5 +92,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        dump($id);
     }
 }
