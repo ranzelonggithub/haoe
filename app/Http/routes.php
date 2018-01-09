@@ -13,6 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
 
 Route::group(['prefix'=>'sys','namespace'=>'sys'],function(){
 	//后台登入路由
