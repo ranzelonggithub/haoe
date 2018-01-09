@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Model\food;
+use DB;
 
 class FoodsController extends Controller
 {
@@ -15,8 +17,11 @@ class FoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        // $data = food::paginate(5);
+        $data = DB::table('foods')->paginate(5);
+
+        return view('shop.foods.index',['data'=>$data]);
     }
 
     /**
@@ -59,7 +64,7 @@ class FoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('/shop/foods/edit',['id'=>$id]);
     }
 
     /**

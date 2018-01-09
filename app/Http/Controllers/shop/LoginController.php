@@ -60,10 +60,13 @@ class LoginController extends Controller
     public function dologin(Request $request)
     {
     	$code = $request->input('code');
+    	$phone = $request->input('phone');
+    	// $id = shop::where('phone',$phone)->id;
+    	//session(['shopid'=>$id]);
     	if($code == session('code')){
     		echo 1;
     	}else{
-    		return view('shop.index.index');
+    		echo 0;
     	}
     }
 

@@ -5,6 +5,7 @@
     <title>后台管理</title>
     <link rel="stylesheet" type="text/css" href="{{asset('shops/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="/shops/css/main.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -35,8 +36,9 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
-                        <li><a href="design.html"><i class="icon-font">&#xe008;</i>店铺主页</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe005;</i>食品管理</a></li>
+                        <li><a href="/shop/index"><i class="icon-font">&#xe008;</i>店铺主页</a></li>
+                        <li><a href="/shop/foods"><i class="icon-font">&#xe005;</i>食品管理</a></li>
+                        <li><a href="#"><i class="icon-font">&#xe018;</i>回 收 站</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe006;</i>店铺管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe004;</i>订单管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>

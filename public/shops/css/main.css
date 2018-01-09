@@ -56,3 +56,47 @@
 .res-lab{color: #909090;}
 .res-info{font-size: 15px;}
 .sort-input{width: 25px;text-align: center;}
+tion li{display:inline-block;padding:8px;margin-right:3px;border:1px solid #0066cc;}*/
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    z-index: 2;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination li:first-child {
+	border-left:1px solid #ddd;
+}
+.pagination {
+	margin:0px auto;
+	margin-top:10px;
+}
+.pagination>li:hover {
+	cursor:pointer;
+}
+
+.pagination>li.active>a, .pagination>li.active>span {
+	background-color:#03f;
+	color:black;
+	/*border:1px solid red;*/
+}

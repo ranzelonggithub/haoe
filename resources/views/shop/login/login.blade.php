@@ -100,7 +100,7 @@
             if(data == 0){
                 layer.tips('验证码不正确', '#dynamicPWD');
             }else{
-                // {{return view('shop.index.index')}}
+                location.href='/shop/index';
             }
         });
     });

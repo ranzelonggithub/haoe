@@ -17,13 +17,19 @@ Route::get('/', function () {
 
 //商铺路由组
 Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
+	
+	//登录
 	Route::get('login','LoginController@login');
 	Route::post('phone','LoginController@phone');
 	Route::post('code','LoginController@code');
 	Route::post('dologin','LoginController@dologin');
 	Route::post('shouye','LoginController@index');
-	// Route::get('/index','IndexController@index');
-	// Route::resource('/foods','FoodsController');
+	
+	//主页
+	Route::get('index','IndexController@index');
+
+	//食品管理
+	Route::resource('/foods','FoodsController');
 	// Route::resource('/com','CommentController');
 	// Route::resource('/order','OrderlistController');
 	// Route::resource('/shop','ShopController');
