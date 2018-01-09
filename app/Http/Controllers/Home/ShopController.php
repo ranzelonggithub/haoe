@@ -14,75 +14,25 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shop_list()
+    public function shop_detail()
     {
         //加载店铺详情页
-        return view('Home/Shop/shop_list') ;
+        return view('Home/Shop/shop_detail') ;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function shop_comment() 
     {
-        //
+        //加载店铺评论页
+        return view('Home/Shop/shop_comment') ;
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function shop_brand() 
     {
-        //
+        //加载店铺大家都在点 页面
+        return view('Home/Shop/shop_brand') ;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+     public function shop_intro() 
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        //加载店铺简介 页面
+        return view('Home/Shop/shop_intro') ;
     }
 }
