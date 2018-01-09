@@ -15,24 +15,40 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//系统后台路由
 Route::group(['prefix'=>'sys','namespace'=>'sys'],function(){
-	//后台登入路由
-	Route::get('login','LoginController@login');
-	//后台首页路由
+
+	//系统后台登入页面
+	Route::get('/','LoginController@index');
+
+	//验证码生成路由
+	Route::get('code','LoginController@code');
+
+	//执行登入的路由
+	Route::post('login','LoginController@login');
+
+	//系统后台首页路由
 	Route::get('index','IndexController@index');
-	//用户管理路由
+
+	//系统用户管理路由
 	Route::resource('user','UserController');
-	//店家管理路由
+
+	//系统店家管理路由
 	Route::resource('shop','ShopController');
-	//订单管理的路由
+
+	//系统订单管理的路由
 	Route::resource('order','OrderController');
-	//申请管理路由
+
+	//系统申请管理路由
 	Route::resource('shenqing','ShenqingController');
-	//分类管理路由
+
+	//系统分类管理路由
 	Route::resource('category','CategoryController');
-	//配置管理路由
+
+	//系统配置管理路由
 	Route::resource('config','ConfigController');
-	//广告管理路由
+
+	//系统广告管理路由
 	Route::resource('ad','AdController');
 	
 });

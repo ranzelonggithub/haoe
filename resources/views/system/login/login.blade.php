@@ -10,19 +10,21 @@
     <div class="adming_login_border">
     <!-- <h1><b><font color="black">后台管理</font></b></h1> -->
         <div class="admin_input">
-            <form action="index.html" method="post">
+            <form action="{{'/sys/login'}}" method="POST">
+                {{ csrf_field() }}
                 <ul class="admin_items">
                     <li>
                         <label for="user">用户名：</label>
-                        <input type="text" name="username" value="admin" id="user" size="40" class="admin_input_style" />
+                        <input type="text" name="userName" value="" id="user" size="40" class="admin_input_style" />
                     </li>
                     <li>
                         <label for="pwd">密码：</label>
-                        <input type="password" name="pwd" value="admin" id="pwd" size="40" class="admin_input_style" />
+                        <input type="password" name="password" value="" id="pwd" size="40" class="admin_input_style" />
                     </li>
                     <li>
                         <label for="pwd">验证码：</label>
-                        <input type="text" name="code" value="请输入验证码" id="code" size="15" class="admin_input_style" />
+                        <input type="text" name="code" value="" id="code" size="15" class="admin_input_style" />                        
+                        <img src="/sys/code" class="admin_input_style" class="admin_input_style" onclick="this.src = this.src += '?!'">
                     </li>
                     <li>
                         <input type="submit" tabindex="3" value="提交" class="btn btn-primary" />
