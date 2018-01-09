@@ -8,19 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\food;
 use DB;
+use App\Model\system;
 
 class FoodsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    //菜品列表
     public function index()
     {   
-        // $data = food::paginate(5);
-        $data = DB::table('foods')->paginate(5);
-
+        $data = food::paginate(5);
         return view('shop.foods.index',['data'=>$data]);
     }
 
@@ -56,27 +52,28 @@ class FoodsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //编辑菜品
     public function edit($id)
     {
-        return view('/shop/foods/edit',['id'=>$id]);
+        $data = food::where('id',$id)->first();
+        $cate = $data->cate->cateName;
+        $uid = $data->uid;
+        $cateName = system::where('id','!=','uid')->get();
+        return view('/shop/foods/edit',['data'=>$data,'cate'=>$cate,'cateName'=>$cateName,'uid'=>$uid]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //更新菜品
     public function update(Request $request, $id)
-    {
-        //
+    {   
+
+        $data = $request->except(['_token','_method','picture']);
+        $data['picture'] = 'change.jpg';
+        $res = food::where('id',$id)->update($data);
+        if($res){
+            return redirect('/shop/foods');
+        }else{
+            echo "<script>location.history=".$_SERVER['HTTP_REFERER']."</script>";
+        }
     }
 
     /**

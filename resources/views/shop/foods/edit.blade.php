@@ -4,38 +4,56 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">作品管理</a><span class="crumb-step">&gt;</span><span>新增作品</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">食品</a><span class="crumb-step">&gt;</span><span>食品编辑</span></div>
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="/shop/foods/{{$data['id']}}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    {{method_field('patch')}}
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
                             <th width="120"><i class="require-red">*</i>分类：</th>
                             <td>
-                                <select name="colId" id="catid" class="required">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                <select name="uid" id="catid" class="required common-text">
+                                    <option value='{{$uid}}'>{{$cate}}</option>
+                                    @foreach($cateName as $k =>$v)
+                                    <option value="{{$v['id']}}">{{$v['cateName']}}</option> 
+                                    @endforeach
                                 </select>
                             </td>
                         </tr>
                             <tr>
-                                <th><i class="require-red">*</i>标题：</th>
+                                <th><i class="require-red">*</i>名称：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                    <input class="common-text required goodsName"  name="goodsName" size="50" value="{{$data['goodsName']}}" type="text">
                                 </td>
                             </tr>
                             <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
+                                <th><i class="require-red">*</i>状态：</th>
+                                <td>
+                                    @if($data['state'] == 0)
+                                        <input type="radio" vlaue='0' name='state' class='common-text required' checked>下架
+                                        <input type="radio" vlaue='1' name='state' class='common-text required'>上架
+                                    @else
+                                        <input type="radio" vlaue='0' name='state' class='common-text required'>下架
+                                        <input type="radio" vlaue='1' name='state' class='common-text required' checked>上架
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
+                                <th><i class="require-red">*</i>排序：</th>
+                                <td>
+                                    <input class="number common-text"  name="sort" value="{{$data['sort']}}" type="number">
+                                </td>
                             </tr>
                             <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <th><i class="require-red">*</i>图片：</th>
+                                <td><input name="picture" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>描述：</th>
+                                <td><textarea name="description" class="common-textarea"  cols="30" style="width: 98%;" rows="10" maxlength='70' placeholder="最多输入70个字">{{$data['description']}}</textarea></td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -44,7 +62,8 @@
                                     <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
                                 </td>
                             </tr>
-                        </tbody></table>
+                        </tbody>
+                    </table>
                 </form>
             </div>
         </div>
@@ -52,3 +71,4 @@
     </div>
     <!--/main-->
 @endsection
+    

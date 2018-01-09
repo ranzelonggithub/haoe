@@ -5,7 +5,7 @@
     <title>后台管理</title>
     <link rel="stylesheet" type="text/css" href="{{asset('shops/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="/shops/css/main.css"/>
-    <!-- <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
+    <script type="text/javascript" src="{{asset('layer/layer.js'}}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">

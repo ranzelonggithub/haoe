@@ -59,7 +59,7 @@
                             <td>{{$v['grade']}}</td>
                             <td>{{$v['amount']}}</td>
                             <td>
-                                <a class="link-update" href="/shop/foods/12/edit">修改</a>
+                                <a class="link-update" href="/shop/foods/{{$v['id']}}/edit">修改</a>
                                 <a class="link-del" href="/shop">删除</a>
                             </td>
                         </tr>
@@ -74,3 +74,7 @@
         </div>
     </div>
  @endsection
+
+ <script type='text/javascript'>
+    
+</script>
