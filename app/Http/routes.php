@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('/login','Home\LoginController') ;
+
+Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
+	Route::get('map','IndexController@map') ;
+	Route::get('list','IndexController@index') ;
+	Route::get('coop','IndexController@coop') ;
+}) ;
+
+Route::group(['prefix'=>'shop','namespace'=>'Home'],function() {
+	Route::get('shop_list','ShopController@shop_list') ;
+}) ;
