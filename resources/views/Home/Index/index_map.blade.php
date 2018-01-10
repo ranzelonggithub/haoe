@@ -11,6 +11,7 @@
     <meta name="baidu-site-verification" content="IYCrtVH0i1" />
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
+    <link rel="stylesheet" type="text/css" href="">
     
     <script type="text/javascript">
         
@@ -48,11 +49,13 @@
         <div class="common-width posr">
             
                 <div class="member-box fs12" login-box info="loginInfo">
-                    <a href="javascript:void(0)" ng-click="logoinDialogShow()">登录</a>
+                    <a href="#" ng-click="logoinDialogShow()">登录</a>
                     <span>/</span>
-                    <a href="javascript:void(0)" ng-click="registerDialogShow()">注册</a>
+                    <a href="#" ng-click="registerDialogShow()">注册</a>
                     <span>|</span>
-                    <a href="member_order.html">查看订单</a>
+                    <a href="{{asset('/home/list')}}">首页</a>
+                    <span>|</span>
+                    <a href="{{asset('/user/member_order')}}">查看订单</a>
                 </div>
             
         </div>
@@ -60,7 +63,7 @@
   <section class="common-width">
         <section class="city-list-wrap clearfix">
             <h1 class="fl">
-                <a class="frontpage-logo" href="index.html">外卖超人</a>
+                <a class="frontpage-logo" href="{{asset('/home/list')}}">外卖超人</a>
             </h1>
             <div class="city-list-box back-yellow">
                 <div class="dropdown-box">
@@ -361,9 +364,9 @@
 <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
         <div class="form-group">
-            <label for="">手机号码</label>
+            <label for="username">用户名</label>
             <div>
-                <input type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入你的手机号码" />
+                <input type="text" ng-model="user.username" ng-class="{error:user.usernameMessage}" ng-focus="user.usernameMessage=''" maxlength="11" placeholder="请输入用户名/邮箱/手机号" name='username' id='username'/>
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -373,9 +376,9 @@
             </div>
         </div>
         <div class="form-group mb10">
-            <label for="">登录密码</label>
+            <label for="password">登录密码</label>
             <div>
-                <input type="password" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" />
+                <input type="password" onpaste="return false" ng-model="user.password" ng-focus="user.passwordMessage=''"  ng-class="{error:user.passwordMessage}" maxlength="10" placeholder="请输入登录密码" name='password' id='password'/>
                 <span class="vaildate-error" ng-if="user.passwordMessage">
                     <span ng-bind="user.passwordMessage"></span>
                 </span>
@@ -408,9 +411,9 @@
 <dh-dialog class="disnone" type='register' height="500" header="注册" show="registerShow" >
     <form ng-controller="registerCtrl" class="register-form" name="registerForm">
         <div class="form-group mb10">
-            <label for="">手机号码</label>
+            <label for="tel">手机号码</label>
             <div>
-                <input type="text" ng-class="{error:user.usernameMessage}" maxlength="11" placeholder="请输入您的手机号码" ng-model="user.username"/>
+                <input type="text" ng-class="{error:user.usernameMessage}" maxlength="11" placeholder="请输入您的手机号码" ng-model="user.username" name='tel' id='tel'/>
                 <span class="vaildate-error" ng-if="user.usernameMessage">
                     <span ng-bind="user.usernameMessage"></span>
                 </span>
@@ -440,22 +443,25 @@
                             <span ng-bind="user.imgCaptchaMessage"></span>
                         </span>
                     </div>
-                    <label class="fr">
+                    <!--<label class="fr">
                         <dh-captcha style="width:119px;height:34px;" change="captchaImgChange" src="{{asset('Home/images/yzm.gif')}}"></dh-captcha>
-                    </label>
+                    </label>-->
+                    <button type='button' class="btn normal-btn btn-cancel">发送手机验证码</button>
+                    
                 </div>
             </div>
         </div>
         <div class="form-group mb10">
-            <label for="">登录密码</label>
-            <div><input type="password" ng-class="{error:user.passwordMessage}" ng-focus="user.passwordMessage=''"  maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password" />
+            <label for="pass">登录密码</label>
+            <div>
+            	<input type="password" ng-class="{error:user.passwordMessage}" ng-focus="user.passwordMessage=''"  maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password" name='password' id='pass'/>
                 <span class="vaildate-error" ng-if="user.passwordMessage">
                     <span ng-bind="user.passwordMessage"></span>
                 </span>
             </div>
         </div>
         <div class="form-group mb10">
-            <div><input type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="输入登录密码 6-10个字符" ng-model="user.password2"/>
+            <div><input type="password" ng-class="{error:user.password2Message}" ng-focus="user.password2Message=''" maxlength="10" onpaste="return false" placeholder="重复输入登录密码 6-10个字符" ng-model="user.password2" name='rep_pass' />
                 <span class="vaildate-error" ng-if="user.password2Message">
                     <span ng-bind="user.password2Message"></span>
                 </span>

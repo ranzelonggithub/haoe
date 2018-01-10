@@ -40,7 +40,7 @@
             <header id="header">
                 <div class="common-width clearfix">
                     <h1 class="fl">
-                        <a class="logo base-logo" href="index.html">外卖超人</a>
+                        <a class="logo base-logo" href="{{asset('/home/list')}}">外卖超人</a>
                     </h1>
                     
                         <ul class="member logging" ng-init="loginInfo=true">
@@ -48,14 +48,13 @@
                             <li class="userName">
                                 <a href="#" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="/account/center/manage/"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="/account/center/address/"  rel="nofollow">地址管理</a></p>
-                                    <p class="no-bo"><a id="logout" href="/account/logout/" referer-url rel="nofollow">退出</a></p>
-                                </div>
+                                    <p><a href="{{asset('/user/member_index')}}"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="{{asset('/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
+                                    <p class="no-bo"><a id="logout" href="{{asset('/login')}}" referer-url rel="nofollow">退出</a></p>                                </div>
                             </li>
-                            <li class=""><a href="member_order.html" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href=""  rel="nofollow">我的收藏</a></li>
-                            <li class=""><a href="/account/gift/center/"  rel="nofollow">氪星礼品站</a></li>
+                            <li class=""><a href="{{asset('/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>
+                            <li class=""><a href="{{asset('/user/member_collect')}}"  rel="nofollow">我的收藏</a></li>
+                            <!-- <li class=""><a href="/account/gift/center/"  rel="nofollow">氪星礼品站</a></li> -->
                             <li class="phone-client "><a href="/app/"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
    

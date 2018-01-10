@@ -35,14 +35,14 @@
             <header id="header">
                 <div class="common-width clearfix">
                     <h1 class="fl">
-                        <a class="logo base-logo" href="index.html">外卖超人</a>
+                        <a class="logo base-logo" href="{{asset('/home/index')}}">外卖超人</a>
                     </h1>
                     
                        <ul class="member" login-box>
                             <li><a href="#" class="index">首页</a></li>
-                            <li class="login-register"><a href="login.html" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
-                            <li><a href="member_order.html" class="order-center"  rel="nofollow">查看订单</a></li>
-                            <li class=""><a href="gifts.html"  rel="nofollow">氪星礼品站</a></li>
+                            <li class="login-register"><a href="{{asset('/login')}}" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
+                            <li><a href="{{asset('/user/member_order')}}" class="order-center"  rel="nofollow">查看订单</a></li>
+                            <!-- <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li> -->
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
                     

@@ -47,7 +47,7 @@
                                 <div>
                                     <p><a href="{{asset('/user/member_index')}}"  rel="nofollow">账号管理</a></p>
                                     <p><a href="{{asset('/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
-                                    <p class="no-bo"><a id="logout" href="#" referer-url rel="nofollow">退出</a></p>
+                                    <p class="no-bo"><a id="logout" href="{{asset('/login')}}" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
                             <li class=""><a href="{{asset('/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>

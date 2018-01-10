@@ -22,6 +22,7 @@ class IndexController extends Controller
     public function index()
     {
         //加载首页 网站首页
+       
         return view('Home/Index/index') ;
     }
 
