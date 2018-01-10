@@ -3,12 +3,9 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class food extends Model
 {
-    //形同分类表与食物表属于
-     public function cate()
-    {
-        return $this->belongsTo('App\Model\system','uid');
-    }
+	use SoftDeletes;
 }

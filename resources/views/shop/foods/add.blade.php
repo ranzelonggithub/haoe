@@ -4,10 +4,10 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">食品</a><span class="crumb-step">&gt;</span><span>食品编辑</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">食品</a><span class="crumb-step">&gt;</span><span>添加食品</span></div>
         </div>
         @if (count($errors) > 0)
-        <center>  
+        <center>
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -19,17 +19,15 @@
         @endif
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/shop/foods/{{$data['id']}}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="/shop/foods" method="post" id="myform" name="myform" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    {{method_field('patch')}}
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
                             <th width="120"><i class="require-red">*</i>分类：</th>
                             <td>
-                                <select name="uid" id="catid" class="required common-text">
-                                    <option value='{{$uid}}'>{{$cate}}</option>
+                                <select name="cate" id="catid" class="required common-text">
                                     @foreach($cateName as $k =>$v)
-                                    <option value="{{$v['id']}}">{{$v['cateName']}}</option> 
+                                    <option value="{{$v}}">{{$v}}</option> 
                                     @endforeach
                                 </select>
                             </td>
@@ -37,31 +35,26 @@
                             <tr>
                                 <th><i class="require-red">*</i>名称：</th>
                                 <td>
-                                    <input class="common-text required goodsName"  name="goodsName" size="50" value="{{$data['goodsName']}}" type="text">
+                                    <input class="common-text required goodsName"  name="goodsName" size="50" value="{{ old('goodsName') }}" type="text">
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>状态：</th>
                                 <td>
-                                    @if($data['state'] == 0)
-                                        <input type="radio" vlaue='0' name='state' class='common-text required' checked>下架
-                                        <input type="radio" vlaue='1' name='state' class='common-text required'>上架
-                                    @else
-                                        <input type="radio" vlaue='0' name='state' class='common-text required'>下架
-                                        <input type="radio" vlaue='1' name='state' class='common-text required' checked>上架
-                                    @endif
+                                    <input type="radio" value='下架' name='state' class='common-text required'>下架
+                                    <input type="radio" value='上架' name='state' class='common-text required' checked>上架
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>排序：</th>
                                 <td>
-                                    <input class="number common-text"  name="sort" value="{{$data['sort']}}" type="number" max='1000'>
+                                    <input class="number common-text"  name="sort" value="{{ old('sort') }}" type="number" max='1000'>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>价格：</th>
                                 <td>
-                                    <input class="number common-text"  name="price" value="{{$data['price']}}" type="number" max='100000'>
+                                    <input class="number common-text"  name="price" value="{{ old('price') }}" type="number" max='1000000'>
                                 </td>
                             </tr>
                             <tr>
@@ -70,13 +63,13 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea name="description" class="common-textarea"  cols="30" style="width: 98%;" rows="10" maxlength='70' placeholder="最多输入70个字">{{$data['description']}}</textarea></td>
+                                <td><textarea name="description" class="common-textarea"  cols="30" style="width: 98%;" rows="10" maxlength='70' placeholder="最多输入70个字">{{ old('description') }}</textarea></td>
                             </tr>
                             <tr>
                                 <th></th>
                                 <td>
-                                    <input class="btn btn-primary btn6 mr10" value="修改" type="submit">
-                                    <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
+                                    <input class="btn btn-primary btn6 mr10" value="添加" type="submit">
+                                    <input class="btn btn6" value="重置" type="reset">
                                 </td>
                             </tr>
                         </tbody>
@@ -88,4 +81,22 @@
     </div>
     <!--/main-->
 @endsection
+@if(session('state')=='失败')
+{{session(['state'=>null])}}
+<script type="text/javascript">
+  window.onload=function(){ 
+    layer.msg('添加失败');
+  }   
+</script>
+@elseif(session('state') == '成功')
+{{session(['state'=>null])}}
+<script type="text/javascript">
+  window.onload=function(){ 
+    layer.msg('添加成功');
+  }   
+</script>
+@endif
+
+
+
     
