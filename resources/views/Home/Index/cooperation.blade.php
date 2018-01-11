@@ -2,19 +2,7 @@
 <html style="font-size: 128px;" data-dpr="1" lang="zh-cmn-Hans">
   
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <link rel="manifest" href="https://h5.ele.me/manifest.json">
-    <meta name="format-detection" content="telephone=no, email=no">
-    <meta name="description" content="饿了么是中国专业的网上订餐平台，目前已覆盖北京、上海、杭州、广州等300多个城市，提供各类中式、日式、韩式、西式、下午茶、夜宵等优质美食，并提供送餐上门服务，让订餐更加轻松，叫外卖就上饿了么！">
-    <meta name="keywords" content="饿了么，网上订餐，外卖，快餐外卖，外卖网">
-    <meta name="apple-mobile-web-app-title" content="饿了么">
-    <meta name="theme-color" content="#0096ff">
-    <link rel="apple-touch-startup-image" href="https://h5.ele.me/startup.png">
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-    <meta name="Alipay:title" content="饿了么外卖">
-    <meta name="Alipay:imgUrl" content="https://h5.ele.me/logo-96x96.png">
-    <meta name="Alipay:desc" content="用饿了么点外卖：美好生活，触手可得。">
+    
     <link rel="dns-prefetch" href="https://fuss10.elemecdn.com/">
     <link rel="dns-prefetch" href="https://restapi.ele.me/">
     <link rel="dns-prefetch" href="https://shadow.elemecdn.com/">
@@ -257,14 +245,14 @@
       .3s ease-out;transition:transform .3s ease-out,-webkit-transform .3s ease-out;-webkit-transform:translateZ(0);transform:translateZ(0)}.ActionSheet-list_1z4rCYY{margin-bottom:.266667rem;margin-bottom:2.666667vw}.ActionSheet-item_29fdQVa{border-bottom:.013333rem
       solid #f2f2f2;border-bottom:.133333vw solid #f2f2f2}.ActionSheet-item_29fdQVa:active{background-color:#f8f8f8}.ActionSheet-button_3Q8lBsA,.ActionSheet-item_29fdQVa{display:block;width:100%;height:1.466667rem;height:14.666667vw;background-color:#fff;color:#3e3e3e;text-align:center;font-size:.48rem;line-height:1.466667rem;line-height:14.666667vw}.ActionSheet-button_3Q8lBsA:active,.ActionSheet-item_29fdQVa:active{opacity:.7}
     </style>
-    <link href="{{asset('Home/Index/css/cooperation.css')}}"
+    <link href="{{asset('Home/css/cooperation.css')}}"
     rel="stylesheet">
   </head>
   
   <body style="font-size: 12px;" ontouchstart="">
     <ul class="app">
       <li>
-        <img class="img" src="{{asset('Home/Index/images/c48e4f5fa82a7fd2ab35918057ec3png.png')}}">
+        <img class="img" src="{{asset('Home/images/c48e4f5fa82a7fd2ab35918057ec3png.png')}}">
         <div class="content">
           <h1 class="content-title">
             商家入驻
@@ -279,7 +267,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/901a6598095193f1f5f8e83f2febepng.png')}}">
+        <img class="img" src="{{asset('Home/images/901a6598095193f1f5f8e83f2febepng.png')}}">
         <div class="content">
           <h1 class="content-title">
             配送服务加盟
@@ -294,7 +282,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/cbe1c341d6e85b678d6adc60948a1png.png')}}">
+        <img class="img" src="{{asset('Home/images/cbe1c341d6e85b678d6adc60948a1png.png')}}">
         <div class="content">
           <h1 class="content-title">
             城市代理申请
@@ -309,7 +297,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/77491e9e83798773a41fb5dd8e47cpng.png')}}">
+        <img class="img" src="{{asset('Home/images/77491e9e83798773a41fb5dd8e47cpng.png')}}">
         <div class="content">
           <h1 class="content-title">
             未来餐厅代理
@@ -324,7 +312,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/f3e5b635080b985d75b6384c63b30svg.svg')}}">
+        <img class="img" src="{{asset('Home/images/f3e5b635080b985d75b6384c63b30svg.svg')}}">
         <div class="content">
           <h1 class="content-title">
             帮买帮送加盟
@@ -339,7 +327,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/9372a5666015ed5aa066995b3021apng.png')}}">
+        <img class="img" src="{{asset('Home/images/9372a5666015ed5aa066995b3021apng.png')}}">
         <div class="content">
           <h1 class="content-title">
             媒体公关合作
@@ -352,7 +340,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/1d1c8a3cd08d2b63930287432e7f9png.png')}}">
+        <img class="img" src="{{asset('Home/images/1d1c8a3cd08d2b63930287432e7f9png.png')}}">
         <div class="content">
           <h1 class="content-title">
             品牌广告合作
@@ -365,7 +353,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/bb7d521fe1b6d0eb6dc43330672fbsvg.svg')}}">
+        <img class="img" src="{{asset('Home/images/bb7d521fe1b6d0eb6dc43330672fbsvg.svg')}}">
         <div class="content">
           <h1 class="content-title">
             用户开放平台合作
@@ -378,7 +366,7 @@
         <!---->
       </li>
       <li>
-        <img class="img" src="{{asset('Home/Index/images/289921843222b87f517d903426cd8png.png')}}">
+        <img class="img" src="{{asset('Home/images/289921843222b87f517d903426cd8png.png')}}">
         <div class="content">
           <h1 class="content-title">
             商家开放平台合作
@@ -399,13 +387,13 @@
         source: "web-sw"
       })
     </script>
-    <script src="{{asset('Home/Index/js/tracer.js')}}">
+    <script src="{{asset('Home/js/tracer.js')}}">
     </script>
-    <script src="{{asset('Home/Index/js/vue.js')}}">
+    <script src="{{asset('Home/js/vue.js')}}">
     </script>
-    <script src="{{asset('Home/Index/js/vue-img.js')}}">
+    <script src="{{asset('Home/js/vue-img.js')}}">
     </script>
-    <script src="{{asset('Home/Index/js/cooperation')}}">
+    <script src="{{asset('Home/js/cooperation')}}">
     </script>
     <script>
       (function() {
@@ -421,7 +409,7 @@
     <script type="text/javascript" src="%E5%8A%A0%E7%9B%9F%E5%90%88%E4%BD%9C_H_files/vendor.js"
     native="true">
     </script>
-    <script type="text/javascript" src="{{asset('Home/Index/js/cooperation.js')}}"
+    <script type="text/javascript" src="{{asset('Home/js/cooperation.js')}}"
     native="true">
     </script>
   </body>
