@@ -16,6 +16,8 @@ class ShopController extends Controller
      */
     public function index()
     {   
+
+        
         //加载店家管理页面
         return view('system.shop.design');
     }

@@ -36,38 +36,31 @@
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
-                        <tr>
-                            <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
-                            <th>排序</th>
+                          <tr>
+                            <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>      
                             <th>ID</th>
-                            <th>标题</th>
-                            <th>审核状态</th>
-                            <th>点击</th>
-                            <th>发布人</th>
-                            <th>更新时间</th>
-                            <th>评论</th>
+                            <th>店家名称</th>
+                            <th>电话</th>
+                            <th>邮箱</th>
+                            <th>身份证</th>
+                            <th>营业执照</th>
+                            <th>餐饮许可证</th>
                             <th>操作</th>
                         </tr>
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
+                            <td>id</td>
+                            <td>店家名称</td>
+                            <td>电话</td>
+                            <td>邮箱</td>
+                            <td>身份证</td>
+                            <td>营业执照</td>
+                            <td>餐饮许可证</td>
                             <td>
-                                <input name="ids[]" value="59" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
-                            </td>
-                            <td>59</td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典">发哥经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>2</td>
-                            <td>admin</td>
-                            <td>2014-03-15 21:11:01</td>
-                            <td></td>
-                            <td>
-                                <a class="link-update" href="#">修改</a>
-                                <a class="link-del" href="#">删除</a>
+                                <a class="link-update" href="{{'/sys/shop/10/edit'}}">同意</a>
+                                <a class="link-del" href="#">不同意</a>
                             </td>
                         </tr>
-                        
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>

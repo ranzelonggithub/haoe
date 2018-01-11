@@ -8,21 +8,11 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="{{'/sys/10'}}" method="post" enctype="multipart/form-data">
+                <form action="/sys/user/10" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT')}}
                     <table class="insert-tab" width="100%">
                         <tbody>
-                            <!-- <!-显示验证错误信息 -->
-                            <!-- @if (count($errors) > 0)
-                                <div>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif --> 
                             <tr>
                                 <th width="120"><i class="require-red">*</i>用户名：</th>
                                 <td>

@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <title>系统后台管理</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('/systems/css/admin_login.css')}}"/>
+    
 </head>
 <body>
 <div class="admin_login_wrap">
-    <div class="adming_login_border">
+     <div class="adming_login_border">
     <!-- <h1><b><font color="black">后台管理</font></b></h1> -->
         <div class="admin_input">
-            <form action="{{'/sys/login'}}" method="POST">
-                {{ csrf_field() }}
+            <form action="{{'/sys/login'}}" method="post">
+            {{ csrf_field() }}
                 <ul class="admin_items">
                     <li>
                         <label for="user">用户名：</label>

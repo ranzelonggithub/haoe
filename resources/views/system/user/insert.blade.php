@@ -8,20 +8,10 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="{{'/sys/user'}}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                <form action="/sys/user" method="post" enctype="multipart/form-data">                 
+                    {{csrf_field()}}
                     <table class="insert-tab" width="100%">
                         <tbody>
-                            <!-- 显示验证错误信息 -->
-                            @if (count($errors) > 0)
-                                <div>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <tr>
                                 <th width="120"><i class="require-red">*</i>用户名：</th>
                                 <td>
@@ -38,12 +28,6 @@
                                 <th width="120"><i class="require-red">*</i>确认密码：</th>
                                 <td>
                                     <input type="passWord" name='repass' value=''>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th width="120"><i class="require-red">*</i>性别:</th>
-                                <td>
-                                    <input type="text" name='sex' value=''>
                                 </td>
                             </tr>
                             <tr>
@@ -74,10 +58,10 @@
                                 <th></th>
                                 <td>
                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <a href='{{'/sys/user'}}'><input class="btn btn6" onClick="history.go(-1)" value="返回" type="button"></a>
+                                    <a href="{{'/sys/user'}}"><input class="btn btn6" onClick="history.go(-1)" value="返回" type="button"></a>
                                 </td>
                             </tr>
-                        </tbody></table>
+                    </tbody></table>
                 </form>
             </div>
         </div>

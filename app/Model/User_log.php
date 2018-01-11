@@ -4,9 +4,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_log extends Model
+class user_log extends Model
 {
-    //一对一
+    // 一对一
     public function userlogin()
     {
         return $this->hasOne('App\Model\User_info','uid');

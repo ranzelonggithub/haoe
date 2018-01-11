@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\User_log;
-use App\Model\User_info;
+use App\Model\user_log;
+use App\Model\user_info;
+
 class UserController extends Controller
 {
     /**
@@ -17,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {   
-        $res = User_log::get();
-        //dump($res);
+
+        $res = user_log::get();
         //加载用户管理视图
         return view('system.user.design',['res'=>$res]);
 
@@ -41,10 +42,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserInsertRequest $request)
+    public function store(Request $request)
     {
         //执行添加
-        dump($request->all());
     }
 
     /**
@@ -66,6 +66,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {   
+
+        // $res = User_log::where('id','=',$id)->first();
+        // dump($res);
         //加载用户修改视图
         return view('/system.user.edit');
     }

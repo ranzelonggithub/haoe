@@ -48,19 +48,12 @@
                             <td>{{$v['phone']}}</td>
                             <td>{{$v['email']}}</td>
                             <td>admin</td>
+                            <td>admin</td>
                             <td>2014-03-15 21:11:01</td>
                             <!-- <td>{{$v['auth']}}</td> -->
                             <td>
-                                <form action="{{'/sys/user/10/edit'}}" method='get' style='display :inline;'>   
-                                    {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <input type="submit" value='修改'>
-                                </form>
-                                <form action="/sys/{{$v['id']}}" method='post' style='display :inline;'>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <input type="submit" value='删除'>
-                                </form>                        
+                                <a class="link-update" href="/sys/user/{{$v['id']}}/edit">修改</a>
+                                <a class="link-del" href="#">删除</a>
                             </td>
                         </tr>
                         @endforeach
