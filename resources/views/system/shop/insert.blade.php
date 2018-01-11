@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-    @extends('system.layout.sys')
-=======
+
 @extends('system.layout.sys')
->>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
+
 @section('content')
      <div class="main-wrap">
 
@@ -21,7 +19,7 @@
                                     <option value="19">精品界面</option><option value="20">推荐界面</option>
                                 </select>
                             </td>
-<<<<<<< HEAD
+
                        <tr>
                                 <th width="120"><i class="require-red">*</i>店家名称：</th>
                                 <td>
@@ -63,26 +61,7 @@
                                 <td>
                                     <input type="file" name='photo' multiple="multiple">
                                 </td>
-=======
-                        </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>标题：</th>
-                                <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
-                            </tr>
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
->>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
+
                             </tr>
                             <tr>
                                 <th></th>

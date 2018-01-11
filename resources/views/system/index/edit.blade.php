@@ -1,5 +1,4 @@
 @extends('system.layout.sys')
-
 @section('content')
     <div class="main-wrap">
 

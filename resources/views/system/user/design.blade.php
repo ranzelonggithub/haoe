@@ -48,18 +48,12 @@
                             <td>{{$v['phone']}}</td>
                             <td>{{$v['email']}}</td>
                             <td>admin</td>
-<<<<<<< HEAD
                             <td>admin</td>
                             <td>2014-03-15 21:11:01</td>
                             <!-- <td>{{$v['auth']}}</td> -->
                             <td>
                                 <a class="link-update" href="/sys/user/{{$v['id']}}/edit">修改</a>
-=======
-                            <td>2014-03-15 21:11:01</td>
-                            <td>{{$v['auth']}}</td>
-                            <td>
-                                <a class="link-update" href="{{'/sys/user/10/edit'}}">修改</a>
->>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
+
                                 <a class="link-del" href="#">删除</a>
                             </td>
                         </tr>
