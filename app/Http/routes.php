@@ -15,6 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//商铺路由组
+Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
+	
+	//登录
+	Route::get('login','LoginController@login');
+	Route::post('phone','LoginController@phone');
+	Route::post('code','LoginController@code');
+	Route::post('dologin','LoginController@dologin');
+	Route::post('shouye','LoginController@index');
+	
+	//主页
+	Route::get('index','IndexController@index');
+
+	//食品管理
+	Route::resource('/foods','FoodsController');
+	// Route::post('');
+	// Route::resource('/com','CommentController');
+	// Route::resource('/order','OrderlistController');
+	// Route::resource('/shop','ShopController');
+});
+
  //加载登陆注册界面
 Route::resource('/login','Home\LoginController') ;
 
@@ -27,7 +49,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	Route::get('coop','IndexController@coop') ;
 }) ;
 //店铺信息
-Route::group(['prefix'=>'shop','namespace'=>'Home'],function() {
+Route::group(['prefix'=>'shops','namespace'=>'Home'],function() {
 	//加载店铺详情页
 	Route::get('shop_detail','ShopController@shop_detail') ;
 	//加载店铺评论页
@@ -56,3 +78,4 @@ Route::group(['prefix'=>'order','namespace'=>'Home'],function() {
 	//下单成功页面
 	Route::get('order_success','OrderController@order_success') ;
 }) ;
+
