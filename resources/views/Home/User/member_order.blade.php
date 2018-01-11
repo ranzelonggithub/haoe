@@ -43,15 +43,15 @@
                         <ul class="member logging" ng-init="loginInfo=true">
                             <li><a href="{{asset('/home/list')}}" class="index">首页</a></li>
                             <li class="userName">
-                                <a href="{{asset('/user/member_index')}}" rel="nofollow" draw-user>18005151538<em></em></a>
+                                <a href="{{asset('/home/user/member_index')}}" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="{{asset('/user/member_index')}}"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="{{asset('/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
-                                    <p class="no-bo"><a id="logout" href="{{asset('/login')}}" referer-url rel="nofollow">退出</a></p>
+                                    <p><a href="{{asset('/home/user/member_index')}}"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
+                                    <p class="no-bo"><a id="logout" href="{{asset('/home/login/login')}}" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
-                            <li class=""><a href="{{asset('/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href="{{asset('/user/member_collect')}}"  rel="nofollow">我的收藏</a></li>
+                            <li class=""><a href="{{asset('/home/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>
+                            <li class=""><a href="{{asset('/home/user/member_collect')}}"  rel="nofollow">我的收藏</a></li>
                             <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
@@ -78,16 +78,16 @@
             <aside class="fl">
                 <ul>
                     <li>
-                        <a href="{{asset('/user/member_index')}}" rel="nofollow">账号管理</a>
+                        <a href="{{asset('/home/user/member_index')}}" rel="nofollow">账号管理</a>
                     </li>
                     <li class="active">
-                        <a href="{{asset('/user/member_order')}}" rel="nofollow">我的订单</a>
+                        <a href="{{asset('/home/user/member_order')}}" rel="nofollow">我的订单</a>
                     </li>
                     <li >
-                        <a href="{{asset('/user/member_collect')}}" rel="nofollow">我的收藏</a>
+                        <a href="{{asset('/home/user/member_collect')}}" rel="nofollow">我的收藏</a>
                     </li>
                     <li >
-                        <a href="{{asset('/user/member_addr')}}"  rel="nofollow">地址管理</a>
+                        <a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a>
                     </li>
                     <li >
                         <a href="#" rel="nofollow">氪星礼品站</a>

@@ -38,13 +38,13 @@
             <header id="header">
                 <div class="common-width clearfix">
                     <h1 class="fl">
-                        <a class="logo base-logo" href="index.html">外卖超人</a>
+                        <a class="logo base-logo" href="{{asset('/home/list')}}">外卖超人</a>
                     </h1>
                     
                         <ul class="member" login-box>
                             <li><a href="{{asset('/home/list')}}" class="index">首页</a></li>
-                            <li class="login-register"><a href="login.html" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
-                            <li><a href="member_order.html" class="order-center"  rel="nofollow">查看订单</a></li>
+                            <li class="login-register"><a href="{{asset('/home/login/login')}}" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
+                            <li><a href="{{asset('home/user/member_order')}}" class="order-center"  rel="nofollow">查看订单</a></li>
                             <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
@@ -70,7 +70,7 @@
         
 <header class="nav clearfix">
     <div class="fl clearfix nav-des">
-        <img src="{{asset('/Home/images/4e5dddb0a16eb1709881143153ac3jpeg.jpeg')}}" alt="[半价菜][送可乐]樱花日本料理" class="fl" />
+        <img src="{{asset('Home/images/4e5dddb0a16eb1709881143153ac3jpeg.jpeg')}}" alt="[半价菜][送可乐]樱花日本料理" class="fl" />
         <div class="fl nav-des-text">
             <h2 class="ellipsis" title="[半价菜][送可乐]樱花日本料理">[半价菜][送可乐]樱花日本料理</h2>
             <div class="clearfix">
@@ -103,10 +103,10 @@
 </header>
 
 <ul class="clearfix menu-nav-list" scroll-position-static="160">
-    <li class="no-line active"><a href="{{asset('/shop/shop_intro')}}">餐厅介绍</a></li>
-    <li><a href="{{asset('/shop/shop_detail')}}">菜单</a></li>
-    <li  class=""><a href="{{asset('/shop/shop_comment')}}">评论</a></li>
-	<li ><a href="{{asset('/shop/shop_brand')}}" id='point-tab'>大家都在点</a></li>
+    <li class="no-line active"><a href="{{asset('/home/shop/shop_intro')}}">餐厅介绍</a></li>
+    <li><a href="{{asset('/home/shop/shop_detail')}}">菜单</a></li>
+    <li  class=""><a href="{{asset('/home/shop/shop_comment')}}">评论</a></li>
+	<li ><a href="{{asset('/home/shop/shop_brand')}}" id='point-tab'>大家都在点</a></li>
     
 </ul>
 
