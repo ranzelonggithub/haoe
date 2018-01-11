@@ -65,7 +65,7 @@
                         @endforeach
                     </table>
                     <div class='pages'>
-                        {!! $data->render() !!}
+                        {!! $data->appends($request)->render() !!}
                     </div>
                 </div>
                 </div>
