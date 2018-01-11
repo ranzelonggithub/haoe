@@ -9,42 +9,53 @@
         <div class="result-wrap">
             <div class="result-content">
                 <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
-                    <table class="insert-tab" width="100%">
-                        <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
-                            <td>
-                                <select name="colId" id="catid" class="required">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
-                            </td>
-                        </tr>
+						<table class="insert-tab" width="100%">
+                        <tbody>
+							<tr>
+								<th width="120">店铺</th>
+								<td>金拱门</td>
+							</tr>
                             <tr>
-                                <th><i class="require-red">*</i>标题：</th>
-                                <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
-                                </td>
+                                <th>订单内容</th>
+                                <td>大鸡腿</td>
                             </tr>
                             <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
+                                <th>下单时间</th>
+                                <td>1992-13-32</td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
+                                <th>评论时间</th>
+                                <td>1992-13-33</td>
                             </tr>
                             <tr>
-                                <th>内容：</th>
+                                <th>回复时间</th>
+                                <td>1992-13-34</td>
+                            </tr>
+                            <tr>
+                                <th>删除时间</th>
+                                <td>1992-13-35</td>
+                            </tr>
+                            <tr>
+                                <th>评论内容：</th>
+                                <td>aaa</td>
+                            </tr>
+                            <tr>
+                                <th>回复内容：</th>
+                                <td>bbb</td>
+                            </tr>
+                            <!-- <tr>
+                                <th>回复内容：</th>
                                 <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <th></th>
                                 <td>
-                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn-primary btn6 mr10" value="删除" type="submit">
                                     <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
                                 </td>
                             </tr>
-                        </tbody></table>
+                        </tbody>
+						</table>
                 </form>
             </div>
         </div>

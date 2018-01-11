@@ -36,56 +36,41 @@
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                            <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
-                            <th>排序</th>
-                            <th>ID</th>
-                            <th>标题</th>
-                            <th>审核状态</th>
-                            <th>点击</th>
-                            <th>发布人</th>
-                            <th>更新时间</th>
-                            <th>评论</th>
+                            <th class="tc" width="5%">选择</th>
+                            <!-- <th>评论ID</th>
+                            <th>订单ID</th>
+                            <th>评论时间</th> -->
+                            <th>买家评论内容</th>
+                            <th>卖家评论内容</th>
+                            <th>店铺评分</th>
+                            <th>商品评分</th>
+                            <th>外卖员评分</th>
+                            <th>创建时间</th>
+                            <th>修改时间</th>
+                            <th>删除时间</th>
                             <th>操作</th>
                         </tr>
-                        <tr>
-                            <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
-                            <td>
-                                <input name="ids[]" value="59" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
-                            </td>
-                            <td>59</td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典">发哥经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>2</td>
-                            <td>admin</td>
-                            <td>2014-03-15 21:11:01</td>
-                            <td></td>
-                            <td>
-                                <a class="link-update" href="#">修改</a>
-                                <a class="link-del" href="#">删除</a>
-                            </td>
-                        </tr>
+						@foreach($data as $k=>$v)
                         <tr>
                             <td class="tc"><input name="id[]" value="58" type="checkbox"></td>
+                            <!-- <td>{{$v['id']}}</td>
+                            <td>{{$v['cateName']}}</td>
+                            <td>{{$v['time']}}</td> -->
+                            <td>{{$v['content']}}</td>
+                            <td>{{$v['reply']}}</td>
+                            <td>{{$v['shopGrade']}}</td>
+                            <td>{{$v['goodsGrade']}}</td>
+                            <td>{{$v['senderGrade']}}</td>
+                            <td>{{$v['created_at']}}</td>
+                            <td>{{$v['updated_at']}}</td>
+                            <td>{{$v['deleted_at']}}</td>
                             <td>
-                                <input name="ids[]" value="58" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
-                            </td>
-                            <td>58</td>
-                            <td title="黑色经典"><a target="_blank" href="#" title="黑色经典">黑色经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>35</td>
-                            <td>admin</td>
-                            <td>2013-12-30 22:34:00</td>
-                            <td></td>
-                            <td>
-                                <a class="link-update" href="#">修改</a>
+                                <a class="link-update" href="/shop/com/{{$v['id']}}">查看</a>
                                 <a class="link-del" href="#">删除</a>
                             </td>
                         </tr>
-                    </table>
+						@endforeach
+					</table>
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>
             </form>
