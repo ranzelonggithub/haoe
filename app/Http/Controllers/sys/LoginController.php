@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use Gregwar\Captcha\CaptchaBuilder; //验证码
 use session;
 use App\Model\user_log;
@@ -74,5 +75,13 @@ class LoginController extends Controller
         header('Content-type:image/jpeg'); 
 		$builder ->output();
 
+=======
+
+class LoginController extends Controller
+{
+     public function login()
+    {
+        return view('system.login.login');
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
     }
 }

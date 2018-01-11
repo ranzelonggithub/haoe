@@ -21,6 +21,7 @@ class ConfigController extends Controller
     }
 
     /**
+<<<<<<< HEAD
      * 执行网站配置修改
      *
      * @return \Illuminate\Http\Response
@@ -52,6 +53,15 @@ class ConfigController extends Controller
         }else{
             dd('没有文件上传');
         }
+=======
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
     }
 
     /**
@@ -94,7 +104,11 @@ class ConfigController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function create(Request $request, $id)
+=======
+    public function update(Request $request, $id)
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
     {
         //
     }

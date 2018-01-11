@@ -10,7 +10,11 @@
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
+<<<<<<< HEAD
             <h1 class="topbar-logo none"><a href="{{'/sys/user/index'}}" class="navbar-brand">后台管理</a></h1>
+=======
+            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
             <ul class="navbar-list clearfix">
                 <li><a class="on" href="{{'/sys/index'}}">首页</a></li>
                 <li><a href="http://www.17sucai.com/" target="_blank">网站首页</a></li>
@@ -19,8 +23,13 @@
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
                 <li><a href="#">管理员</a></li>
+<<<<<<< HEAD
                 <li><a href="/sys/pass">修改密码</a></li>
                 <li><a href="{{'/sys/del'}}">退出</a></li>
+=======
+                <li><a href="#">修改密码</a></li>
+                <li><a href="#">退出</a></li>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
             </ul>
         </div>
     </div>
@@ -33,7 +42,11 @@
         <div class="sidebar-content">
             <ul class="sidebar-list">
                 <li>
+<<<<<<< HEAD
                     <a href="#"><i class="icon-font">&#xe003;</i>管理员操作</a>
+=======
+                    <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
                     <ul class="sub-menu">
                         <li><a href="{{'/sys/user'}}"><i class="icon-font">&#xe008;</i>用户管理</a></li>
                         <li><a href="{{'/sys/shop'}}"><i class="icon-font">&#xe005;</i>店家管理</a></li>
@@ -44,11 +57,26 @@
                         <li><a href="{{'/sys/ad'}}"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
+<<<<<<< HEAD
+=======
+                <li>
+                    <a href="#"><i class="icon-font">&#xe018;</i>系统管理</a>
+                    <ul class="sub-menu">
+                        <li><a href="system.html"><i class="icon-font">&#xe017;</i>系统设置</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe037;</i>清理缓存</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe046;</i>数据备份</a></li>
+                        <li><a href="system.html"><i class="icon-font">&#xe045;</i>数据还原</a></li>
+                    </ul>
+                </li>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
             </ul>
         </div>
     </div>
     @section('content')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
     @show
 </div>
 </body>

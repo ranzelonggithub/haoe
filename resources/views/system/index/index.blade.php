@@ -26,10 +26,17 @@
             <div class="result-content">
                 <ul class="sys-info-list">
                     <li>
+<<<<<<< HEAD
                         <label class="res-lab">操作系统</label><span class="res-info">{{PHP_OS}}</span>
                     </li>
                     <li>
                         <label class="res-lab">运行环境</label><span class="res-info">{{PHP_VERSION}}</span>
+=======
+                        <label class="res-lab">操作系统</label><span class="res-info">WINNT</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">运行环境</label><span class="res-info">Apache/2.2.21 (Win64) PHP/5.3.10</span>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
                     </li>
                     <li>
                         <label class="res-lab">PHP运行方式</label><span class="res-info">apache2handler</span>
@@ -44,7 +51,11 @@
                         <label class="res-lab">北京时间</label><span class="res-info">{{date('Y-m-d H:i:s',time())}}</span>
                     </li>
                     <li>
+<<<<<<< HEAD
                         <label class="res-lab">服务器域名/IP</label><span class="res-info">{{$_SERVER['HTTP_HOST']}}</span>
+=======
+                        <label class="res-lab">服务器域名/IP</label><span class="res-info">localhost [ 127.0.0.1 ]</span>
+>>>>>>> 4c9d7ac4502c3783d63a7e25c3269996e1b886bc
                     </li>
                     <li>
                         <label class="res-lab">Host</label><span class="res-info">127.0.0.1</span>
