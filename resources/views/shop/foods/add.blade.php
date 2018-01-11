@@ -27,7 +27,7 @@
                             <td>
                                 <select name="cate" id="catid" class="required common-text">
                                     @foreach($cateName as $k =>$v)
-                                    <option value="{{$v}}">{{$v}}</option> 
+                                    <option value="{{$k}}">{{$v}}</option> 
                                     @endforeach
                                 </select>
                             </td>

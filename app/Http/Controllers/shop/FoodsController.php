@@ -19,13 +19,14 @@ class FoodsController extends Controller
     {   
         $search = $request->input('search');
         $keywords = $request->input('keywords');
+        $cateName = ['早餐','午餐','晚餐','宵夜'];
         $requestall = $request->all();
         if(!empty($search)){
             $data = food::where('uid',1)->where($search,'like','%'.$keywords.'%')->orderby('sort','asc')->paginate(5); 
         }else{
             $data = food::where('uid',1)->orderby('sort','asc')->paginate(5);//??????????
         }
-        return view('shop.foods.index',['data'=>$data,'request'=>$requestall]);
+        return view('shop.foods.index',['data'=>$data,'request'=>$requestall,'cateName'=>$cateName]);
     }
 
 

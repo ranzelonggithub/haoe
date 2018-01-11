@@ -52,7 +52,7 @@
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
                             <td>{{$v['sort']}}</td>
                             <td>{{$v['goodsName']}}</td>
-                            <td>{{$v['cate']}}</td>
+                            <td>{{$cateName[$v['cate']]}}</td>
                             <td>{{$v['price']}}</td>
                             <td>{{$v['state']}}</td>
                             <td>{{$v['grade']}}</td>

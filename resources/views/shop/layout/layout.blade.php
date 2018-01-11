@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>后台管理</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{asset('shops/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="/shops/css/main.css"/>
     <script type="text/javascript" src="{{asset('shops/js/jquery-1.8.3.min.js')}}"></script>
@@ -40,7 +41,7 @@
                         <li><a href="/shop/index"><i class="icon-font">&#xe008;</i>店铺主页</a></li>
                         <li><a href="/shop/foods"><i class="icon-font">&#xe005;</i>食品管理</a></li>
                         <li><a href="#"><i class="icon-font">&#xe018;</i>回 收 站</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe006;</i>店铺管理</a></li>
+                        <li><a href="/shop/shop"><i class="icon-font">&#xe006;</i>店铺管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe004;</i>订单管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
                     </ul>

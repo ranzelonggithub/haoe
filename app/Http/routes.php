@@ -31,10 +31,12 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 
 	//食品管理
 	Route::resource('/foods','FoodsController');
-	// Route::post('');
+
+	//店铺管理
+	Route::resource('/shop','ShopController');
 	// Route::resource('/com','CommentController');
 	// Route::resource('/order','OrderlistController');
-	// Route::resource('/shop','ShopController');
+	
 });
 
  //加载登陆注册界面
