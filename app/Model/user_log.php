@@ -9,6 +9,6 @@ class user_log extends Model
     // 一对一
     public function userlogin()
     {
-        return $this->hasOne('App\Model\User_info','uid');
+        return $this->hasOne('App\Model\user_info','uid');
     }
 }
