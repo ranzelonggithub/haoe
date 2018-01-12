@@ -9,6 +9,6 @@ class user_info extends Model
     //属于
     public function userinfo()
     {
-        return $this->belongsTo('App\Model\user_log','uid');
+        return $this->belongsTo('App\Model\User_Log','uid');
     }
 }
