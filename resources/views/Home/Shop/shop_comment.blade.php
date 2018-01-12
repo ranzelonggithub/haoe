@@ -42,8 +42,8 @@
                     
                         <ul class="member" login-box>
                             <li><a href="{{asset('/home/list')}}" class="index">首页</a></li>
-                            <li class="login-register"><a href="login.html" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="register.html" referer-url  rel="nofollow" class="register">注册</a></li>
-                            <li><a href="member_order.html" class="order-center"  rel="nofollow">查看订单</a></li>
+                            <li class="login-register"><a href="{{asset('/home/login/login')}}" referer-url  class="login"  rel="nofollow">登录</a><span class="cg">/</span><a href="{{asset('/home/login/login')}}" referer-url  rel="nofollow" class="register">注册</a></li>
+                            <li><a href="{{asset('/home/user/member_order')}}" class="order-center"  rel="nofollow">查看订单</a></li>
                             <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
