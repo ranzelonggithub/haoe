@@ -50,16 +50,22 @@
                             <td>admin</td>
                             <td>admin</td>
                             <td>2014-03-15 21:11:01</td>
-                            <!-- <td>{{$v['auth']}}</td> -->
                             <td>
-                                <a class="link-update" href="/sys/user/{{$v['id']}}/edit">修改</a>
-
-                                <a class="link-del" href="#">删除</a>
+                                <form action="/sys/user/{{$v['id']}}/edit" method="GET" style='display:inline;'>
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                    <button>修改</button>
+                                </form>
+                                <form action="/sys/user/{{ $v['id'] }}" method='POST' style='display :inline;'>
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button>删除</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">{!! $res ->render() !!}</div>
                 </div>
             </form>
         </div>

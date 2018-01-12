@@ -15,9 +15,11 @@
                     </div>
                     <div class="result-content">
                         <table width="" class="insert-tab">
-                            <tbody><tr>
+                            <tbody>
+                            @foreach($res as $k=>$v)
+                            <tr>
                                 <th width="20%"><i class="require-red">*</i>网站名称：</th>
-                                <td><input type="text" name="webname" value=''></td>
+                                <td><input type="text" name="webname" value="{{$v['webname']}}"></td>
                             </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站关键字：</th>
@@ -35,8 +37,8 @@
                                    <th><i class="require-red">*</i>网站状态：</th>  
                                    <td>
                                         <select name="status" id="">
-                                            <option value="1">开启</option>
-                                            <option value="0">关闭</option>
+                                            <option value="1" <?=$res[0]['status']==1?'selected':''?>>开启</option>
+                                            <option value="0" <?=$res[0]['status']==0?'selected':''?>>关闭</option>
                                         </select>
                                    </td>
 
@@ -44,11 +46,11 @@
                                 <tr>
                                     <th></th>
                                     <td>
-                                        <input type="submit" value="提交" class="btn btn-primary btn6 mr10">
+                                        <input type="submit" value="修改" class="btn btn-primary btn6 mr10">
                                         <input type="button" value="返回" onClick="history.go(-1)" class="btn btn6">
                                     </td>
                                 </tr>
-
+                            @endforeach
                             </tbody></table>
                     </div>
                 </div>

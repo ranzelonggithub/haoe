@@ -127,7 +127,7 @@ Route::group(['prefix'=>'sys','namespace'=>'sys','Middleware'=>'Login'],function
 	Route::get('config','ConfigController@index');
 
 	//修改网站配置路由
-	Route::post('doconfig','ConfigController@update');
+	Route::post('/doconfig','ConfigController@update');
 
 	//系统广告管理路由
 	Route::resource('ad','AdController');

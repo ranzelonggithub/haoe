@@ -80,6 +80,19 @@ return [
             'url_type'  => 'publicURL',
         ],
 
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+            'default'=>'p2dtot555.bkt.clouddn.com',
+            //'https'     => 'www.lamp.com',
+            
+            ],
+            'access_key'=> '7AJN3yhjXbRxUH0JGnhCeMFtfGMGW-GTMvIxt_lP',  //AccessKey
+            'secret_key'=> 'FTksWtrV9nE4Im6pt1El47HBWSNdWJSBw_19MYfT',  //SecretKey
+            'bucket'    => '',  //Bucket名字  空间名
+            'notify_url'=> '',  //持久化处理回调地址
+            'access'    => 'public'  //空间访问控制 public 或 private
+        ],
     ],
 
 ];

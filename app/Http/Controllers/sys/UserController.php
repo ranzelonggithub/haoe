@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Model\user_log;
 use App\Model\user_info;
-
+use App\Http\Requests\UserInfoRequest;
 use DB;
 
 class UserController extends Controller
@@ -19,11 +19,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
 
 
-        $res = user_log::get();
+        $res = user_log::paginate(2);
+
+        // $date = DB::table('user_logs')->paginate(2);
+        // dump($date);
+        // $res = $date ->paginate(2);
+        
+        // dump($res);
+        //dump($date);
         //加载用户管理视图
         return view('system.user.design',['res'=>$res]);
 
@@ -47,9 +54,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserInfoRequest $request)
     {
-
+        //执行用户添加
+        $date = $request->except(['_token','auth','photo']);
+        dump($date);
     }
 
     /**
@@ -72,12 +81,11 @@ class UserController extends Controller
     public function edit($id)
     {   
 
+        $data = DB::table('user_logs')->where('id',$id)->first();
 
-        // $res = User_log::where('id','=',$id)->first();
-        // dump($res);
-
+        dump($data);
         //加载用户修改视图
-        return view('/system.user.edit');
+        return view('system.user.edit',['data'=>$data]);
     }
 
     /**
@@ -89,10 +97,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        dump($request->$id);
+        $data = $request->except(['_token','_method','photo','auth']); 
 
-        echo 123;
-
+        dump($data);
+        // $res = DB::table('user_logs')->where('id',$id)->update($data);
+        // if($res){
+        //     echo '<script>alert("修改成功");location.href="/sys/user"</script>';
+        // }else{
+        //     echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        // }
 
     }
 
@@ -104,10 +119,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
-
-        dump($id);
-
-
+        $res = DB::table('user_logs')->where('id',$id)->delete();
+        if($res){
+            echo '<script>alert("删除成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }else{
+            echo '<script>alert("删除失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
     }
 }

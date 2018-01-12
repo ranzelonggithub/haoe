@@ -8,6 +8,15 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <form action="/sys/user" method="post" enctype="multipart/form-data">                 
                     {{csrf_field()}}
                     <table class="insert-tab" width="100%">
@@ -21,7 +30,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>密码：</th>
                                 <td>
-                                    <input type="password" name='password' value=''>
+                                    <input type="password" name='passWord' value=''>
                                 </td>
                             </tr>
                             <tr>

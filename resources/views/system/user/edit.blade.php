@@ -8,7 +8,7 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/sys/user/10" method="post" enctype="multipart/form-data">
+                <form action="/sys/user/{{$data['id']}}" method='POST' enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT')}}
                     <table class="insert-tab" width="100%">
@@ -16,7 +16,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>用户名：</th>
                                 <td>
-                                    <input type="text" name='userName' value=''>
+                                    <input type="text" name='userName' value='{{$data["userName"]}}'>
                                 </td>
                             </tr>
                             <tr>
@@ -29,12 +29,6 @@
                                 <th width="120"><i class="require-red">*</i>确认密码：</th>
                                 <td>
                                     <input type="passWord" name='repass' value=''>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th width="120"><i class="require-red">*</i>性别:</th>
-                                <td>
-                                    <input type="text" name='sex' value=''>
                                 </td>
                             </tr>
                             <tr>
@@ -65,7 +59,7 @@
                                 <th></th>
                                 <td>
                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <a href='{{'/sys/user'}}'><input class="btn btn6" onClick="history.go(-1)" value="返回" type="button"></a>
+                                    <a href='{{"/sys/user"}}'><input class="btn btn6" onClick="history.go(-1)" value="返回" type="button"></a>
                                 </td>
                             </tr>
                         </tbody></table>
