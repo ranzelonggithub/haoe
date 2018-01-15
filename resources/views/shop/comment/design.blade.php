@@ -12,8 +12,8 @@
                             <th width="120">选择分类:</th>
                             <td>
                                 <select name="search-sort" id="">
-                                    <option value="">全部</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                    <option value="19">卖家店铺</option>
+                                    <option value="20">买家名</option>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
@@ -36,34 +36,37 @@
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                            <th class="tc" width="5%">选择</th>
-                            <!-- <th>评论ID</th>
+                            <!-- <th class="tc" width="5%">选择</th> -->
+                            <th>评论ID</th>
                             <th>订单ID</th>
-                            <th>评论时间</th> -->
+                            <th>评论时间</th>
                             <th>买家评论内容</th>
-                            <th>卖家评论内容</th>
+                            <th>卖家回复内容</th>
                             <th>店铺评分</th>
                             <th>商品评分</th>
                             <th>外卖员评分</th>
-                            <th>创建时间</th>
-                            <th>修改时间</th>
-                            <th>删除时间</th>
+                            <th>创建时间/已删除</th>
                             <th>操作</th>
                         </tr>
-						@foreach($data as $k=>$v)
+						@foreach($comment as $k=>$v)
                         <tr>
-                            <td class="tc"><input name="id[]" value="58" type="checkbox"></td>
-                            <!-- <td>{{$v['id']}}</td>
+                            <!-- <td class="tc"><input name="id[]" value="58" type="checkbox"></td> -->
+                            <td>{{$v['id']}}</td>
                             <td>{{$v['cateName']}}</td>
-                            <td>{{$v['time']}}</td> -->
+                            <td>{{$v['time']}}</td>
                             <td>{{$v['content']}}</td>
                             <td>{{$v['reply']}}</td>
                             <td>{{$v['shopGrade']}}</td>
                             <td>{{$v['goodsGrade']}}</td>
                             <td>{{$v['senderGrade']}}</td>
-                            <td>{{$v['created_at']}}</td>
+						@if (empty($v['deleted_at']))
+							<td>{{$v['created_at']}}</td>
+						@else 
+							<td>已删除</td>
+						@endif
+                            <!--<td>{{$v['created_at']}}</td>
                             <td>{{$v['updated_at']}}</td>
-                            <td>{{$v['deleted_at']}}</td>
+                            <td>{{$v['deleted_at']}}</td> -->
                             <td>
                                 <a class="link-update" href="/shop/com/{{$v['id']}}">查看</a>
                                 <a class="link-del" href="#">删除</a>

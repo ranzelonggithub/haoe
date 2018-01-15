@@ -33,7 +33,7 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 	Route::resource('/foods','FoodsController');
 	// Route::post('');
 	Route::resource('/com','CommentController');
-	// Route::resource('/order','OrderlistController');
+	Route::resource('/order','OrderlistController');
 	// Route::resource('/shop','ShopController');
 });
 

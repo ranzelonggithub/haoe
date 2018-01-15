@@ -24,6 +24,7 @@ class CommentController extends Controller
         //$requestall = $request->all();
         //查询数据并且分页
         $comment = DB::table('comments')->get();
+		$shop = DB::table('orders')->get();
         //if(isset($username)){
         //    $users -> where('username','like','%'.$username.'%');
         //}
@@ -39,7 +40,7 @@ class CommentController extends Controller
         //return view('index',['data'=>$data,'request'=>$requestall]);
 
 		//var_dump($users);die;
-		return view('shop.comment.design',['data'=>$comment]);
+		return view('shop.comment.design',['comment'=>$comment],['shop'=>$shop]);
     }
 
     /**
@@ -71,8 +72,11 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-       $users = DB::table('comments')->get();
-	   return view('shop.comment.insert');
+       $comment = DB::table('comments')->where('id',$id)->get();
+       $shop = DB::table('orders')->where('id',$comment[0]['cateName'])->get();
+	   
+	   var_dump($shop);die;
+	   return view('shop.comment.insert',['comment'=>$comment,'shop'=>$shop]);
     }
 
     /**
@@ -106,6 +110,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+		// 删除一条
+		$num=DB::table("comments")->where('id',$id)->delete();
     }
 }
