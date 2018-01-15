@@ -11,7 +11,8 @@ use App\Model\user_log;
 use App\Model\user_info;
 use App\Http\Requests\UserInfoRequest;
 use DB;
-
+use Hash;
+use Illuminate\Pagination\LengthAwarePaginator; 
 class UserController extends Controller
 {
     /**
@@ -22,15 +23,12 @@ class UserController extends Controller
     public function index(Request $request)
     {   
 
+        //搜索
 
-        $res = user_log::paginate(2);
-
-        // $date = DB::table('user_logs')->paginate(2);
-        // dump($date);
-        // $res = $date ->paginate(2);
-        
-        // dump($res);
-        //dump($date);
+        $res = DB::table('user_logs')
+            ->join('user_infos', 'user_logs.id', '=', 'user_infos.uid')
+            ->select('user_logs.*', 'user_infos.auth')
+            ->paginate(4);
         //加载用户管理视图
         return view('system.user.design',['res'=>$res]);
 
@@ -54,11 +52,41 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserInfoRequest $request)
+    public function store(Request $request)
     {
-        //执行用户添加
-        $date = $request->except(['_token','auth','photo']);
-        dump($date);
+        $file = $request->file('photo');
+        //获取文件路径
+        $filepath = $file->getRealPath();
+        // dump($filepath);
+        //获取文件后缀名
+        $hz = $file->getClientOriginalExtension();
+
+        $filename = md5(time()+rand(0,99999)).'.'.$hz;
+        // dump($filename);        
+        //上传图像七牛
+        $disk = \Storage::disk('qiniu');
+        $res = $disk->put("systems/imgs".$filename,$filepath);
+        // dump($res);
+        return $filename;
+        
+        $data = $request->except(['_token','_method','photo','auth','repass']); 
+
+        //获取插入返回的id
+        $res = DB::table('user_logs')->insertGetid($data);
+
+        //获取auth
+        $info = $request->only('auth');
+
+        $info['photo'] = $filename;
+        $info['uid'] = $res;
+        $infos = DB::table('user_infos')->insert($info);
+
+        if($res && $infos){
+            echo '<script>alert("添加成功");location.href="/sys/user"</script>';
+        }else{
+            echo '<script>alert("添加失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
+        
     }
 
     /**
@@ -83,9 +111,9 @@ class UserController extends Controller
 
         $data = DB::table('user_logs')->where('id',$id)->first();
 
-        dump($data);
+        $auth = DB::table('user_infos')->where('id',$id)->first();
         //加载用户修改视图
-        return view('system.user.edit',['data'=>$data]);
+        return view('system.user.edit',['data'=>$data,'auth'=>$auth]);
     }
 
     /**
@@ -96,18 +124,36 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        
-        dump($request->$id);
-        $data = $request->except(['_token','_method','photo','auth']); 
+    {   
 
-        dump($data);
-        // $res = DB::table('user_logs')->where('id',$id)->update($data);
-        // if($res){
-        //     echo '<script>alert("修改成功");location.href="/sys/user"</script>';
-        // }else{
-        //     echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
-        // }
+        $file = $request->file('photo');
+        //获取文件路径
+        $filepath = $file->getRealPath();
+
+        //获取文件后缀名
+        $hz = $file->getClientOriginalExtension();
+
+        $filename = md5(time()+rand(0,99999)).'.'.$hz;
+
+        $disk = \Storage::disk('qiniu');
+        $res = $disk->put('/systems/uploads'.$filename,$filepath);
+
+        //获取auth
+        $info = $request->only('auth');
+
+        $info['photo'] = $filename;
+
+        $infos = DB::table('user_infos')->where('id',$id)->update($info);
+  
+        $data = $request->except(['_token','_method','photo','auth','repass']); 
+
+        $res = DB::table('user_logs')->where('id',$id)->update($data);
+
+        if($res && $infos){
+            echo '<script>alert("修改成功");location.href="/sys/user"</script>';
+        }else{
+            echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
 
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use DB;
 class OrderController extends Controller
 {
     /**
@@ -15,10 +15,13 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+
+        $res = DB::table('orders')->paginate(2);
+        // $res = $data ->paginate(4);
         //加载订单管理的视图
-        return view('system.order.design');
-    }
+        return view('system.order.design',['res'=>$res]);
+    }                                                                                                       
 
     /**
      * Show the form for creating a new resource.
@@ -83,6 +86,12 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //执行删除
+        $res = DB::table('orders')->where('id',$id)->delete();
+         if($res){
+            echo '<script>alert("删除成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }else{
+            echo '<script>alert("删除失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
     }
 }

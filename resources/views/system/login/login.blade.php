@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <label for="pwd">密码：</label>
-                        <input type="password" name="password" value="" id="pwd" size="40" class="admin_input_style" />
+                        <input type="password" name="passWord" value="" id="pwd" size="40" class="admin_input_style" />
                     </li>
                     <li>
                         <label for="pwd">验证码：</label>

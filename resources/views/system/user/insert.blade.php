@@ -17,7 +17,7 @@
                     </ul>
                 </div>
             @endif
-                <form action="/sys/user" method="post" enctype="multipart/form-data">                 
+                <form action="/sys/user" method="POST" enctype="multipart/form-data">                 
                     {{csrf_field()}}
                     <table class="insert-tab" width="100%">
                         <tbody>
@@ -54,13 +54,18 @@
                             <tr>
                                 <th><i class="require-red">*</i>权限：</th>
                                 <td>
-                                    <input type="text" name='auth' value=''>
+                                        <select name="auth" id="">
+                                            <option value="1">普通用户</option>
+                                            <option value="2">管理员</option>
+                                        </select>
                                 </td>
+                            </tr>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>头像：</th>
-                                <td>
-                                    <input type="file" name='photo' multiple="multiple">
+                               <td>
+                                    <input type="file" name="photo" id="file_upload" value="">
+                                    <p><img  id="imgs" src="/systems/images/logo.png" style="width:80px"></p>
                                 </td>
                             </tr>
                             <tr>
@@ -72,6 +77,61 @@
                             </tr>
                     </tbody></table>
                 </form>
+                <script type='text/javascript'>
+                    $.ajaxSetup({
+                         headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                         }
+                    });
+                    //文件改变,开始上传
+                    $(function(){
+                        $('#file_upload').change(function(){
+                            uploadImage();
+                        });
+                    });
+
+                    //判断是否有文件上传
+                    function uploadImage(){
+                        var oldpic = $("#picture").attr('src');
+                        var imgPath = $('#file_upload').val();
+                        if(imgPath == ""){
+                            alert('请选择上传图片');
+                            return;
+                        }
+                    
+                    }
+                    //判断上传文件为后缀名
+                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.')+1);
+                    if(strExtension != 'jpg' && strExtension != 'gif'  && strExtension != 'png'  && strExtension != 'bmp'){
+                        alert('请选择图片文件');
+                        return;
+                    }
+
+                    var formData = new FormData($('#myform')[0]);
+                    console.log(formData);
+                    $.ajax({
+                        type : "post",
+                        url : "/systems/imgs",
+                        data : formData,
+                        async : true,
+                        cache : false,
+                        contentType:false,
+                        processData:false,
+                        beforeSend:function(){
+                            a = layer.load();
+                        },
+                        success:function(data){
+                            layer.close(a);
+                            $('#picture').attr('src',"/"+data);
+                        },
+                        error:function(XMLHttpRequest,textStatus,errorThrown){
+                            layer.close(a);
+                            alert("上传失败,请检测网络后重试");
+                            $("#picture").attr('src',oldpic);
+                        }
+                    });
+                
+                </script>
             </div>
         </div>
     </div>

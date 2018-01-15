@@ -49,17 +49,17 @@
                         </tr>
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
-
                             <td>id</td>
                             <td>店家名称</td>
                             <td>电话</td>
                             <td>邮箱</td>
                             <td>身份证</td>
-                            <td>营业执照</td>
-                            <td>餐饮许可证</td>
+                            <td><img src="/systems/sysimgs/xukezheng.jpg" style="width:80px"></td>
+                            <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px"></td>
                             <td>
-                                <a class="link-update" href="{{'/sys/shop/10/edit'}}">同意</a>
-                                <a class="link-del" href="#">不同意</a>
+                                <button><a href="">详情</a></button>
+                                <button><a class="link-update" href="{{'/sys/shop/10/edit'}}">同意</a></button>
+                                <button><a class="link-del" href="#">不同意</a></button>
                             </td>
                         </tr>
 

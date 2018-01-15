@@ -6,9 +6,8 @@
         </div>
         <div class="result-wrap">
 
-            <form action="{{'/sys/doconfig'}}" method="post" enctype="multipart/form-data">
+            <form action="/sys/doconfig/{{$res[0]['id']}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-
                 <div class="config-items">
                     <div class="config-title">
                         <h1><i class="icon-font">&#xe00a;</i>网站信息设置</h1>
@@ -27,7 +26,8 @@
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站loge：</th>
-                                    <td><input type="file" name='loge' multiple="multiple">
+                                    <td><input type="file" name='loge' multiple="multiple" id="logo">
+                                    <p><img  id="imgs" src="/systems/images/logo.png" style="width:80px;height:100px"></p>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站版权：</th>

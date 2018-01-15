@@ -11,6 +11,7 @@ use Gregwar\Captcha\CaptchaBuilder; //验证码
 use session;
 use App\Model\user_log;
 use Hash;
+use DB;
 class LoginController extends Controller
 {	
 
@@ -27,41 +28,42 @@ class LoginController extends Controller
         
         //获取提交数据
         $log = $request->except('_token');
-        
+        session_start();
+
+        // $log['passWord'] = Hash::make($log['passWord']);
+        // $res = DB::table('user_logs')->insert($log);
+        // dump($res);
+        //判断提交是否为空
+
+        // if(empty($log['userName'] and $log['passWord'] and $log['code'])){
+        //     echo '<script>alert("提交不能为空");location.href="/sys/do"</script>'; 
+        // }
+
         //查询登入的信息
         $res = user_log::where('userName',$log['userName'])->first();
 
-        //判断提交是否为空
-        if(empty($res['userName'] or $res['passWord'] or $res['code'])){
-            echo '<script>alert("提交不能为空");location.href="/sys/do"</script>'; 
-        }
-        
-        //判断是否有权限登入
-        if(!($res->Userlogin->auth == 1)){
-
-            echo '<script>alert("抱歉权限不够");location.href="/sys/do"</script>';
-        }
-
+        // dump(Hash::check($res['passWord']));
         //判断用户名是否存在
-        if(!($res['userName'] == $log['userName'])){
-         
-            echo '<script>alert("用户名不存在");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
-        }
+        // if(!($res['userName'] == $log['userName'])){
+        //     echo '<script>alert("用户名不存在");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        // }
 
         //判断密码是否正确
+        // dump($log['passWord']);
+        // dump(Hash::check($res['passWord']) == $log['passWord']);
+        // dump(Hash::check($res['passWord'] == $log['passWord']));
         // if(!(Hash::check($res['passWord']) == $log['passWord'])){
         //     return redirect('/sys/do');
         // }
 
-        //判断验证码
-        if(!(session('code') == $log['code'])){
+        // //判断验证码
+        // if(!(session('code') == $log['code'])){
+        //     echo '<script>alert("验证码不正确");location.href="/sys/do"</script>';
+        // }
 
-            echo '<script>alert("验证码不正确");location.href="/sys/do"</script>';
-        }
-
-        //将登入成功的用户id存入session 
+        // //将登入成功的用户id存入session 
         session(['id'=>$res['id']]);
-
+        // dump(Session('id'));
         return redirect('/sys/index');
     	
     }
