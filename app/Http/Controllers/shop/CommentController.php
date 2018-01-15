@@ -74,8 +74,6 @@ class CommentController extends Controller
     {
        $comment = DB::table('comments')->where('id',$id)->get();
        $shop = DB::table('orders')->where('id',$comment[0]['cateName'])->get();
-	   
-	   var_dump($shop);die;
 	   return view('shop.comment.insert',['comment'=>$comment,'shop'=>$shop]);
     }
 
