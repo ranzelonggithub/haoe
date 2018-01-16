@@ -28,7 +28,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>确认密码：</th>
                                 <td>
-                                    <input type="passWord" name='repass' value=''>
+                                    <input type="password" name='repass' value=''>
                                 </td>
                             </tr>
                             <tr>
@@ -47,16 +47,16 @@
                                 <th><i class="require-red">*</i>权限：</th>
                                 <td>
                                         <select name="auth" id="">
-                                            <option value="1" <?= $auth['auth'] == 1?'selected':''?>>普通用户</option>
-                                            <option value="2" <?= $auth['auth'] == 2?'selected':''?>>管理员</option>
+                                            <option value="1" <?= $res['auth'] == 1?'selected':''?>>普通用户</option>
+                                            <option value="2" <?= $res['auth'] == 2?'selected':''?>>管理员</option>
                                         </select>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>头像：</th>
                                 <td>
-                                    <input type="file" name="photo" id="photo" value="">
-                                    <p><img  id="imgs" src="/systems/images/logo.png" style="width:80px"></p>
+                                    <input type="file" name="photo" id="update" value="">
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$res['photo']}}" style="width:80px"></p>
                                 </td>
 
                             <tr>
@@ -66,28 +66,6 @@
                                     <a href='{{"/sys/user"}}'><input class="btn btn6" onClick="history.go(-1)" value="返回" type="button"></a>
                                 </td>
                             </tr>
-                            <script type='text/javascript'>
-                            //     $.ajaxSetup({
-                            //         headers: {
-                            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            //         }
-                            //     });
-                            //     $(function () {
-                            //         $("#photo").change(function (){ 
-                            //              uploadImage();
-                            //              alert('wewew');
-                            //         });
-                            //     });
-                            //     function uploadImage() {
-                            //         //判断是否有选择上传文件
-                            //         //input type file
-                            //         var imgPath = $("#photo").val();
-                            //         if (imgPath == "") {
-                            //             alert("请选择上传图片！");
-                            //             return;
-                            //         }
-                            //     }
-                            </script>
                         </tbody>
                     </table>
                 </form>

@@ -33,7 +33,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>门户loge:</th>
                                 <td>
-                                    <input type="file" name='logo' value='{{$res["logo"]}}'>
+                                    <input type="file" name='logo'  value='{{$res["logo"]}}'>
                                     <p><img src="/systems/sysimgs/loge.jpg" style="width:120px;height:120px;"></p>
                                 </td>
                             </tr>
@@ -47,7 +47,7 @@
                             <tr>
                                 <th><i class="require-red">*</i>门脸图片</th>
                                 <td>
-                                    <input type="file" name='insidePic' value='{{$res["insidePic"]}}'>
+                                    <input type="file" name='frontPic' value='{{$res["frontPic"]}}'>
                                     <p><img src="/systems/sysimgs/menlian.jpg" style="width:120px;height:120px;"></p>
                                 </td>
                             </tr>
@@ -80,7 +80,12 @@
                             <tr>
                                 <th><i class="require-red">*</i>状态</th>
                                 <div>
-                                    <td><?= $res['state']==1?'正常营业':'店铺已封'?></td>
+                                    <td>
+                                        <select name="auth" id="">
+                                            <option value="1" <?=$res['auth']==1?'selected':''?>>开启</option>
+                                            <option value="0" <?=$res['auth']==0?'selected':''?>>关闭</option>
+                                        </select>
+                                    </td>
                                 </div>
                            </tr>
                             <tr>

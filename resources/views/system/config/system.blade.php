@@ -25,9 +25,9 @@
                                     <td><input type="text" name='keywords' vlaue=''></td>
                                 </tr>
                                 <tr>
-                                    <th><i class="require-red">*</i>网站loge：</th>
-                                    <td><input type="file" name='loge' multiple="multiple" id="logo">
-                                    <p><img  id="imgs" src="/systems/images/logo.png" style="width:80px;height:100px"></p>
+                                    <th><i class="require-red">*</i>网站logo：</th>
+                                    <td><input type="file" name='logo' multiple="multiple" id="logo">
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$v['logo']}}" style="width:80px;height:90px"></p>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站版权：</th>

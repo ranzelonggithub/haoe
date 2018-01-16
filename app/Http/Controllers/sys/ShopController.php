@@ -20,8 +20,9 @@ class ShopController extends Controller
         $res = DB::table('seller_logs')
             ->join('seller_infos', 'seller_logs.id', '=', 'seller_infos.id')
             ->join('shops', 'seller_logs.id', '=', 'shops.uid')
+            ->where('auth','=',1)
             ->select('seller_logs.*', 'seller_infos.email','shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
-            ->paginate(4);
+            ->paginate(1);
         //dump($res);
         //加载店家管理页面
         return view('system.shop.design',['res'=>$res]);
@@ -86,7 +87,14 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
         //执行修改
-        dump($request->all());
+        
+        $auth = $request->only('auth');
+        $res = DB::table('shops')->where('id',$id)->update($auth);
+        if($res){
+            echo '<script>alert("修改成功");location.href="/sys/shop"</script>';
+        }else{
+            echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
 
     }
 

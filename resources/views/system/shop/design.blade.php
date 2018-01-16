@@ -53,9 +53,9 @@
                             <td>{{$v['sellerName']}}</td>
                             <td>{{$v['phone']}}</td>
                             <td>{{$v['email']}}</td>
-                            <td><img src="/systems/sysimgs/xukezheng.jpg" style="width:80px">{{$v['busi_license']}}</td>
-                            <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px">{{$v['cate_licence']}}</td>
-                            <td><?=$v['auth']==1?'正常营业':'店铺已封'?></td>
+                            <td><img src="/systems/sysimgs/xukezheng.jpg" style="width:80px"></td>
+                            <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px"></td>
+                            <td><?= $v['auth'] == 1 ? '正在营业':'店铺已关'?></td>
                             <td>
                                 <form action="/sys/shop/{{$v['id']}}" method='get' style='display :inline;'>                                          
                                     <button>详情</button>
@@ -69,7 +69,7 @@
                         </tr>
                         @endforeach     
                     </table>
-                    <div class="list-page">{!! $res->render() !!}       </div>
+                    <div class="list-page">{!! $res->render() !!}</div>
                 </div>
         </div>
     </div>

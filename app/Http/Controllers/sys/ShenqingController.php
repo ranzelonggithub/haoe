@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use DB;
 class ShenqingController extends Controller
 {
     /**
@@ -17,7 +17,14 @@ class ShenqingController extends Controller
     public function index()
     {
         //加载申请管理视图
-        return view('system.shenqing.design');
+        $res = DB::table('seller_logs')
+            ->join('seller_infos', 'seller_logs.id', '=', 'seller_infos.id')
+            ->join('shops', 'seller_logs.id', '=', 'shops.uid')
+            ->where('auth','=',0)
+            ->select('seller_logs.*', 'seller_infos.email','seller_infos.identify','shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
+            ->paginate(2);
+
+        return view('system.shenqing.design',['res'=>$res]);
     }
 
     /**
@@ -39,7 +46,8 @@ class ShenqingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //详情
+        
     }
 
     /**
@@ -51,6 +59,9 @@ class ShenqingController extends Controller
     public function show($id)
     {
         //
+        $res = DB::table('shops')->where('id',$id)->first();
+        dump($res); 
+        return view('/system/shenqing/show',['res'=>$res]);
     }
 
     /**
@@ -73,7 +84,8 @@ class ShenqingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //执行修改
+        
     }
 
     /**

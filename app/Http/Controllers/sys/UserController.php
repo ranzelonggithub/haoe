@@ -24,7 +24,6 @@ class UserController extends Controller
     {   
 
         //搜索
-
         $res = DB::table('user_logs')
             ->join('user_infos', 'user_logs.id', '=', 'user_infos.uid')
             ->select('user_logs.*', 'user_infos.auth')
@@ -52,12 +51,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserInfoRequest $request)
     {
         $file = $request->file('photo');
         //获取文件路径
         $filepath = $file->getRealPath();
-        // dump($filepath);
         //获取文件后缀名
         $hz = $file->getClientOriginalExtension();
 
@@ -65,22 +63,20 @@ class UserController extends Controller
         // dump($filename);        
         //上传图像七牛
         $disk = \Storage::disk('qiniu');
-        $res = $disk->put("systems/imgs".$filename,$filepath);
-        // dump($res);
-        return $filename;
+        $res = $disk->put("/systems/sysimgs/".$filename,file_get_contents($filepath));
         
         $data = $request->except(['_token','_method','photo','auth','repass']); 
 
         //获取插入返回的id
         $res = DB::table('user_logs')->insertGetid($data);
 
-        //获取auth
+        //获取auth添加info表
         $info = $request->only('auth');
-
         $info['photo'] = $filename;
         $info['uid'] = $res;
         $infos = DB::table('user_infos')->insert($info);
 
+        //判断
         if($res && $infos){
             echo '<script>alert("添加成功");location.href="/sys/user"</script>';
         }else{
@@ -111,9 +107,9 @@ class UserController extends Controller
 
         $data = DB::table('user_logs')->where('id',$id)->first();
 
-        $auth = DB::table('user_infos')->where('id',$id)->first();
+        $res = DB::table('user_infos')->where('id',$id)->first();
         //加载用户修改视图
-        return view('system.user.edit',['data'=>$data,'auth'=>$auth]);
+        return view('system.user.edit',['data'=>$data,'res'=>$res]);
     }
 
     /**
@@ -136,7 +132,7 @@ class UserController extends Controller
         $filename = md5(time()+rand(0,99999)).'.'.$hz;
 
         $disk = \Storage::disk('qiniu');
-        $res = $disk->put('/systems/uploads'.$filename,$filepath);
+        $res = $disk->put('/systems/sysimgs/'.$filename,file_get_contents($filepath));
 
         //获取auth
         $info = $request->only('auth');

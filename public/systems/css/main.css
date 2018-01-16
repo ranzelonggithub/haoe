@@ -106,21 +106,33 @@ ul.pagination {
     padding-top: 10px;
 }
 
-input#file_upload {
-    position: absolute;
-    width: 80px;
-    height: 50px;
-    opacity: 0;
+input[name="insidePic"]{
+    position:absolute;
+    width:120px;
+    height:120px;
+    opacity:0;
 }
-input[type="file"] {
-    position: absolute;
-    width: 140px;
-    height: 120px;
-    opacity: 0;
+input[name="frontPic"]{
+    position:absolute;
+    width:120px;
+    height:120px;
+    opacity:0;
+}
+input[name="logo"]{
+    position:absolute;
+    width:120px;
+    height:120px;
+    opacity:0;
 }
 input#logo {
     position: absolute;
     width: 80px;
-    height: 100px;
+    height: 80px;
     opacity: 0;
+}
+input#update{
+    position:absolute;
+    width:80px;
+    height:55px;
+    opacity:0;
 }

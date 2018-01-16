@@ -19,7 +19,7 @@ class ConfigController extends Controller
     {
         //加载配置管理视图
         $res = DB::table('configs')->get();
-        dump($res);
+
         return view('system.config.system',['res'=>$res]);
     }
 
@@ -31,11 +31,10 @@ class ConfigController extends Controller
     public function update(Request $request,$id)
     {
         
-        dump($id);
-
+        //获取提交的数据
         $date =$request->except('_token');
 
-        $file = $request->file('loge');
+        $file = $request->file('logo');
         //获取文件路径
         $filepath = $file->getRealPath();
 
@@ -45,13 +44,18 @@ class ConfigController extends Controller
         $filename = md5(time()+rand(0,99999)).'.'.$hz;
 
         $disk = \Storage::disk('qiniu');
-        $res = $disk->put('/sys/imgs'.$filename,$filepath);
-        dump($res);
-        $date['loge'] = $filename;
-        dump($date);
+        $res = $disk->put('/systems/sysimgs/'.$filename,file_get_contents($filepath));
+
+        $date['logo'] = $filename;
        
         $data = DB::table('configs')->where('id',$id)->update($date);
-        dump($data);
+
+        //修改成功
+        if($data){
+            echo '<script>alert("修改成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }else{
+            echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
     }
 }
     
