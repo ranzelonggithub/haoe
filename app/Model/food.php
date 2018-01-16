@@ -9,6 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class food extends Model
 {
 	use SoftDeletes;
-
-
+	 public $timestamps = true;
 }

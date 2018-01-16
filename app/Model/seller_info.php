@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class sender extends Model
+class seller_info extends Model
 {
-    public $primaryKey = 'sid';
+    //
 }

@@ -6,19 +6,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Model\shop;
-use App\model\food;
-use App\Http\Requests\ShopRequest;
+use App\Model\seller_log;
+use App\Model\seller_info;
 
-class ShopController extends Controller
+class centerController extends Controller
 {
-    //显示店铺信息
+    //个人中心首页
     public function index()
     {   
-
-        $data = shop::where('id',1)->first();
-        $count = food::where('uid',1)->count();
-        return view('shop/shop/index',['data'=>$data,'count'=>$count]);
+        $seller = seller_log::where('id',1)->first();
+        $sex = $seller->seller_info->sex;
+        $photo =  $seller->seller_info->photo;
+        return view('/shop/center/index',['seller'=>$seller,'sex'=>$sex,'photo'=>$photo]);
     }
 
     /**
@@ -38,8 +37,8 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
-         
+    {
+        //
     }
 
     /**
@@ -53,29 +52,26 @@ class ShopController extends Controller
         //
     }
 
-    //修改店铺信息
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $data = shop::where('id',$id)->first();
-        return view('shop/shop/edit',['data'=>$data]);
+        echo '编辑页面';
     }
 
-    //更新店铺信息
-    public function update(ShopRequest $request, $id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        $data = $request->except(['_token','_method']);
-        $res = shop::where('id',$id)->update($data);
-        if($res){
-            echo 1;
-        }else{
-            echo 0; 
-        }
-
-        // if(0){
-        //     return redirect('/shop/shop');
-        // }else{
-        //     return back();
-        // }
         
     }
 

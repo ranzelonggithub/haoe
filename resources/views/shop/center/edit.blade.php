@@ -6,8 +6,9 @@
             <div class="crumb-list"><i class="icon-font"></i><a href="index.html">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">店铺信息</span></div>
         </div>
         <div class="result-wrap">
-            <form action="shop.shop"  id="myform" name="myform" enctype='multipart/form-data'>
+            <form  method='post' id="myform" name="myform" enctype='multipart/form-data'>
                 {{csrf_field()}}
+                {{method_field('put')}}
                 <div class="config-items">
                     <div class="config-title">
                         <h1><i class="icon-font">&#xe00a;</i>店铺信息</h1>
@@ -15,34 +16,6 @@
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
-                                <tr>
-                                    <th width="15%"><i class="require-red">*</i>门户logo：</th>
-                                    <td>
-                                        <input type="file" size="85" name="logo" id='file_upload' class="common-text" style='position:absolute;height:170px;width:220px;opacity:0'>
-                                        <img src="{{asset('upload/shop/shop/shopPic.jpg')}}" height="170" width="220" id='picture'>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="15%"><i class="require-red">*</i>店内图片：</th>
-                                    <td>
-                                        <input type="file" size="85" name="insidePic" id='insidePic_upload' class="common-text" style='position:absolute;height:170px;width:220px;opacity:0'>
-                                        <img src="{{asset('upload/shop/shop/shopPic.jpg')}}" height="170" width="220" id='insidePic'>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="15%"><i class="require-red">*</i>门脸照片：</th>
-                                    <td>
-                                        <input type="file" size="85" name="frontPic" id='frontPic_upload' class="common-text" style='position:absolute;height:170px;width:220px;opacity:0'>
-                                        <img src="{{asset('upload/shop/shop/shopPic.jpg')}}" height="170" width="220" id='frontPic'>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th width="15%"><i class="require-red">*</i>食物图片：</th>
-                                    <td>
-                                        <input type="file" size="85" name="goodPic" id='goodPic_upload' class="common-text" style='position:absolute;height:170px;width:220px;opacity:0'>
-                                        <img src="{{asset('upload/shop/shop/shopPic.jpg')}}" height="170" width="220" id='goodPic'>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <th width="15%"><i class="require-red">*</i>店铺名称：</th>
                                     <td><input type="text" id="" value="{{$data['shopName']}}" size="85" name="shopName" class="common-text" disabled></td>
@@ -55,21 +28,17 @@
                                     <th width="15%"><i class="require-red">*</i>店铺电话：</th>
                                     <td><input type="text" id="" value="{{$data['shopPhone']}}" size="85" name="shopPhone" class="common-text"></td>
                                 </tr>
-                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>食物总数：</th>
-                                    <td><input type="number" id="" value="" size="85" name="amount" class="common-text"></td>
-                                </tr>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>配送费：</th>
+                                    <th width="15%"><i class="require-red">*</i>配&nbsp&nbsp送&nbsp费：</th>
                                     <td><input type="number" id="" value="{{$data['deliPrice']}}" size="85" name="deliPrice" class="common-text"></td>
                                 </tr>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>起步价：</th>
+                                    <th width="15%"><i class="require-red">*</i>起&nbsp&nbsp步&nbsp价：</th>
                                     <td><input type="number" id="" value="{{$data['initPrice']}}" size="85" name="initPrice" class="common-text"></td>
                                 </tr>
                                 <tr>
                                     <th width="15%"><i class="require-red">*</i>开店时间：</th>
-                                    <td><input type="time" id="" value="{{$data['openTime']}}" size="85" name="openTIme" class="common-text"></td>
+                                    <td><input type="time" id="" value="{{$data['openTime']}}" size="85" name="openTime" class="common-text"></td>
                                 </tr>
                                 <tr>
                                     <th width="15%"><i class="require-red">*</i>关店时间：</th>
@@ -86,11 +55,13 @@
                                 <tr>
                                     <th></th>
                                     <td>
-                                        <input type="submit" value="提交" class="btn btn-primary btn6 mr10">
+                                        <button type="button"class="btn btn-primary btn6 mr10" onclick="up({{$data['id']}})">提交</button>
+                                        <!-- <button type="submit"class="btn btn-primary btn6 mr10" >提交</button> -->
                                         <input type="button" value="返回" onClick="history.go(-1)" class="btn btn6">
                                     </td>
                                 </tr>
-                            </tbody></table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                
@@ -103,52 +74,53 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-    //文件改变,开始上传
-    $(function(){
-        $('#file_upload').change(function(){
-            uploadImage();
-        });
-    });
+
 
     //判断是否有文件上传
-    function uploadImage(){
-        var oldpic = $("#picture").attr('src');
-        var imgPath = $('#file_upload').val();
-        if(imgPath == ""){
-            alert('请选择上传图片');
-            return;
-        }
-    
-
-        //判断上传文件为后缀名
-        var strExtension = imgPath.substr(imgPath.lastIndexOf('.')+1);
-        if(strExtension != 'jpg' && strExtension != 'gif'  && strExtension != 'png'  && strExtension != 'bmp'){
-            alert('请选择图片文件');
-            return;
-        }
+    function up(id){
 
         var formData = new FormData($('#myform')[0]);
         console.log(formData);
         $.ajax({
             type : "post",
-            url : "/shop/shop",
+            url : "{{url('/shop/shop')}}/"+id,
             data : formData,
             async : true,
             cache : false,
             contentType:false,
             processData:false,
-            beforeSend:function(){
-                a = layer.load();
-            },
             success:function(data){
-                layer.close(a);
-                $('#picture').attr('src',"{{asset('upload/shop/shop')}}/"+data);//????
+                if(data == 1){
+                    layer.msg('更新成功');
+                    setTimeout(function(){
+                        location.href="/shop/shop";
+                    },1000);
+                    
+                }else{
+                    layer.msg('更新失败');
+                }
+                
             },
-            error:function(XMLHttpRequest,textStatus,errorThrown){
-                layer.close(a);
-                alert("上传失败,请检测网络后重试");
-                $("#picture").attr('src',oldpic);
-            }
+
+            error: function(msg) {
+                var json = JSON.parse(msg.responseText);
+                var a = ''
+                var num = 0;
+                for(i in json){
+                    num++;
+                    a += '<li>'+num+'.&nbsp&nbsp'+json[i][0]+'</li>';
+                }
+
+                layer.open({
+                  skin: 'layui-layer-lan',
+                  type: 1 ,//Page层类型
+                  title: '错误!',
+                  shade: 0.6 ,//遮罩透明度
+                  maxmin: false,//允许全屏最小化
+                  anim: 0 ,//0-6的动画形式，-1不开启
+                  content: '<div style="padding:30px;"><ol>'+a+'</ol></div>'
+                }); 
+            },
         });
     }
  </script>

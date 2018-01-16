@@ -56,7 +56,7 @@
 .res-lab{color: #909090;}
 .res-info{font-size: 15px;}
 .sort-input{width: 25px;text-align: center;}
-tion li{display:inline-block;padding:8px;margin-right:3px;border:1px solid #0066cc;}*/
+
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
@@ -104,3 +104,7 @@ tion li{display:inline-block;padding:8px;margin-right:3px;border:1px solid #0066
 input.number { width:100px;}
 input.goodsName{width:200px;}
 input[type="radio"] {margin-left:5px;}
+
+.order-table {margin:5px auto; border:1px dotted #ddd;}
+.order-table tr td{text-align: center}
+
