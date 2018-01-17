@@ -8,34 +8,26 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="/sys/category/{{$data['id']}}" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT')}}
                     <table class="insert-tab" width="100%">
-                        <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
-                            <td>
-                                <select name="colId" id="catid" class="required">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <tbody>
                             <tr>
-                                <th><i class="require-red">*</i>标题：</th>
+                                <th><i class="require-red">*</i>修改者：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                    <input class="common-text required" id="title" name="userName" size="50" value="{{$res['userName']}}" type="text">
                                 </td>
                             </tr>
                             <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
+                                <th><i class="require-red">*</i>原类名：</th>
+                                <td><input class="common-text" name="cateName" size="50" value="{{$data['cateName']}}" type="text"></td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
-                            </tr>
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <th><i class="require-red">*</i>新类名：</th>
+                                <td>
+                                    <input class="common-text required" id="title" name="cateName" size="50" value="" type="text">
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>

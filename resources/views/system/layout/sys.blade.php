@@ -5,7 +5,8 @@
     <title>系统后台管理</title>
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/main.css')}}"/>
-    <script src="{{ asset('/systems/js/jquery-1.8.3.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('/systems/js/jquery-1.8.3.js') }}"></script>
+    <script type="text/javascript" src="{{asset('/layer/layer.js')}}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">

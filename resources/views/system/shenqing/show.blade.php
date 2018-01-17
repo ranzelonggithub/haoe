@@ -7,7 +7,7 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/sys" method="post" enctype="multipart/form-data">
+                <form action="/sys/shenqing/{{$res['id']}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT')}}
                     <table class="insert-tab" width="100%">
@@ -87,9 +87,19 @@
 
                             </tr>
                             <tr>
+                                <th><i class="require-red">*</i>权限</th>
+                                <td>
+                                    <select name="auth" id="">
+                                            <option value="1" <?=$res['auth']==1?'selected':''?>>开启</option>
+                                            <option value="0" <?=$res['auth']==0?'selected':''?>>关闭</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th></th>
                                 <td>
-                                    <a class="btn btn-primary btn6 mr10" href='/sys/shenqing'>返回</a>
+                                    <input class="btn btn-primary btn6 mr10" value="同意" type="submit">
+                                    <a class="btn btn-primary btn6 mr10" href='/sys/shenqing'>不同意</a>
                                 </td>
                             </tr>
                         </tbody></table>

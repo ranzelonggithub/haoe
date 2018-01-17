@@ -1,5 +1,7 @@
 @extends('system.layout.sys')
 @section('content')
+       
+        <script type="text/javascript" src="{{asset('/layer/layer.js')}}"></script>
         <div class="main-wrap">
 
         <div class="crumb-wrap">
@@ -26,52 +28,48 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{{'/sys/category/create'}}"><i class="icon-font"></i>新增分类</a>
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
                             <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
-                            <th>排序</th>
                             <th>ID</th>
-                            <th>标题</th>
-                            <th>审核状态</th>
-                            <th>点击</th>
-                            <th>发布人</th>
-                            <th>更新时间</th>
-                            <th>评论</th>
+                            <th>分类名</th>
                             <th>操作</th>
                         </tr>
+                        @foreach($res as $k=>$v)
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
+                            <td id='delid'>{{$v['id']}}</td>
+                            <td>{{$v['cateName']}}</td>
                             <td>
-                                <input name="ids[]" value="59" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
+                                <button><a href="/sys/category/{{$v['id']}}/edit">修改</a></button>
+                                <!-- <form action="/sys/category/{{ $v['id'] }}" method='post' style='display :inline;'>
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    
+                                </form> -->
+                                <button class="del" onclick="del({{$v['id']}})">删除</button>
                             </td>
-                            <td>59</td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典">发哥经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>2</td>
-                            <td>admin</td>
-                            <td>2014-03-15 21:11:01</td>
-                            <td></td>
-                            <td>
-                                <a class="link-update" href="{{'/sys/category/10/edit'}}">修改</a>
-                                <a class="link-del" href="#">删除</a>
-                            </td>
-                        </tr>
-                        
+                        </tr> 
+                        @endforeach
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">{!! $res->render() !!}</div>
                 </div>
-            </form>
         </div>
+       <script type="text/javascript">    
+            
+            function del(id){
+                layer.confirm('确定删除',{},function(id){
+                    console.log(id);
+
+                    layer.close(id);
+                })  
+            }      
+       </script>
     </div>
 @endsection

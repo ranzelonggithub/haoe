@@ -72,7 +72,8 @@ class ShenqingController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+
     }
 
     /**
@@ -85,7 +86,8 @@ class ShenqingController extends Controller
     public function update(Request $request, $id)
     {
         //执行修改
-        
+        dump($id);
+        dump($request->all());
     }
 
     /**

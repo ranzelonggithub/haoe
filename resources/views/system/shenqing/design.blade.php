@@ -58,8 +58,8 @@
                                 <form action="/sys/shenqing/{{$v['id']}}" method='get' style='display :inline;'>                                          
                                     <button>详情</button>
                                 </form>
-                                <button><a class="link-update" href="{{'/sys/shop/10/edit'}}">同意</a></button>
-                                <button><a class="link-del" href="">不同意</a></button>
+                                </form>
+                                <button><a class="link-del" href="">删除</a></button>
                             </td>
                         </tr>
                         @endforeach
