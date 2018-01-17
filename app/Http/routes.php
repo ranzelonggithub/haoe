@@ -30,6 +30,7 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 
 	//食品管理
 	Route::resource('/foods','FoodsController');
+	Route::post('/foods/picture','FoodsController@chengePicture');
 
 	//店铺管理
 	Route::resource('/shop','ShopController');
@@ -38,7 +39,11 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 	//订单管理
 	Route::resource('/order','OrderlistController');
 
+	//个人中心
 	Route::resource('/center','centerController');
+
+	//密码修改
+	Route::resource('/pass','PassController');
 	
 });
 

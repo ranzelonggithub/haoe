@@ -6,20 +6,9 @@
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">食品</a><span class="crumb-step">&gt;</span><span>添加食品</span></div>
         </div>
-        @if (count($errors) > 0)
-        <center>
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li><b>{{ $error }}</b></li>
-                    @endforeach
-                </ul>
-            </div>
-        </center>
-        @endif
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/shop/foods" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form  method="post" id="myform" name="myform" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
@@ -68,7 +57,7 @@
                             <tr>
                                 <th></th>
                                 <td>
-                                    <input class="btn btn-primary btn6 mr10" value="添加" type="submit">
+                                    <input class="btn btn-primary btn6 mr10" onClick="up()" value="添加" >
                                     <input class="btn btn6" value="重置" type="reset">
                                 </td>
                             </tr>
@@ -81,21 +70,63 @@
     </div>
     <!--/main-->
 @endsection
-@if(session('state')=='失败')
-{{session(['state'=>null])}}
+
 <script type="text/javascript">
-  window.onload=function(){ 
-    layer.msg('添加失败');
-  }   
+    $.ajaxSetup({
+        headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+   //添加食物
+   function up(){
+       var formData = new FormData($('#myform')[0]);
+       $.ajax({
+           type : "post",
+           url : "{{url('/shop/foods')}}",
+           data : formData,
+           async : true,
+           cache : false,
+           contentType:false,
+           processData:false,
+           success:function(data){
+               if(data == 1){
+                   layer.msg('添加成功');
+                   setTimeout(function(){
+                       location.href="/shop/foods";
+                   },1000);
+                   
+               }else{
+                   layer.msg('添加失败');
+               }
+           },
+
+           error: function(msg) {
+               var json = JSON.parse(msg.responseText);
+               var a = ''
+               var num = 0;
+               for(i in json){
+                   num++;
+                   a += '<li>'+num+'.&nbsp&nbsp'+json[i][0]+'</li>';
+               }
+
+               layer.open({
+                 skin: 'layui-layer-lan',
+                 type: 1 ,//Page层类型
+                 title: '错误!',
+                 shade: 0.6 ,//遮罩透明度
+                 maxmin: false,//允许全屏最小化
+                 anim: 0 ,//0-6的动画形式，-1不开启
+                 content: '<div style="padding:30px;"><ol>'+a+'</ol></div>'
+               }); 
+           },
+       });
+   }
+
+   
 </script>
-@elseif(session('state') == '成功')
-{{session(['state'=>null])}}
-<script type="text/javascript">
-  window.onload=function(){ 
-    layer.msg('添加成功');
-  }   
-</script>
-@endif
+
 
 
 

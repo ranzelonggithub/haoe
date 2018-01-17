@@ -3,7 +3,7 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">个人中心</span><span class="crumb-step">&gt;</span><span class="crumb-name">修改个人信息</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">个人中心</span><span class="crumb-step">&gt;</span><span class="crumb-name">修改密码</span></div>
         </div>
         <div class="result-wrap">
             <form  method='post' id="myform" name="myform" enctype='multipart/form-data'>
@@ -18,29 +18,22 @@
                         <table width="100%" class="insert-tab">
                             <tbody>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>用户：</th>
-                                    <td><input type="text" id="" value="{{$seller['sellerName']}}" size="28" name="sellerName" class="common-text" ></td>
+                                    <th width="15%"><i class="require-red">*</i>原&nbsp密&nbsp&nbsp码：</th>
+                                    <td><input type="password" id="oldPass" value="" size="28" name="oldPass" class="common-text" ><span style='font-size:10px;color:#ccc'>&nbsp&nbsp&nbsp由8~16位字母数字下划线组成</span></td>
                                 </tr>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>电话：</th>
-                                    <td><input type="text" id="" value="{{$seller['phone']}}" size="28" name="phone" class="common-text" >&nbsp&nbsp&nbsp<a href='#'>解除绑定</a></td>
+                                    <th width="15%"><i class="require-red">*</i>新&nbsp密&nbsp&nbsp码：</th>
+                                    <td><input type="password" id="newPass" value="" size="28" name="newPass" class="common-text" ></td>
                                 </tr>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>邮箱：</th>
-                                    <td><input type="email" id="" value="{{$seller['email']}}" size="28" name="email" class="common-text" ></td>
+                                    <th width="15%"><i class="require-red">*</i>确认密码：</th>
+                                    <td><input type="password" id="rePass" value="" size="28" name="rePass" class="common-text" ></td>
                                 </tr>
-                                <tr>
-                                    <th width="15%"><i class="require-red">*</i>性别：</th>
-                                    <td>
-                                        <input type="radio" id="" value="0"  name="sex" class="common-text" {{$sex == 0 ? 'checked' : ''}}>男
-                                        <input type="radio" id="" value="1"  name="sex" class="common-text" {{$sex == 1 ? 'checked' : ''}}>女
-                                    </td>
-                                </tr>
+                                
                                 <tr>
                                     <th></th>
                                     <td>
-                                        <button type="button"class="btn btn-primary btn6 mr10" onclick="up({{$seller['id']}})">提交</button>
-                                        <!-- <button type="submit"class="btn btn-primary btn6 mr10" >提交</button> -->
+                                        <button type="button"class="btn btn-primary btn6 mr10" onclick="modify({{$id}})">修改</button>
                                         <input type="button" value="返回" onClick="history.go(-1)" class="btn btn6">
                                     </td>
                                 </tr>
@@ -61,12 +54,12 @@
 
 
     //更改个人信息
-    function up(id){
+    function modify(id){
 
         var formData = new FormData($('#myform')[0]);
         $.ajax({
             type : "post",
-            url : "{{url('/shop/center')}}/"+id,
+            url : "{{url('/shop/pass')}}/"+id,
             data : formData,
             async : true,
             cache : false,
@@ -82,7 +75,7 @@
                 }else if(data == 0){
                     layer.msg('更新失败');
                 }else{
-                    ayer.msg('性别更新失败');
+                    layer.msg('原密码输入错误');
                 }
                 
             },

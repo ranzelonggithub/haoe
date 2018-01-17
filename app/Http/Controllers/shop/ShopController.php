@@ -70,12 +70,6 @@ class ShopController extends Controller
         }else{
             echo 0; 
         }
-
-        // if(0){
-        //     return redirect('/shop/shop');
-        // }else{
-        //     return back();
-        // }
         
     }
 

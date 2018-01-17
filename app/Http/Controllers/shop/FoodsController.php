@@ -40,17 +40,36 @@ class FoodsController extends Controller
     //执行食物的添加
     public function store(FoodRequest $request)
     {   
-        // dd($request->all());
-        $request->flashExcept(['_token','picture']);
-        $data = $request->except(['_token','picture']);
-        $data['picture'] = 'change.jpg'; //??????????
+        //判断是否上传图片
+        $pic = $request -> file('picture');
+        $res = false;
+        $filename = '';
+        if(!empty($pic)){
+            //2.获取文件后缀名
+            $hz = $pic->getClientOriginalExtension();
+            //3.随机文件名字
+            $temp_name = md5(time()+rand(10000,99999));
+            //4.拼接
+            $filename = $temp_name.'.'.$hz;
+            $path = $pic->getRealPath();
+            
+            //文件上传
+            $disk = \Storage::disk('qiniu');
+            $res = $disk->put('/shop/foods/'.$filename,file_get_contents($path));
+        }
+        
+        $data = $request->except(['_token']);
+        //若图片上传到云,则写入数据库
+        if($res){
+            $data['picture'] = $filename;
+        }
         $data['uid'] = 1; //??????????
-        // dd($data);
+        
         $res = food::insert($data);
         if($res){
-            return back()->withInput()->with('state','成功');
+           echo 1;
         }else{
-            return back()->withInput()->with('state','失败');
+           echo 2; 
         }
         
     }
@@ -79,14 +98,13 @@ class FoodsController extends Controller
     //更新菜品
     public function update(FoodRequest $request, $id)
     {   
+        $data = $request->except(['_token','_method']);
 
-        $data = $request->except(['_token','_method','picture']);
-        $data['picture'] = 'change.jpg';
         $res = food::where('id',$id)->update($data);
         if($res){
-            return redirect('/shop/foods');
+            echo 1;
         }else{
-            echo "<script>location.history=".$_SERVER['HTTP_REFERER']."</script>";
+            echo 0;
         }
     }
 
@@ -100,4 +118,43 @@ class FoodsController extends Controller
             echo 0;
         }
     }
+
+    public function chengePicture(Request $request)
+    {
+      // 更是食物图片 1.获取文件
+          $pic = $request -> file('photo');
+          $id = $request->input('id');
+          if(!empty($pic)){
+              //2.获取文件后缀名
+              $hz = $pic->getClientOriginalExtension();
+              //3.随机文件名字
+              $temp_name = md5(time()+rand(10000,99999));
+              //4.拼接
+              $filename = $temp_name.'.'.$hz;
+              $path = $pic->getRealPath();
+              
+              //文件上传
+              $disk = \Storage::disk('qiniu');
+              $res = $disk->put('/shop/foods/'.$filename,file_get_contents($path));
+
+              if($res){
+                  $picture = food::where('id',$id)->value('picture');
+                  if($picture != 'foods.jpg'){
+                      $disk->delete("/shop/foods/".$picture);
+                  }
+                  $res = food::where('id',$id)->update(['picture'=>$filename]);
+                  if($res){
+                      echo $filename;
+                  }else{
+                      echo 'foods.jpg';
+                  }
+              }
+              
+          }else{
+            echo 0;  
+          }
+        
+    }
+
+
 }

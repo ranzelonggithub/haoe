@@ -21,8 +21,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="#">管理员</a></li>
-                <li><a href="#">修改密码</a></li>
+                <li><a href="/shop/pass">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
@@ -39,7 +38,7 @@
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
                         <li><a href="/shop/index"><i class="icon-font">&#xe008;</i>店铺主页</a></li>
-                        <li><a href="/shop/center"><i class="icon-font">&#xe008;</i>个人中心</a></li>
+                        <li><a href="/shop/center"><i class="icon-font">&#xe001;</i>个人中心</a></li>
                         <li><a href="/shop/foods"><i class="icon-font">&#xe005;</i>食品管理</a></li>
                         <li><a href="#"><i class="icon-font">&#xe018;</i>回 收 站</a></li>
                         <li><a href="/shop/shop"><i class="icon-font">&#xe006;</i>店铺管理</a></li>

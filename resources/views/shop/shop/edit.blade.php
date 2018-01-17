@@ -76,7 +76,7 @@
      });
 
 
-    //判断是否有文件上传
+    //利用ajax传输数据
     function up(id){
 
         var formData = new FormData($('#myform')[0]);
