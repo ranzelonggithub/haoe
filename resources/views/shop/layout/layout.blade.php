@@ -38,8 +38,9 @@
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
                         <li><a href="/shop/index"><i class="icon-font">&#xe008;</i>店铺主页</a></li>
-                        <li><a href="/shop/center"><i class="icon-font">&#xe001;</i>个人中心</a></li>
+                        <li><a href="/shop/center"><i class="icon-font">&#xe003;</i>个人中心</a></li>
                         <li><a href="/shop/foods"><i class="icon-font">&#xe005;</i>食品管理</a></li>
+                        <li><a href="/shop/cate"><i class="icon-font">&#xe001;</i>食品分类</a></li>
                         <li><a href="#"><i class="icon-font">&#xe018;</i>回 收 站</a></li>
                         <li><a href="/shop/shop"><i class="icon-font">&#xe006;</i>店铺管理</a></li>
                         <li><a href="/shop/order"><i class="icon-font">&#xe004;</i>订单管理</a></li>

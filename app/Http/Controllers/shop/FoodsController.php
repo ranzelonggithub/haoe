@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\food;
 use DB;
-use App\Model\system;
+use App\Model\shop;
 use App\Http\Requests\FoodRequest;
 
 class FoodsController extends Controller
@@ -19,22 +19,25 @@ class FoodsController extends Controller
     {   
         $search = $request->input('search');
         $keywords = $request->input('keywords');
-        $cateName = ['早餐','午餐','晚餐','宵夜'];
+        $cate = shop::value('cate');
+        $cate = explode('&',$cate);
         $requestall = $request->all();
+        $data = food::where('uid',1);
         if(!empty($search)){
-            $data = food::where('uid',1)->where($search,'like','%'.$keywords.'%')->orderby('sort','asc')->paginate(5); 
-        }else{
-            $data = food::where('uid',1)->orderby('sort','asc')->paginate(5);//??????????
+            $data = $data->where($search,'like','%'.$keywords.'%'); 
         }
-        return view('shop.foods.index',['data'=>$data,'request'=>$requestall,'cateName'=>$cateName]);
+        $data =$data->orderby('sort','asc')->paginate(5);//??????????
+        
+        return view('shop.foods.index',['data'=>$data,'request'=>$requestall,'cate'=>$cate]);
     }
 
 
     //跳转到食物增加页面
     public function create()
     {   
-        $cateName = ['早餐','午餐','晚餐','宵夜']; //??????????
-        return view('shop.foods.add',['cateName'=>$cateName]);
+        $cate = shop::value('cate');
+        $cate = explode('&',$cate);
+        return view('shop.foods.add',['cate'=>$cate]);
     }
 
     //执行食物的添加
@@ -87,12 +90,11 @@ class FoodsController extends Controller
 
     //编辑菜品
     public function edit($id)
-    {
+    {   
+        $cate = shop::value('cate');
+        $cate = explode('&',$cate);
         $data = food::where('id',$id)->first();
-        $cate = '早餐';//?????????
-        $uid = $data->uid;
-        $cateName = system::where('id','!=','uid')->get();//?????????
-        return view('/shop/foods/edit',['data'=>$data,'cate'=>$cate,'cateName'=>$cateName,'uid'=>$uid]);
+        return view('/shop/foods/edit',['data'=>$data,'cate'=>$cate]);
     }
 
     //更新菜品

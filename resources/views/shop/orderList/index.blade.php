@@ -99,7 +99,6 @@
             </div>
         </div>
     </div>
-    <a href="/shop/order/1/edit"><button>点一下</button></a>
  <script type='text/javascript'>
 
 //执行发送

@@ -18,7 +18,15 @@
                             <tbody>
                                 <tr>
                                     <th width="15%"><i class="require-red">*</i>店铺名称：</th>
-                                    <td><input type="text" id="" value="{{$data['shopName']}}" size="85" name="shopName" class="common-text" disabled></td>
+                                    <td><input type="text" id="" value="{{$data['shopName']}}" size="85" name="shopName" class="common-text"></td>
+                                </tr>
+                                <tr>
+                                    <th width="15%"><i class="require-red">*</i>店铺类别：</th>
+                                    <td><select name="shopCate" id="shopCate" class="required common-text">
+                                    @foreach($cateName as $k =>$v)
+                                        <option value="{{$k+1}}" {{$k+1 == $data['shopCate'] ? 'selected' : ''}}>{{$v}}</option> 
+                                    @endforeach
+                                    </select></td>
                                 </tr>
                                 <tr>
                                     <th width="15%"><i class="require-red">*</i>店铺地址：</th>

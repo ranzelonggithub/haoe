@@ -15,7 +15,7 @@
                             <th width="120"><i class="require-red">*</i>分类：</th>
                             <td>
                                 <select name="cate" id="catid" class="required common-text">
-                                    @foreach($cateName as $k =>$v)
+                                    @foreach($cate as $k =>$v)
                                     <option value="{{$k}}">{{$v}}</option> 
                                     @endforeach
                                 </select>

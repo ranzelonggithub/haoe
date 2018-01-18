@@ -49,12 +49,12 @@
 <script type="text/javascript">
 
     //检查电话号码
-    $('input[name=phone]').blur(function(){
+    $('input[name=phone]').mouseout(function(){
         var phone = $(this).val();
         $.post('/shop/phone',{'phone':phone,'_token':'{{csrf_token()}}'},function(data){
               switch(data){
                 case 'no':
-                    layer.tips('电话号码格式不正确', '#phone');
+                    layer.tips('请先申请开店', '#phone');
                     $('#btn').attr('disabled','disabled');
                     break;
                 case 'not':
@@ -72,24 +72,27 @@
     //发送验证码
     var time = 0;
     $('#btn').click(function(){
+        $('#btn').attr('disabled','disabled');
         if(time == 0){
             var phone = $('input[name=phone]').val();
             $.post('/shop/code',{'phone':phone,'_token':'{{csrf_token()}}'},function(data){
-                alert(data);
-            });
-            $('#btn').attr('disabled','disabled');
-        }
-        if (time == 0) {
-                time = 10; 
-                var index = setInterval(function(){
-                    time--;
-                    if (time == 0) {
-                        clearInterval(index);
-                        time = 0;
-                        $('#btn').removeAttr('disabled');
+                if (time == 0) {
+                        time = 60; 
+                        var index = setInterval(function(){
+                            time--;
+                            $('.btn_mfyzm').val(time+"秒后失效");
+                            if (time == 0) {
+                                clearInterval(index);
+                                time = 0;
+                                $('.btn_mfyzm').val("获取动态密码");
+                                $('#btn').removeAttr('disabled');
+                            }
+                        }, 1000);
                     }
-                }, 1000);
-            }
+            });
+            
+        }
+
     });
 
     //执行登录

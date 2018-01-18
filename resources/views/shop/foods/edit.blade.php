@@ -19,7 +19,6 @@
                                 <img src="http://p2dtot555.bkt.clouddn.com/shop/foods/{{$data['picture']}}" height="100" width="100" id='picture' >
                             </td>
                         </tr>
-                    }
                 </form>
                 <form  method="post" id="yourform" name="yourform" enctype="multipart/form-data">
                         {{csrf_field()}}
@@ -27,10 +26,9 @@
                         <tr>
                             <th width="120"><i class="require-red">*</i>分类：</th>
                             <td>
-                                <select name="uid" id="catid" class="required common-text">
-                                    <option value='{{$uid}}'>{{$cate}}</option>
-                                    @foreach($cateName as $k =>$v)
-                                    <option value="{{$v['id']}}">{{$v['cateName']}}</option> 
+                                <select name="cate" id="catid" class="required common-text">
+                                    @foreach($cate as $k =>$v)
+                                    <option value="{{$k}}" {{$data['cate'] == $k ? 'selected' : ''}}>{{$v}}</option> 
                                     @endforeach
                                 </select>
                             </td>
@@ -38,6 +36,7 @@
                             <tr>
                                 <th><i class="require-red">*</i>名称：</th>
                                 <td>
+                                    <input type="hidden" value="{{$data['uid']}}">
                                     <input class="common-text required goodsName"  name="goodsName" size="50" value="{{$data['goodsName']}}" type="text">
                                 </td>
                             </tr>

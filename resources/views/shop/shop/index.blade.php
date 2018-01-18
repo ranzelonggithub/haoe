@@ -29,6 +29,9 @@
                         <label class="res-lab">店铺名称</label><span class="res-info">{{$data['shopName']}}</span>
                     </li>
                     <li>
+                        <label class="res-lab">店铺类别</label><span class="res-info">{{$shopCate}}</span>
+                    </li>
+                    <li>
                         <label class="res-lab">店铺地址</label><span class="res-info">{{$data['address']}}</span>
                     </li>
                     <li>

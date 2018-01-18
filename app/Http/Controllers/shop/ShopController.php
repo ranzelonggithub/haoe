@@ -7,18 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\shop;
-use App\model\food;
+use App\Model\food;
 use App\Http\Requests\ShopRequest;
-
+use App\Model\system;
 class ShopController extends Controller
 {
     //显示店铺信息
     public function index()
     {   
 
-        $data = shop::where('id',1)->first();
-        $count = food::where('uid',1)->count();
-        return view('shop/shop/index',['data'=>$data,'count'=>$count]);
+        $data = shop::where('id',1)->first();//??????
+        $count = food::where('uid',1)->count();//??????
+        $shop = shop::where('id',1)->first();
+        $shopCate = $shop->systemCate->cateName;////?????????
+        return view('shop/shop/index',['data'=>$data,'count'=>$count,'shopCate'=>$shopCate]);
     }
 
     /**
@@ -57,7 +59,9 @@ class ShopController extends Controller
     public function edit($id)
     {
         $data = shop::where('id',$id)->first();
-        return view('shop/shop/edit',['data'=>$data]);
+        $shopCate = $data->shopCate;
+        $cateName = system::lists('cateName');
+        return view('shop/shop/edit',['data'=>$data,'cateName'=>$cateName]);
     }
 
     //更新店铺信息

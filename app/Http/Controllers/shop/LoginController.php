@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Flc\Dysms\Client;
 use Flc\Dysms\Request\SendSms;
 use App\Model\seller_log;
+use App\Model\shop;
 
 class LoginController extends Controller
 {
@@ -37,39 +38,39 @@ class LoginController extends Controller
     //发送验证码
     public function code(Request $request)
     {
-    	// $phone = $request->input(phone);
-    	// $config = [
-    	//     'accessKeyId'    => 'LTAIoIL9CepmtlBW',
-    	//     'accessKeySecret' => 'y8cJCQJazGlX1KIhLbNrPw4O3kYomW',
-    	// ];
+    	$phone = $request->input('phone');
+    	$config = [
+    	    'accessKeyId'    => 'LTAIoIL9CepmtlBW',
+    	    'accessKeySecret' => 'y8cJCQJazGlX1KIhLbNrPw4O3kYomW',
+    	];
 
-    	// $client  = new Client($config);
-    	// $sendSms = new SendSms;
-    	// $sendSms->setPhoneNumbers($phone);
-    	// $sendSms->setSignName('冉泽龙');
-    	// $sendSms->setTemplateCode('SMS_120405864');
+    	$client  = new Client($config);
+    	$sendSms = new SendSms;
+    	$sendSms->setPhoneNumbers($phone);
+    	$sendSms->setSignName('冉泽龙');
+    	$sendSms->setTemplateCode('SMS_120405864');
     	$code = rand(100000, 999999);
-    	// $sendSms->setTemplateParam(['code' => $code);
-    	// $sendSms->setOutId('demo');
+    	$sendSms->setTemplateParam(['code' => $code]);
+    	$sendSms->setOutId('demo');
     	session(['code'=>$code]);
-    	// $client->execute($sendSms);
-    	echo $code;
+    	$client->execute($sendSms);
+    	echo 1;
     }
 
     //执行登录
     public function dologin(Request $request)
     {
-    	$code = $request->input('code');
+        $code = $request->input('code');
     	$phone = $request->input('phone');
-    	// $id = shop::where('phone',$phone)->id;
-    	//session(['shopid'=>$id]);
+    	$sellerid = seller_log::where('phone',$phone)->value('id');
+        $shopid = shop::where('uid',$sellerid);
+        session(['sellerid'=>$sellerid]);
+    	session(['shopid'=>$shopid]);
     	if($code == session('code')){
     		echo 1;
     	}else{
     		echo 0;
     	}
     }
-
-
 
 }

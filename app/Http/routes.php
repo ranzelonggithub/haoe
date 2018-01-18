@@ -34,7 +34,7 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 
 	//店铺管理
 	Route::resource('/shop','ShopController');
-	// Route::resource('/com','CommentController');
+	Route::resource('cate','CateController');
 
 	//订单管理
 	Route::resource('/order','OrderlistController');
