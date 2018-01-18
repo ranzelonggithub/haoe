@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>系统后台管理</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/main.css')}}"/>
     <script type="text/javascript" src="{{ asset('/systems/js/jquery-1.8.3.js') }}"></script>
@@ -52,8 +53,6 @@
                         <li><a href="{{'/sys/ad'}}"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
-
-
             </ul>
         </div>
     </div>

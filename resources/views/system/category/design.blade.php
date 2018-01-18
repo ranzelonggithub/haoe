@@ -48,12 +48,7 @@
                             <td>{{$v['cateName']}}</td>
                             <td>
                                 <button><a href="/sys/category/{{$v['id']}}/edit">修改</a></button>
-                                <!-- <form action="/sys/category/{{ $v['id'] }}" method='post' style='display :inline;'>
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    
-                                </form> -->
-                                <button class="del" onclick="del({{$v['id']}})">删除</button>
+                                <button class="del" d="{{$v['id']}}" onclick="del({{$v['id']}})">删除</button>
                             </td>
                         </tr> 
                         @endforeach
@@ -62,13 +57,30 @@
                 </div>
         </div>
        <script type="text/javascript">    
-            
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             function del(id){
-                layer.confirm('确定删除',{},function(id){
-                    console.log(id);
-
-                    layer.close(id);
-                })  
+                layer.confirm('确认删除？？', {
+                    btn: ['是','否'] //按钮
+                }, function(){
+                    $.ajax({
+                        type:"post",
+                        url:"{{url('/sys/category')}}/"+id,
+                        data:{'_method':'delete'},
+                        async:true,
+                        success:function(data){
+                            if(data){
+                                layer.msg('删除成功');
+                                $("[d="+id+"]").parent().parent().remove();
+                            }else{
+                                layer.msg('删除失败');
+                            }
+                        },   
+                    });
+                });
             }      
        </script>
     </div>

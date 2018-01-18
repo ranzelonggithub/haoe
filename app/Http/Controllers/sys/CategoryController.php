@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {   
-        $res = DB::table('systems')->paginate(4);
+        $res = DB::table('systems')->paginate(2);
         //加载分类管理的视图
         return view('system.category.design',['res'=>$res]);
     }
@@ -110,12 +110,13 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         
-        // $res = DB::table('systems')->where('id',$id)->delete();
-        // if($res){
-        //     echo '<script>alert("删除成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
-        // }else{
-        //     echo '<script>alert("删除失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
-        // }
+        $res = DB::table('systems')->where('id',$id)->delete();
+        if($res){
+            echo 1;
+        }else{
+            echo 0;
+        }
+       
 
     }
 }

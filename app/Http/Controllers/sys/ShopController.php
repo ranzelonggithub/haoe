@@ -24,8 +24,11 @@ class ShopController extends Controller
             ->select('seller_logs.*', 'seller_infos.email','shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
             ->paginate(1);
         //dump($res);
+        //
+        $data = DB::table('systems')->get();
+        dump($data);
         //加载店家管理页面
-        return view('system.shop.design',['res'=>$res]);
+        return view('system.shop.design',['res'=>$res,'data'=>$data]);
     }
 
     /**

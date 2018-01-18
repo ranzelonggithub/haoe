@@ -13,8 +13,9 @@
                             <th width="120">选择分类:</th>
                             <td>
                                 <select name="search-sort" id="">
-                                    <option value="">全部</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                    @foreach($data as $k=>$v)
+                                    <option value="{{$v['id']}}">{{$v['cateName']}}</option>
+                                    @endforeach
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
@@ -55,7 +56,7 @@
                             <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px"></td>
                             <td><?= $v['auth'] == 1 ? '正在营业':'店铺已关'?></td>
                             <td>
-                                <form action="/sys/shop/{{$v['id']}}" method='get' style='display :inline;'>                                          
+                                <form action="/sys/shop/{{$v['id']}}" method='get' style='display :inline;'>                                 
                                     <button>详情</button>
                                 </form>
                                 <form action="/sys/shop/{{$v['id']}}" method='POST' style='display :inline;'>
