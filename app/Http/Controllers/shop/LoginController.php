@@ -10,6 +10,7 @@ use Flc\Dysms\Client;
 use Flc\Dysms\Request\SendSms;
 use App\Model\seller_log;
 use App\Model\shop;
+use Hash;
 
 class LoginController extends Controller
 {
@@ -71,6 +72,47 @@ class LoginController extends Controller
     	}else{
     		echo 0;
     	}
+    }
+
+    public function plogin(Request $request)
+    {   
+        $flag = 0;
+        $txtUser = $request->input('txtUser');
+        $password = $request->input('password');
+        $password1 = seller_log::where('sellerName',$txtUser)->value('password');
+        $password2 = seller_log::where('phone',$txtUser)->value('password');
+        $password3 = seller_log::where('email',$txtUser)->value('password');
+        
+        if(!empty($password1)){
+            if(Hash::check($password, $password1)){
+                $flag = 1;
+                $sellerid = seller_log::where('sellerName',$txtUser)->value('id');
+            }
+        }
+
+        if(!empty($password2)){
+            if(Hash::check($password, $password2)){
+                $flag = 1;
+                $sellerid = seller_log::where('phone',$txtUser)->value('id');
+            }
+        }
+
+        if(!empty($password3)){
+            if(Hash::check($password, $password3)){
+                $flag = 1;
+                $sellerid = seller_log::where('email',$txtUser)->value('id');
+            }
+        }
+
+        if($flag){
+            $shopid = shop::where('uid',$sellerid);
+            session(['sellerid'=>$sellerid]);
+            session(['shopid'=>$shopid]);
+            echo 1;
+        }else{
+            echo 2;
+        }
+
     }
 
 }

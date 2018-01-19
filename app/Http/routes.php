@@ -18,12 +18,15 @@ Route::get('/', function () {
 //商铺路由组
 Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 	
-	//登录
+	//手机登录
 	Route::get('login','LoginController@login');
 	Route::post('phone','LoginController@phone');
 	Route::post('code','LoginController@code');
 	Route::post('dologin','LoginController@dologin');
 	Route::post('shouye','LoginController@index');
+
+	//普通登录
+	Route::post('plogin','LoginController@plogin');
 	
 	//主页
 	Route::get('index','IndexController@index');
@@ -44,6 +47,9 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 
 	//密码修改
 	Route::resource('/pass','PassController');
+
+	//评论管理
+	Route::resource('/comment','CommentController');
 	
 });
 

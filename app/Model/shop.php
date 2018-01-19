@@ -10,4 +10,9 @@ class shop extends Model
     {
     	return $this->belongsTo('App\Model\system','shopCate');
     }
+
+    public function order()
+    {
+    	return $this->belongsTo('App\Model\order','oid');
+    }
 }

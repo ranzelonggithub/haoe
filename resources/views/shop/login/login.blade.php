@@ -22,7 +22,7 @@
 					<div class="login-style" style="display: block;">
 						<dl><dd><input name="txtUser" type="text" id="txtUser" placeholder="用户名/邮箱/手机号" /></dd></dl>
 						<dl>
-							<dd><input type="password" id="Userpwd" onkeydown="enterHandler(event)" placeholder="请输入您的密码" /></dd>
+							<dd><input type="password" id="Userpwd"  placeholder="请输入您的密码" /></dd>
 						</dl>
 						<div class="tishi"></div>
 						<button onclick="cliLogin()" id="logbtn" style="outline:none">登 录</button>
@@ -104,6 +104,21 @@
                 layer.tips('验证码不正确', '#dynamicPWD');
             }else{
                 location.href='/shop/index';
+            }
+        });
+    });
+
+    //普通登录
+    $('#logbtn').click(function(){
+        var txtUser = $('[name=txtUser]').val();
+        var password = $('#Userpwd').val();
+        // alert(password);
+        $.post('/shop/plogin',{'txtUser':txtUser,'password':password,'_token':'{{csrf_token()}}'},function(data){
+            // alert(data);
+            if(data){
+                location.href='/shop/index';
+            }else{
+                layer.tips('用户或密码不正确', '#txtUser');
             }
         });
     });

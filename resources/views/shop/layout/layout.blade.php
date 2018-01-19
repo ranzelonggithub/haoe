@@ -44,7 +44,7 @@
                         <li><a href="#"><i class="icon-font">&#xe018;</i>回 收 站</a></li>
                         <li><a href="/shop/shop"><i class="icon-font">&#xe006;</i>店铺管理</a></li>
                         <li><a href="/shop/order"><i class="icon-font">&#xe004;</i>订单管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
+                        <li><a href="/shop/comment"><i class="icon-font">&#xe012;</i>评论管理</a></li>
                     </ul>
                 </li>
             </ul>
