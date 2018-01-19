@@ -12,13 +12,6 @@
                 <form action="#" method="post">
                     <table class="search-tab">
                         <tr>
-                            <th width="120">选择分类:</th>
-                            <td>
-                                <select name="search-sort" id="">
-                                    <option value="">全部</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
-                            </td>
                             <th width="70">关键字:</th>
                             <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
