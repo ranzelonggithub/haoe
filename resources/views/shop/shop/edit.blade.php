@@ -29,7 +29,27 @@
                                     </select></td>
                                 </tr>
                                 <tr>
-                                    <th width="15%"><i class="require-red">*</i>店铺地址：</th>
+                                    <th width="15%"><i class="require-red">*</i>所在地址：</th>
+                                    <td>
+                                        市：<select name='city' class="common-text">
+                                        @foreach($city as $k => $v)
+                                            <option value="{{$v['id']}}" {{$v['id'] == $data['city'] ? 'selected' : ''}}>{{$v['area']}}</option>
+                                        @endforeach
+                                        </select>
+                                        &nbsp&nbsp&nbsp区：<select name='distract' class="common-text">
+                                        @foreach($distract as $k => $v)
+                                            <option value="{{$v['id']}}" {{$v['id'] == $data['distract'] ? 'selected' : ''}}>{{$v['area']}}</option>
+                                        @endforeach
+                                        </select>
+                                        &nbsp&nbsp&nbsp商圈：<select name='trade' class="common-text">
+                                        @foreach($trade as $k => $v)
+                                            <option value="{{$v['id']}}" {{$v['id'] == $data['trade'] ? 'selected' : ''}}>{{$v['area']}}</option>
+                                        @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="15%"><i class="require-red">*</i>详细地址：</th>
                                     <td><input type="text" id="" value="{{$data['address']}}" size="85" name="address" class="common-text"></td>
                                 </tr>
                                 <tr>
@@ -131,6 +151,32 @@
             },
         });
     }
+
+    //更改区下拉框
+    $('[name=city]').change(function(){
+        var city = $(this).val();
+        $.post("{{url('shop/shop')}}",{'city':city},function(data){
+            var str = '<option >--请选择--</option>';
+            var str1 = '<option >--请选择--</option>';
+            for(var k in data){
+                str += '<option value="'+data[k]['id']+'" >'+data[k]['area']+'</option>';
+            }
+            $('[name=distract]').html(str);
+            $('[name=trade]').html(str1);
+        });
+    });
+
+    //更改商圈下拉框
+    $('[name=distract]').change(function(){
+        var distract = $(this).val();
+        $.post("{{url('shop/shop')}}",{'distract':distract},function(data){
+            var str = '<option >--请选择--</option>';
+            for(var k in data){
+                str += '<option value="'+data[k]['id']+'" >'+data[k]['area']+'</option>';
+            }
+            $('[name=trade]').html(str);
+        });
+    });
  </script>
     <!--/main-->
  @endsection

@@ -68,7 +68,7 @@ class CommentController extends Controller
         $data['orderNum'] = $data->order->orderNum;
         $data['recName'] = $data->order->recName;
         $data['recPhone'] = $data->order->recPhone;
-        $data['delilName'] = $data->order->delilName;
+        $data['deliName'] = $data->order->deliName;
         $data['deliPhone'] = $data->order->deliPhone;
         $food = $data->order->goodsName;
         $food = explode('&',$food);

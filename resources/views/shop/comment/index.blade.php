@@ -57,7 +57,7 @@
                         <tr>
                             <td>{{($page-1)*3+$k+1}}</td>
                             <td>{{$v['orderNum']}}</td>
-                            <td>{{$v['payment']}}</td>
+                            <td>{{$v['payment']}}元</td>
                             <td>{{$v['recName']}}</td>
                             <td>{{$v['recPhone']}}</td>
                             <td>{{$v['time']}}</td>

@@ -32,7 +32,10 @@
                         <label class="res-lab">店铺类别</label><span class="res-info">{{$shopCate}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">店铺地址</label><span class="res-info">{{$data['address']}}</span>
+                        <label class="res-lab">所在地址</label><span class="res-info">{{$area[$data['city']-1]}}&nbsp&nbsp&nbsp{{$area[$data['distract']-1]}}&nbsp&nbsp&nbsp{{$area[$data['trade']-1]}}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">详细地址</label><span class="res-info">{{$data['address']}}</span>
                     </li>
                     <li>
                         <label class="res-lab">店铺电话</label><span class="res-info">{{$data['shopPhone']}}</span>

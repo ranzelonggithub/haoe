@@ -10,6 +10,7 @@ use App\Model\shop;
 use App\Model\food;
 use App\Http\Requests\ShopRequest;
 use App\Model\system;
+use App\Model\business;
 class ShopController extends Controller
 {
     //显示店铺信息
@@ -18,9 +19,9 @@ class ShopController extends Controller
 
         $data = shop::where('id',1)->first();//??????
         $count = food::where('uid',1)->count();//??????
-        $shop = shop::where('id',1)->first();
-        $shopCate = $shop->systemCate->cateName;////?????????
-        return view('shop/shop/index',['data'=>$data,'count'=>$count,'shopCate'=>$shopCate]);
+        $shopCate = $data->systemCate->cateName;////?????????
+        $area = business::lists('area');
+        return view('shop/shop/index',['data'=>$data,'count'=>$count,'shopCate'=>$shopCate,'area'=>$area]);
     }
 
     /**
@@ -41,7 +42,17 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {       
-         
+        $cid = $request->input('city');
+        $did =  $request->input('distract');
+        
+        if(!empty($cid)){
+            $data = business::where('pid',$cid)->get();
+        }
+
+        if(!empty($did)){
+            $data = business::where('pid',$did)->get();
+        }
+        return $data;
     }
 
     /**
@@ -61,7 +72,10 @@ class ShopController extends Controller
         $data = shop::where('id',$id)->first();
         $shopCate = $data->shopCate;
         $cateName = system::lists('cateName');
-        return view('shop/shop/edit',['data'=>$data,'cateName'=>$cateName]);
+        $city = business::where('pid',0)->get();
+        $distract = business::where('pid',$data->city)->get();
+        $trade = business::where('pid',$data->distract)->get();
+        return view('shop/shop/edit',['data'=>$data,'cateName'=>$cateName,'city'=>$city,'distract'=>$distract,'trade'=>$trade]);
     }
 
     //更新店铺信息

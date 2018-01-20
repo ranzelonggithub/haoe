@@ -26,22 +26,25 @@
             <div class="result-content">
                 <ul class="sys-info-list">
                     <li>
-                        <label class="res-lab">店铺名称</label><span class="res-info">###</span>
+                        <label class="res-lab">店铺logo</label><span class="res-info"><img src="http://p2dtot555.bkt.clouddn.com/shop/shop/{{$shop['logo']}}" width='100'></span>
                     </li>
                     <li>
-                        <label class="res-lab">店铺老板</label><span class="res-info">###</span>
+                        <label class="res-lab">店铺名称</label><span class="res-info">{{$shop['shopName']}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">菜品总量</label><span class="res-info">###</span>
+                        <label class="res-lab">店铺老板</label><span class="res-info">{{$sellerName}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">总订单量</label><span class="res-info">###</span>
+                        <label class="res-lab">菜品总量</label><span class="res-info">{{$fnum}}种</span>
                     </li>
                     <li>
-                        <label class="res-lab">开店天数</label><span class="res-info">###</span>
+                        <label class="res-lab">总订单量</label><span class="res-info">{{$onum}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">店铺评分</label><span class="res-info">###</span>
+                        <label class="res-lab">开店天数</label><span class="res-info">{{$date}}天</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">店铺评分</label><span class="res-info">{{$shop['grade']}}</span>
                     </li>
 
                 </ul>

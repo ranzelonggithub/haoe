@@ -68,64 +68,64 @@
         </div>
 
     </div>
+    <script type="text/javascript">
+        
+        $.ajaxSetup({
+             headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+         });
+
+
+       //添加食物
+       function up(){
+           var formData = new FormData($('#myform')[0]);
+           $.ajax({
+               type : "post",
+               url : "{{url('/shop/foods')}}",
+               data : formData,
+               async : true,
+               cache : false,
+               contentType:false,
+               processData:false,
+               success:function(data){
+                   if(data == 1){
+                       layer.msg('添加成功');
+                       setTimeout(function(){
+                           location.href="/shop/foods";
+                       },1000);
+                       
+                   }else{
+                       layer.msg('添加失败');
+                   }
+               },
+
+               error: function(msg) {
+                   var json = JSON.parse(msg.responseText);
+                   var a = ''
+                   var num = 0;
+                   for(i in json){
+                       num++;
+                       a += '<li>'+num+'.&nbsp&nbsp'+json[i][0]+'</li>';
+                   }
+
+                   layer.open({
+                     skin: 'layui-layer-lan',
+                     type: 1 ,//Page层类型
+                     title: '错误!',
+                     shade: 0.6 ,//遮罩透明度
+                     maxmin: false,//允许全屏最小化
+                     anim: 0 ,//0-6的动画形式，-1不开启
+                     content: '<div style="padding:30px;"><ol>'+a+'</ol></div>'
+                   }); 
+               },
+           });
+       }
+
+       
+    </script>
     <!--/main-->
 @endsection
-
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-
-   //添加食物
-   function up(){
-       var formData = new FormData($('#myform')[0]);
-       $.ajax({
-           type : "post",
-           url : "{{url('/shop/foods')}}",
-           data : formData,
-           async : true,
-           cache : false,
-           contentType:false,
-           processData:false,
-           success:function(data){
-               if(data == 1){
-                   layer.msg('添加成功');
-                   setTimeout(function(){
-                       location.href="/shop/foods";
-                   },1000);
-                   
-               }else{
-                   layer.msg('添加失败');
-               }
-           },
-
-           error: function(msg) {
-               var json = JSON.parse(msg.responseText);
-               var a = ''
-               var num = 0;
-               for(i in json){
-                   num++;
-                   a += '<li>'+num+'.&nbsp&nbsp'+json[i][0]+'</li>';
-               }
-
-               layer.open({
-                 skin: 'layui-layer-lan',
-                 type: 1 ,//Page层类型
-                 title: '错误!',
-                 shade: 0.6 ,//遮罩透明度
-                 maxmin: false,//允许全屏最小化
-                 anim: 0 ,//0-6的动画形式，-1不开启
-                 content: '<div style="padding:30px;"><ol>'+a+'</ol></div>'
-               }); 
-           },
-       });
-   }
-
-   
-</script>
 
 
 

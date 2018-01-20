@@ -25,6 +25,9 @@ class ShopRequest extends Request
     {
         return [
             'address' => 'required|max:80',
+            'city' => 'required',
+            'distract' => 'required',
+            'trade' => 'required',
             'shopPhone' => 'required|regex:/^1[34578]\d{9}$/',
             'deliPrice' => 'required',
             'initPrice' => 'required',
@@ -40,6 +43,9 @@ class ShopRequest extends Request
         return [
             'address.required' => '店铺地址是必填的',
             'address.max:80'  => '名店铺地址最大为80个字',
+            'city.required' => '市是必填的',
+            'distract.required' => '区是必填的',
+            'trade.required' => '商圈是必填的',
             'shopPhone.required' => '店铺电话是必填的',
             'shopPhone.regex' => '店铺电话格式不正确',
             'deliPrice.required' => '配送费是必填的',

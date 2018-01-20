@@ -24,28 +24,28 @@
                         <label class="res-lab">收货电话</label><span class="res-info">{{$data['recPhone']}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">配送姓名</label><span class="res-info">{{$data['delilName']}}</span>
+                        <label class="res-lab">配送姓名</label><span class="res-info">{{$data['deliName']}}</span>
                     </li>
                     <li>
                         <label class="res-lab">配送电话</label><span class="res-info">{{$data['deliPhone']}}</span>
                     </li>
                     <li>
-                        <label class="res-lab">食物评分</label>
+                        <label class="res-lab">具体评分</label>
                     </li>
                     <li>
                         <table  width='700px' class="order-table" min-width='700px' cellpadding='4px'> 
                            <caption><font size='4'><b>评&nbsp价&nbsp详&nbsp情</b></font></caption>
-                            <tr style='border:1px solid #888'>
+                            <tr style='border:1px solid #aaa'>
                                 <th colspan="3" align='center'>食品</th>
                             </tr>
                         @foreach($food as $k => $v)
                             <tr>
                                 <td>{{$food[$k]}}</td>
-                                <td>{{$goodsAmount[$k]}}</td>
+                                <td>×{{$goodsAmount[$k]}}</td>
                                 <td><img src="../../shops/images/evl/{{$goodsGrade[$k]}}xing.png"  width="80" alt=""></td>
                             </tr>
                         @endforeach
-                            <tr style='border:1px solid #888'>
+                            <tr style='border:1px solid #aaa'>
                                 <th colspan="3" align='center'>快递员</th>
                             </tr>
                             
@@ -55,7 +55,7 @@
                                 <td><img src="../../shops/images/evl/{{$data['senderGrade']}}xing.png"  width="80" alt=""></td>
                             </tr>
                             
-                            <tr style='border:1px solid #888'>
+                            <tr style='border:1px solid #aaa'>
                                 <th colspan="3" align='center'>店铺</th>
                             </tr>
                             
@@ -64,14 +64,14 @@
                                 <td></td>
                                 <td><img src="../../shops/images/evl/{{$data['shopGrade']}}xing.png"  width="80" alt=""></td>
                             </tr>
-                            <tr style='border:1px solid #888'>
+                            <tr style='border:1px solid #aaa'>
                                 <th colspan="3" align='center'>评价留言</th>
                             </tr>
                             
                             <tr>
                                 <td colspan="3">{{$data['content']}}</td>
                             </tr>
-                            <tr style='border:1px solid #888'>
+                            <tr style='border:1px solid #aaa'>
                                 <th colspan="3" align='center'>卖家回复</th>
                             </tr>
                             
