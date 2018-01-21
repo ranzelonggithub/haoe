@@ -14,6 +14,13 @@
                     <table class="insert-tab" width="100%">
                         <tbody>
                             <tr>
+                                <th><i class="require-red">*</i>头像：</th>
+                                <td>
+                                    <input type="file" name="photo" id="update" value="">
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$res['photo']}}" style="width:80px"></p>
+                                </td>
+                            <tr>
+                            <tr>
                                 <th width="120"><i class="require-red">*</i>用户名：</th>
                                 <td>
                                     <input type="text" name='userName' value='{{$data["userName"]}}'>
@@ -52,14 +59,6 @@
                                         </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>头像：</th>
-                                <td>
-                                    <input type="file" name="photo" id="update" value="">
-                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$res['photo']}}" style="width:80px"></p>
-                                </td>
-
-                            <tr>
                                 <th></th>
                                 <td>
                                     <input class="btn btn-primary btn6 mr10" value="提交" type="submit">

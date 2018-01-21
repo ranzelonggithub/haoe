@@ -15,10 +15,10 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($request->Session()->has('id')){
+        if($request->session()->has('id')){
             return $next($request);
         }else{
-            return view('/sys/do');
+            return redirect('/sys/do');
         }
     }
 }

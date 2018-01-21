@@ -92,7 +92,7 @@ Route::group(['prefix'=>'sys','namespace'=>'sys'],function(){
 });
 
 //系统后台主页路由
-Route::group(['prefix'=>'sys','namespace'=>'sys','Middleware'=>'Login'],function(){
+Route::group(['prefix'=>'sys','namespace'=>'sys','middleware'=>'login'],function(){
 	
 	//系统后台首页路由
 	Route::get('index','IndexController@index');
@@ -130,6 +130,8 @@ Route::group(['prefix'=>'sys','namespace'=>'sys','Middleware'=>'Login'],function
 	//系统广告管理路由
 	Route::resource('ad','AdController');
 	
+	//商圈管理路由
+	Route::resource('business','BusinessController');
 });
 
 

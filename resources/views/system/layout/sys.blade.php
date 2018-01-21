@@ -51,6 +51,7 @@
                         <li><a href="{{'/sys/category'}}"><i class="icon-font">&#xe012;</i>分类管理</a></li>
                         <li><a href="{{'/sys/config'}}"><i class="icon-font">&#xe052;</i>配置管理</a></li>
                         <li><a href="{{'/sys/ad'}}"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="{{'/sys/business'}}"><i class="icon-font">&#xe033;</i>商圈管理</a></li>
                     </ul>
                 </li>
             </ul>

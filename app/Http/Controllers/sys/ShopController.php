@@ -26,7 +26,7 @@ class ShopController extends Controller
         //dump($res);
         //
         $data = DB::table('systems')->get();
-        dump($data);
+        
         //加载店家管理页面
         return view('system.shop.design',['res'=>$res,'data'=>$data]);
     }

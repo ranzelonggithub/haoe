@@ -16,19 +16,19 @@ class LoginController extends Controller
 {	
 
 	//系统后台登入页面
-     public function index()
-    {
+     public function index(Request $request)
+    {   
+
         return view('system.login.login');
        
     }
 
     //执行后台登入的方法
     public function login(Request $request)
-    {
-        
+    {  
         //获取提交数据
         $log = $request->except('_token');
-        session_start();
+        
 
         // $log['passWord'] = Hash::make($log['passWord']);
         // $res = DB::table('user_logs')->insert($log);
@@ -63,8 +63,10 @@ class LoginController extends Controller
 
         // //将登入成功的用户id存入session 
         session(['id'=>$res['id']]);
+
         // dump(Session('id'));
         return redirect('/sys/index');
+
     	
     }
 

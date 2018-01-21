@@ -87,7 +87,14 @@ class ShenqingController extends Controller
     {
         //执行修改
         dump($id);
-        dump($request->all());
+         
+        $auth = $request->only('auth');
+        $res = DB::table('shops')->where('id',$id)->update($auth);
+        if($res){
+            echo '<script>alert("修改成功");location.href="/sys/shop"</script>';
+        }else{
+            echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
     }
 
     /**

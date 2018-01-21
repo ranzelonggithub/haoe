@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {   
-
+        
         //搜索
         $res = DB::table('user_logs')
             ->join('user_infos', 'user_logs.id', '=', 'user_infos.uid')
