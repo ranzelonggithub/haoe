@@ -6,9 +6,8 @@
         </div>
         <div class="result-wrap">
 
-            <form action="{{'/sys/doconfig'}}" method="post" enctype="multipart/form-data">
+            <form action="/sys/doconfig/{{$res[0]['id']}}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-
                 <div class="config-items">
                     <div class="config-title">
                         <h1><i class="icon-font">&#xe00a;</i>网站信息设置</h1>
@@ -26,8 +25,9 @@
                                     <td><input type="text" name='keywords' vlaue=''></td>
                                 </tr>
                                 <tr>
-                                    <th><i class="require-red">*</i>网站loge：</th>
-                                    <td><input type="file" name='loge' multiple="multiple">
+                                    <th><i class="require-red">*</i>网站logo：</th>
+                                    <td><input type="file" name='logo' multiple="multiple" id="logo">
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$v['logo']}}" style="width:80px;height:90px"></p>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站版权：</th>

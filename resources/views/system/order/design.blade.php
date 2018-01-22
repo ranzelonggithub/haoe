@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
+            
                 <div class="result-title">
                     <div class="result-list">
                         <a href="insert.html"><i class="icon-font"></i>新增订单</a>
@@ -45,35 +45,35 @@
                             <th>食品名称</th>
                             <th>配送费</th>
                             <th>收货人名称</th>
+                            <th>收货人电话</th>
                             <th>订单状态</th>
                             <th>操作</th>
                         </tr>
+                        @foreach($res as $k=>$v)
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
-                            <td>id</td>
-                            <td>222222</td>
-                            <td>武大郎</td>
-                            <td>1383838438</td>
-                            <td>烧饼</td>
-                            <td>100</td>
-                            <td>回龙观育荣教育园</td>
-                            <!-- @swich(1) -->
-                            <td>正在配送</td>
-                            <!-- @case -->
-                            <!-- <td>正在配送 </td> -->
-                            <!-- @case -->
-                            <!-- <td></td> -->
-                            <!-- @case -->
+                            <td>{{$v['id']}}</td>
+                            <td>{{$v['orderNum']}}</td>
+                            <td>{{$v['shopName']}}</td>
+                            <td>{{$v['shopPhone']}}</td>
+                            <td>{{$v['goodsName']}}</td>
+                            <td>{{$v['deliPrice']}}</td>
+                            <td>{{$v['recName']}}</td>
+                            <td>{{$v['recPhone']}}</td>
+                            <td><?=$v['comState']==1?'已接收':'正在配送'?></td>
                             <td>
-                                <a class="link-update" href="#">修改</a>
-                                <a class="link-del" href="#">删除</a>
+                                <button><a class="link-update" href="#">修改</a></button>
+                                <form action="/sys/order/{{$v['id']}}" method='post' style='display :inline;'>
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button>删除</button>
+                                </form>
                             </td>
                         </tr>
-                        
+                        @endforeach
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div>{!! $res->render() !!}</div>
                 </div>
-            </form>
         </div>
     </div>
 @endsection

@@ -3,7 +3,6 @@
 
 @section('content')
      <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="{{'/sys/index'}}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{{'/sys/shop'}}">店家管理</a><span class="crumb-step">&gt;</span><span>新增店家</span></div>
         </div>
@@ -19,8 +18,7 @@
                                     <option value="19">精品界面</option><option value="20">推荐界面</option>
                                 </select>
                             </td>
-
-                       <tr>
+                            <tr>
                                 <th width="120"><i class="require-red">*</i>店家名称：</th>
                                 <td>
                                     <input type="text" name='userName' value=''>

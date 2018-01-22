@@ -19,6 +19,7 @@ class ConfigController extends Controller
     {
         //加载配置管理视图
         $res = DB::table('configs')->get();
+
         return view('system.config.system',['res'=>$res]);
     }
 
@@ -27,28 +28,34 @@ class ConfigController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         
-        
-
+        //获取提交的数据
         $date =$request->except('_token');
 
-        // $file = $request->file('loge');
-        // //获取文件路径
-        // $filepath = $file->getRealPath();
+        $file = $request->file('logo');
+        //获取文件路径
+        $filepath = $file->getRealPath();
 
-        // //获取文件后缀名
-        // $hz = $file->getClientOriginalExtension();
+        //获取文件后缀名
+        $hz = $file->getClientOriginalExtension();
 
-        // $filename = md5(time()+rand(0,99999)).'.'.$hz;
+        $filename = md5(time()+rand(0,99999)).'.'.$hz;
 
-        // // $disk = \Storage::disk('qiniu');
-        // // $res = $disk->put('sys/uploads'.$filename,$filepath);
+        $disk = \Storage::disk('qiniu');
+        $res = $disk->put('/systems/sysimgs/'.$filename,file_get_contents($filepath));
 
-        // $date['loge'] = $filename;
+        $date['logo'] = $filename;
+       
+        $data = DB::table('configs')->where('id',$id)->update($date);
 
-        $res = DB::table('configs')->update($date);
-        dump($res);
+        //修改成功
+        if($data){
+            echo '<script>alert("修改成功");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }else{
+            echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+        }
     }
 }
+    

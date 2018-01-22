@@ -26,12 +26,9 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="{{'/sys/shenqing/create'}}"><i class="icon-font"></i>新增申请</a>
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -47,26 +44,28 @@
                             <th>餐饮许可证</th>
                             <th>操作</th>
                         </tr>
+                        @foreach($res as $k=>$v)
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
-
-                            <td>id</td>
-                            <td>店家名称</td>
-                            <td>电话</td>
-                            <td>邮箱</td>
-                            <td>身份证</td>
-                            <td>营业执照</td>
-                            <td>餐饮许可证</td>
+                            <td>{{$v['id']}}</td>
+                            <td>{{$v['sellerName']}}</td>
+                            <td>{{$v['phone']}}</td>
+                            <td>{{$v['email']}}</td>
+                            <td>{{$v['identify']}}</td>
+                            <td><img src="/systems/sysimgs/xukezheng.jpg" style="width:80px"></td>
+                            <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px"></td>
                             <td>
-                                <a class="link-update" href="{{'/sys/shop/10/edit'}}">同意</a>
-                                <a class="link-del" href="#">不同意</a>
+                                <form action="/sys/shenqing/{{$v['id']}}" method='get' style='display :inline;'>                                          
+                                    <button>详情</button>
+                                </form>
+                                </form>
+                                <button><a class="link-del" href="">删除</a></button>
                             </td>
                         </tr>
-
+                        @endforeach
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">{!! $res->render() !!}</div>
                 </div>
-            </form>
         </div>
     </div>
 @endsection

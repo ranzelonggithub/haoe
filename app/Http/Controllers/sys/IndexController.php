@@ -38,6 +38,7 @@ class IndexController extends Controller
     public function update(UserInfoRequest $request)
     {
         $id = $request->id;
+        dump($id);
         $res = $request->except('_token');
         
 
@@ -46,14 +47,14 @@ class IndexController extends Controller
             echo '<script>alert("密码不一致");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
         }
         
-        $password = Hash::make($res['passWord']);
+        $passWord = Hash::make($res['passWord']);
         //执行添加
-        $res = user_log::where('id',$id)->update(['passWord'=>$password]);
+        $res = user_log::where('id',$id)->update(['passWord'=>$passWord]);
         if($res){
             echo '<script>alert("修改成功");location.href="/sys/do"</script>';
         }else{
             echo '<script>alert("修改失败");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
-        }
+        }   
 
     }
 

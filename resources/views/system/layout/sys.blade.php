@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>系统后台管理</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/common.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('/systems/css/main.css')}}"/>
+    <script type="text/javascript" src="{{ asset('/systems/js/jquery-1.8.3.js') }}"></script>
+    <script type="text/javascript" src="{{asset('/layer/layer.js')}}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -48,10 +51,9 @@
                         <li><a href="{{'/sys/category'}}"><i class="icon-font">&#xe012;</i>分类管理</a></li>
                         <li><a href="{{'/sys/config'}}"><i class="icon-font">&#xe052;</i>配置管理</a></li>
                         <li><a href="{{'/sys/ad'}}"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="{{'/sys/business'}}"><i class="icon-font">&#xe033;</i>商圈管理</a></li>
                     </ul>
                 </li>
-
-
             </ul>
         </div>
     </div>

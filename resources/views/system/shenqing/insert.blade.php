@@ -43,12 +43,14 @@
                                 <th><i class="require-red">*</i>营业执照：</th>
                                 <td>
                                     <input type="file" name='photo' multiple="multiple">
+                                    <img src="/systems/sysimgs/xukezheng.jpg" style="width:130px;height:100px">
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>餐饮许可证：</th>
                                 <td>
                                     <input type="file" name='photo' multiple="multiple">
+                                    <img src="/systems/sysimgs/yingye.jpg" style="width:130px;height::;">
                                 </td>
 
                             </tr>

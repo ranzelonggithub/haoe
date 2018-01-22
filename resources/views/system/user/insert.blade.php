@@ -17,7 +17,7 @@
                     </ul>
                 </div>
             @endif
-                <form action="/sys/user" method="post" enctype="multipart/form-data">                 
+                <form action="/sys/user" method="POST" enctype="multipart/form-data">                 
                     {{csrf_field()}}
                     <table class="insert-tab" width="100%">
                         <tbody>
@@ -48,19 +48,23 @@
                             <tr>
                                 <th><i class="require-red">*</i>邮箱：</th>
                                 <td>
-                                    <input type="text" name='email' value=''>
+                                    <input type="email" name='email' value=''>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>权限：</th>
                                 <td>
-                                    <input type="text" name='auth' value=''>
+                                        <select name="auth" id="">
+                                            <option value="1">普通用户</option>
+                                            <option value="2">管理员</option>
+                                        </select>
                                 </td>
+                            </tr>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>头像：</th>
-                                <td>
-                                    <input type="file" name='photo' multiple="multiple">
+                               <td>
+                                    <input type="file" name="photo" id="file_upload" value="">
                                 </td>
                             </tr>
                             <tr>
