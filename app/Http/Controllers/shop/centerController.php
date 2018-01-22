@@ -15,7 +15,8 @@ class centerController extends Controller
     //个人中心首页
     public function index()
     {   
-        $seller = seller_log::where('id',1)->first();
+        $sellerid = session('sellerid');
+        $seller = seller_log::where('id',$sellerid)->first();
         $sex = $seller->seller_info->sex;
         $photo =  $seller->seller_info->photo;
         return view('/shop/center/index',['seller'=>$seller,'sex'=>$sex,'photo'=>$photo]);
@@ -81,8 +82,9 @@ class centerController extends Controller
 
     //进入个人信息修改界面
     public function edit($id)
-    {
-        $seller = seller_log::where('id',1)->first();//??????????
+    {   
+        $sellerid = session('sellerid');
+        $seller = seller_log::where('id',$sellerid)->first();//??????????
         $sex = $seller->seller_info->sex;
         return view('/shop/center/edit',['seller'=>$seller,'sex'=>$sex]);
     }

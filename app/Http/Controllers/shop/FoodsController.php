@@ -17,12 +17,13 @@ class FoodsController extends Controller
     //菜品列表
     public function index(Request $request)
     {   
+        $shopid = session('shopid');
         $search = $request->input('search');
         $keywords = $request->input('keywords');
         $cate = shop::value('cate');
         $cate = explode('&',$cate);
         $requestall = $request->all();
-        $data = food::where('uid',1);
+        $data = food::where('uid',$shopid);
         if(!empty($search)){
             $data = $data->where($search,'like','%'.$keywords.'%'); 
         }

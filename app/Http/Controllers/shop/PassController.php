@@ -16,9 +16,11 @@ class PassController extends Controller
     //跳转到修改密码页
     public function index()
     {   
-        $id = 1;//??????
-        if(1){
-            return view('shop/center/repass',['id'=>$id]);
+
+        $sellerid = session('sellerid');
+        $password = seller_log::where('id',$sellerid)->value('password');
+        if(!empty($password)){
+            return view('shop/center/repass',['id'=>$sellerid]);
         }else{
             return view('shop/center/cpass');
         }
@@ -39,9 +41,9 @@ class PassController extends Controller
     {
 
         $pass = $request->input('pass');
-        
+        $selleid = session('sellerid');
         $hash = Hash::make($pass);
-        $res = seller_log::where('id',1)->update(['password'=>$hash]);//????????????
+        $res = seller_log::where('id',$selleid)->update(['password'=>$hash]);//????????????
         if($res){
             echo 1;
         }else{

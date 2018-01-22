@@ -12,8 +12,8 @@ class CateController extends Controller
 {
 
     public function index()
-    {
-        $cate = shop::where('id',1)->value('cate');//?????????
+    {   $shopid = session('shopid');
+        $cate = shop::where('id',$shopid)->value('cate');//?????????
         $cate = explode('&',$cate);
         return view('/shop/category/index',['cate'=>$cate]);
     }
@@ -36,8 +36,9 @@ class CateController extends Controller
      */
     public function store(Request $request)
     {   
+        $shopid = session('shopid');
         $newName = $request->input('newName');
-        $cate = shop::where('id',1)->value('cate');//?????
+        $cate = shop::where('id',$shopid)->value('cate');//?????
         $cate = explode('&',$cate);
         if(in_array($newName,$cate)){
             echo 'has';
@@ -45,7 +46,7 @@ class CateController extends Controller
             $cate[] = $newName;
             $num = count($cate)-1;
             $cate = implode('&',$cate);
-            $res = shop::where('id',1)->update(['cate'=>$cate]);
+            $res = shop::where('id',$shopid)->update(['cate'=>$cate]);
             if($res){
                 echo $num;
             }else{
@@ -80,13 +81,14 @@ class CateController extends Controller
     //编辑种类
     public function update(Request $request, $id)
     {
+        $shopid = session('shopid');
         $newName = $request->input('newName');
-        $cate = shop::where('id',1)->value('cate');//?????
+        $cate = shop::where('id',$shopid)->value('cate');//?????
         $cate = explode('&',$cate);
         // $key = array_search($id,$cate);
         array_splice($cate,$id,1,$newName);
         $cate = implode('&',$cate);
-        $res = shop::where('id',1)->update(['cate'=>$cate]);
+        $res = shop::where('id',$shopid)->update(['cate'=>$cate]);
         if($res){
             echo 1;
         }else{
@@ -96,12 +98,13 @@ class CateController extends Controller
 
     //删除种类
     public function destroy($id)
-    {
-        $cate = shop::where('id',1)->value('cate');//?????
+    {   
+        $shopid = session('shopid');
+        $cate = shop::where('id',$shopid)->value('cate');//?????
         $cate = explode('&',$cate);
         array_splice($cate,$id,1);
         $cate = implode('&',$cate);
-        $res = shop::where('id',1)->update(['cate'=>$cate]);
+        $res = shop::where('id',$shopid)->update(['cate'=>$cate]);
         if($res){
             echo 1;
         }else{

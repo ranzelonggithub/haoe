@@ -90,13 +90,13 @@
                processData:false,
                success:function(data){
                    if(data == 1){
-                       layer.msg('添加成功');
+                       layer.msg('添加成功',{icon:6});
                        setTimeout(function(){
                            location.href="/shop/foods";
                        },1000);
                        
                    }else{
-                       layer.msg('添加失败');
+                       layer.msg('添加失败',{icon:5});
                    }
                },
 

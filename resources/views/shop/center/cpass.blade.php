@@ -60,13 +60,13 @@
             processData:false,
             success:function(data){
                 if(data == 1){
-                    layer.msg('密码创建成功');
+                    layer.msg('密码创建成功',{icon:6});
                     setTimeout(function(){
                         location.href="/shop/center";
                     },1000);
                     
                 }else{
-                    layer.msg('密码更创建失败');
+                    layer.msg('密码更创建失败',{icon:5=/});
                 }
             },
 

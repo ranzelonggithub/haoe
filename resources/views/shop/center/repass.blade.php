@@ -67,13 +67,13 @@
             processData:false,
             success:function(data){
                 if(data == 1){
-                    layer.msg('更新成功');
+                    layer.msg('更新成功',{icon:6});
                     setTimeout(function(){
                         location.href="/shop/center";
                     },1000);
                     
                 }else if(data == 0){
-                    layer.msg('更新失败');
+                    layer.msg('更新失败',{icon:5});
                 }else{
                     layer.msg('原密码输入错误');
                 }

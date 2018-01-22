@@ -64,7 +64,7 @@ class LoginController extends Controller
         $code = $request->input('code');
     	$phone = $request->input('phone');
     	$sellerid = seller_log::where('phone',$phone)->value('id');
-        $shopid = shop::where('uid',$sellerid);
+        $shopid = shop::where('uid',$sellerid)->value('id');
         session(['sellerid'=>$sellerid]);
     	session(['shopid'=>$shopid]);
     	if($code == session('code')){
@@ -82,7 +82,7 @@ class LoginController extends Controller
         $password1 = seller_log::where('sellerName',$txtUser)->value('password');
         $password2 = seller_log::where('phone',$txtUser)->value('password');
         $password3 = seller_log::where('email',$txtUser)->value('password');
-        
+      
         if(!empty($password1)){
             if(Hash::check($password, $password1)){
                 $flag = 1;
@@ -105,14 +105,20 @@ class LoginController extends Controller
         }
 
         if($flag){
-            $shopid = shop::where('uid',$sellerid);
+            $shopid = shop::where('uid',$sellerid)->value('id');
             session(['sellerid'=>$sellerid]);
             session(['shopid'=>$shopid]);
             echo 1;
         }else{
-            echo 2;
+            echo 0;
         }
 
+    }
+
+    public function logout()
+    {
+        session(['sellerid'=>null,'shopid'=>null]);
+        return view('shop.login.login');
     }
 
 }

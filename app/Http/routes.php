@@ -14,19 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-//商铺路由组
+//商铺登录路由
 Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
-	
 	//手机登录
 	Route::get('login','LoginController@login');
 	Route::post('phone','LoginController@phone');
 	Route::post('code','LoginController@code');
 	Route::post('dologin','LoginController@dologin');
-	Route::post('shouye','LoginController@index');
+	
 
 	//普通登录
 	Route::post('plogin','LoginController@plogin');
+});
+//商铺路由组
+Route::group(['prefix'=>'shop','namespace'=>'shop','middleware'=>'shopLogin'],function(){
+	
+	//进入首页
+	Route::post('shouye','LoginController@index');
+
+	//退出登录
+	Route::get('logout','LoginController@logout');
 	
 	//主页
 	Route::get('index','IndexController@index');

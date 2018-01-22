@@ -15,12 +15,13 @@ class CommentController extends Controller
     //评论列表
     public function index(Request $request)
     {   
+        $shopid = session('shopid');
         $search = $request->input('search');
         $keywords = $request->input('keywords');
         $page = $request->input('page');
         $comState = $request->input('comState');
         $req = $request->all();
-        $data = DB::table('orders')->where('kid','1')->where('comState',2)
+        $data = DB::table('orders')->where('kid',$shopid)->where('comState',2)
                 ->join('comments','orders.id','=','comments.oid')
                 ->select('comments.*','orders.orderNum','orders.payment','orders.recName','orders.recPhone');//?????????
 
@@ -62,8 +63,9 @@ class CommentController extends Controller
     }
 
     //评价详情
-    public function show($id)
+    public function show(Request $request,$id)
     {   
+        $page = $request->input('page');
         $data = comment::where('id',$id)->first();
         $data['orderNum'] = $data->order->orderNum;
         $data['recName'] = $data->order->recName;
@@ -76,7 +78,7 @@ class CommentController extends Controller
         $goodsAmount = explode('&',$goodsAmount);
         $goodsGrade = $data->goodsGrade;
         $goodsGrade = explode('&',$goodsGrade);
-        return view('shop.comment.detail',['data'=>$data,'food'=>$food,'goodsAmount'=>$goodsAmount,'goodsGrade'=>$goodsGrade]);
+        return view('shop.comment.detail',['data'=>$data,'food'=>$food,'goodsAmount'=>$goodsAmount,'goodsGrade'=>$goodsGrade,'page'=>$page]);
     }
 
     /**

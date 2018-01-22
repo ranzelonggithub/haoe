@@ -57,9 +57,9 @@
                             <td>{{$v['state']}}</td>
                             <td>{{$v['grade']}}</td>
                             <td>{{$v['amount']}}</td>
-                            <td>
-                                <button><a class="link-update" href="/shop/foods/{{$v['id']}}/edit">修改</a></button>
-                                <button class="link-del" a="{{$v['id']}}"onclick="del({{$v['id']}})">删除</button>
+                            <td align='center' width='300'>
+                                <a style='color:#fff' href="/shop/foods/{{$v['id']}}/edit"><button class='btn btn-primary btn6 mr10'>修改</button></a>
+                                <button class="btn btn6" a="{{$v['id']}}"onclick="del({{$v['id']}})">删除</button>
                             </td>
                         </tr>
                         @endforeach
@@ -82,11 +82,11 @@
     }, function(){
       $.post("{{url('/shop/foods/')}}/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
         if(data){
-            layer.alert('删除成功');
+            layer.alert('删除成功',{icon:6});
 
             $('button[a='+id+']').parent().parent().remove();
         }else{
-            layer.alert('删除失败');
+            layer.alert('删除失败',{icon:5});
         }
       });
     });

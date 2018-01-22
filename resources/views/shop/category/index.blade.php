@@ -54,12 +54,12 @@
     }, function(){
       $.post("{{url('/shop/cate/')}}/"+id,{'_method':'delete','_token':'{{csrf_token()}}'},function(data){
         if(data){
-            layer.alert('删除成功');
+            layer.alert('删除成功',{icon:6});
             $('button[d='+id+']').parent().parent().prev().find('button:last').removeAttr('disabled style');
             $('button[d='+id+']').parent().parent().remove();
             
         }else{
-            layer.alert('删除失败');
+            layer.alert('删除失败',{icon:5});
         }
       });
     });

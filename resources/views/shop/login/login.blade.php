@@ -103,6 +103,7 @@
             if(data == 0){
                 layer.tips('验证码不正确', '#dynamicPWD');
             }else{
+                $('#btn').removeAttr('disabled');
                 location.href='/shop/index';
             }
         });
@@ -115,7 +116,7 @@
         // alert(password);
         $.post('/shop/plogin',{'txtUser':txtUser,'password':password,'_token':'{{csrf_token()}}'},function(data){
             // alert(data);
-            if(data){
+            if(data == 1){
                 location.href='/shop/index';
             }else{
                 layer.tips('用户或密码不正确', '#txtUser');

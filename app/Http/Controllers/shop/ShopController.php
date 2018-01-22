@@ -16,9 +16,9 @@ class ShopController extends Controller
     //显示店铺信息
     public function index()
     {   
-
-        $data = shop::where('id',1)->first();//??????
-        $count = food::where('uid',1)->count();//??????
+        $shopid = session('shopid');
+        $data = shop::where('id',$shopid)->first();//??????
+        $count = food::where('uid',$shopid)->count();//??????
         $shopCate = $data->systemCate->cateName;////?????????
         $area = business::lists('area');
         return view('shop/shop/index',['data'=>$data,'count'=>$count,'shopCate'=>$shopCate,'area'=>$area]);

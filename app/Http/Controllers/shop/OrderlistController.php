@@ -16,13 +16,14 @@ class OrderlistController extends Controller
     //显示订单列表
     public function index(Request $request)
     {   
+        $shopid = session('shopid');
         $search = $request->input('search');
         $keywords = $request->input('keywords');
         $page = $request->input('page');
         $state = $request->input('state');
         $recSex = $request->input('recSex');
         $req = $request->all();
-        $data = order::where('kid','1');
+        $data = order::where('kid',$shopid);
 
         if(empty($page)){
             $page = 1;
@@ -97,12 +98,13 @@ class OrderlistController extends Controller
     {
         $send = $request->input('send');
         $rec = $request->input('rec');
+        $shopid = session('shopid');
         
         //更改到已发送状态
         if(!empty($send)){
             $sid = rand(1,5);
             $sender = DB::table('senders')->where('sid',$sid)->first();
-            $delivery = DB::table('shops')->where('id',1)->value('delivery');
+            $delivery = DB::table('shops')->where('id',$shopid)->value('delivery');
             $sender['state'] = 2;
             $sender['delivery'] = $delivery;
 

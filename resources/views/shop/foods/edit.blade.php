@@ -105,13 +105,13 @@
            processData:false,
            success:function(data){
                if(data == 1){
-                   layer.msg('更新成功');
+                   layer.msg('更新成功',{icon:6});
                    setTimeout(function(){
                        location.href="/shop/foods";
                    },1000);
                    
                }else{
-                   layer.msg('更新失败');
+                   layer.msg('更新失败',{icon:5});
                }
            },
 
@@ -155,7 +155,7 @@
            }
 
            var formData = new FormData($('#myform')[0]);
-           console.log(formData);
+           // console.log(formData);
            $.ajax({
                type : "post",
                url : "{{url('/shop/foods/picture')}}",
@@ -173,12 +173,12 @@
                    if(data != 0){
                     $('#picture').attr('src',"http://p2dtot555.bkt.clouddn.com/shop/foods/"+data);//????
                    }else{
-                      layer.msg('上传失败');
+                      layer.msg('上传失败',{icon:5});
                    }
                },
                error:function(XMLHttpRequest,textStatus,errorThrown){
                    layer.close(a);
-                   layer.msg('上传失败,请检测网络后重试');
+                   layer.msg('上传失败,请检测网络后重试',{icon:5});
                    $("#picture").attr('src',oldpic);
                }
            });

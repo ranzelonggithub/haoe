@@ -76,15 +76,53 @@
                             </tr>
                             
                             <tr>
-                                <td colspan="3">{{$data['reply'] or '未进行回复'}}</td>
+                                <td colspan="3" b='reply' >{{$data['reply'] or '未进行回复'}}</td>
                             </tr>
                         </table>
+                    </li>
+                    <li style='text-align:center'>
+                        <span class="res-info" >
+                            <input class="btn btn6" onClick="history.go(-1)" value="返回" type="button">
+                        @if($data['reply'] == '')
+                            <input class="btn btn-primary btn6 mr10" onClick="reply({{$data['id']}})" a= "{{$data['id']}}" value="回复" >
+                        @else
+                            <input class="btn btn-primary btn6 mr10" style='opacity:0;cursor:default' >
+                        @endif
+                        </span>
                     </li>
                 </ul>
 
             </div>
         </div>
     </div>
+     <script type='text/javascript'>
+        layer.use("{{asset('layer/extend/layer.ext.js')}}", function(){  
+             layer.ext = function(){  
+                 layer.prompt({})  
+             };  
+         });
+    //执行发送
+    function reply(id){
 
+        layer.prompt({title: '请回复', formType: 2}, function(text, index){
+            layer.close(index);
+            $.post("{{url('/shop/comment/')}}/"+id,{'_method':'put','_token':'{{csrf_token()}}','reply':text},function(data){
+                if(data){
+                    layer.msg('回复成功',{icon:6});
+                    $('[a='+id+']').attr({'style':'opacity:0;cursor:default', 'onClick':''});
+                    $('[b=reply]').html(text);
+                    setTimeout(function(){
+                        location.href="/shop/comment?page={{$page}}";
+                    },600);
+                }else{
+                    layer.msg('回复失败',{icon:5});
+                }
+            });
+          });
+        
+    }
+
+        
+    </script>
     <!--/main-->
 @endsection

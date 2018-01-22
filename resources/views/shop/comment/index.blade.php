@@ -62,7 +62,7 @@
                             <td>{{$v['recPhone']}}</td>
                             <td>{{$v['time']}}</td>
                             <td>{{$v['shopGrade']}}</td>
-                            <td><a href="/shop/comment/{{$v['id']}}">评价详情</a></td>
+                            <td><a href="/shop/comment/{{$v['id']}}?page={{$page}}}}">评价详情</a></td>
                             @if($v['reply'] == null)
                             <td><button r ="{{$v['id']}}" onclick="reply({{$v['id']}})" class='btn btn-primary btn6 mr10'>回复</button></td>
                             @else
@@ -91,10 +91,10 @@ function reply(id){
         layer.close(index);
         $.post("{{url('/shop/comment/')}}/"+id,{'_method':'put','_token':'{{csrf_token()}}','reply':text},function(data){
             if(data){
-                layer.msg('回复成功');
+                layer.msg('回复成功',{icon:6});
                 $('button[r='+id+']').remove() ;
             }else{
-                layer.msg('回复失败');
+                layer.msg('回复失败',{icon:5});
             }
         });
       });
