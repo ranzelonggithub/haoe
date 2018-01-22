@@ -2,13 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="user-scalable=no">
+    <link rel="icon" href="{{asset('Home/images/yahoo_panda_72px_534234_easyicon.net.ico')}}">
+    <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
+    <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('layer/layer.js') }}"></script>
     
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
-    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+    <link rel="stylesheet" href="{{ asset('Home/css/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
     
     <script type="text/javascript">
@@ -42,15 +41,15 @@
                         <ul class="member logging" ng-init="loginInfo=true">
                             <li><a href="{{asset('/home/list')}}" class="index">首页</a></li>
                             <li class="userName">
-                                <a href="{{asset('/home/user/member_index')}}" rel="nofollow" draw-user>18005151538<em></em></a>
+                                <a href="/home/user/member_index?id={{ $id }}" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="{{asset('/home/user/member_index')}}"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
+                                    <p><a href="/home/user/member_index?id={{ $id }}"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="/home/user/member_addr?id={{ $id }}"  rel="nofollow">地址管理</a></p>
                                     <p class="no-bo"><a id="logout" href="{{asset('/home/login/login')}}" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
-                            <li class=""><a href="{{asset('/home/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href="{{asset('/home/user/member_collect')}}"  rel="nofollow">我的收藏</a></li>
+                            <li class=""><a href="/home/user/member_order?id={{ $id }}" class="order-center"  rel="nofollow">我的订单</a></li>
+                            <li class=""><a href="/home/user/member_collect?id={{ $id }}"  rel="nofollow">我的收藏</a></li>
                             <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
@@ -77,57 +76,124 @@
             <aside class="fl">
                 <ul>
                     <li>
-                        <a href="{{asset('/home/user/member_index')}}" rel="nofollow">账号管理</a>
+                        <a href="/home/user/member_index?id={{ $id }}" rel="nofollow">账号管理</a>
                     </li>
                     <li>
-                        <a href="{{asset('/home/user/member_order')}}" rel="nofollow">我的订单</a>
+                        <a href="/home/user/member_order?id={{ $id }}" rel="nofollow">我的订单</a>
                     </li>
                     <li  class="active">
-                        <a href="{{asset('/home/user/member_collect')}}" rel="nofollow">我的收藏</a>
+                        <a href="/home/user/member_collect?id={{ $id }}" rel="nofollow">我的收藏</a>
                     </li>
                     <li >
-                        <a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a>
+                        <a href="/home/user/member_addr?id={{ $id }}"  rel="nofollow">地址管理</a>
                     </li>
-                    <li >
-                        <a href="#" rel="nofollow">氪星礼品站</a>
-                    </li>
+                 
                 </ul>
             </aside>
             <article class="fl user-center-main">
-                <header>收藏的餐厅</header>
+                <header>订单详情</header>
                 
+                @if(count($data) > 0)
+                    @foreach($data as $k=>$v)
+                <table class="table table-hover ">
+                    <tr>
+                        <th rowspan='2'>
+                            <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" alt="">
+                        </th>
+                        <th>餐厅:{{ $v['shopName'] }}</th>
+                        <th rowspan=2></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>订单号:D-{{ $v['orderNum'] }}</th>
+                        <th>店铺电话:{{ $v['shopPhone'] }}</th>
+                        <th></th>
+                     
+                    </tr>
+                    <tr>
+                        <th colspan='3'>菜品</th>
+                   
+                        <th>数量</th>
+                        <th>小计</th>
+                    </tr>
+                    
+                    @if(count($goodsNames) > 0) 
+                        @for($i = 0; $i < count($goodsNames);$i++)
+                    <tr>
+                        <th colspan=3>{{ $goodsNames[$i] }}</th>
+                        <th>{{ $goodsAmounts[$i] }}</th>
+                        <th>{{ $subtotals[$i] }}</th>
+                    
+                    </tr>
+                        @endfor
+                    @endif
+                 
+                    <tr>
+                        <th colspan=4>配送费:</th>
+            
+                        <th>￥{{ $v['deliPrice'] }}</th>
+                    </tr>
+                    <tr>
+                        
+                        <th colspan=4>总价:</th>
+                        <th>￥{{ $v['payment'] }}</th>
+                    </tr>
+                   
+                </table>
+                
+
+                <!-- 配送信息 -->
+                <table class="table table-hover ">
+                    <caption><h3>配送信息</h3></caption>
+                    <tr>
+                        <td >配送方式:</td>
+                        <td>{{ $v['delivery'] }}</td>
+                        <td></td>
+                        <td></td>
+             
+                     
+                    </tr>
+                     <tr>
+                        <td>配送人电话:</td>
+                        <td>{{ $v['deilPhone'] }}</td>
+                        <td></td>
+                        <td></td>
+                
+                    </tr>
+                    <tr>
+                        <td colspan=4></td>
+             
+                    </tr>
+                     <tr>
+                        <td>联系人:</td>
+                        <td >{{ $v['recName'] }}(先生)</td>
+                        <td></td>
+                        <td></td>
     
-        <ul class="favorite clearfix transform-style">
-            
-                <li class="restaurant-item fl trans">
-                    <div class="img-box fl">
-                        <a href="shop_detail.html"><img src="{{asset('Home/images/restaurant_16.png')}}" style="border:1px solid #EEE ;" width="82px" height="82px"></a>
-                    </div>
-                    <article class="restaurant-introduce fl">
-                        <h3 class="ellipsis"><a href="/shanghai/ji-xiang-hun-tun-gao-an-lu-dian/menu/">吉祥馄饨 (高安路店)</a></h3>
-                        <dl class="clearfix">
-                            <dt class="fl">饮料小吃</dt>
-                            <dd class="r-small-star fl">
-                                <div class="r-small-star score" style="width:65.00px"></div>
-                            </dd>
-                        </dl>
-                        <div class="restaurant-state clearfix">
-                            
-                            
-                            
-                                
-                                    <span><img src="http://dhcactivity.dhero.cn/Flswo958RM8GgqlKACT4tY5kr5K7?imageView2/1/w/15/h/15/" alt="" /></span>
-                                
-                                    <span><img src="http://dhcactivity.dhero.cn/FjnSIEuUzJvV6j-ifPq7zevJSt30?imageView2/1/w/15/h/15/" alt="" /></span>
-                                
-                            
-                        </div>
-                    </article>
-                    <div class="close-favorite" data-rid="1019">&times;</div>
-                </li>
-            
-        </ul>
-        <page show="5" total="1"></page>
+                    </tr>
+                     <tr>
+                        <td>收货地址:</td>
+                        <td >{{ $v['autoAddr'] }}---{{ $v['detailAddr'] }}</td>
+                        <td></td>
+                        <td></td>
+                    
+                    </tr>
+                     <tr>
+                        <td>发票信息:</td>
+                        <td colspan=3></td>
+                
+                    </tr>
+                     <tr>
+                        <td>备注:</td>
+                        <td colspan=3>无备注</td>
+                  
+                    </tr>
+        
+                </table>
+                    @endforeach
+                @endif
+  
     
 
 

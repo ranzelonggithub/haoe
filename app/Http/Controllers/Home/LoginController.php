@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function index()
     {
         //加载登陆注册界面
-        return view('Home/Login/login') ;
+        return view('Home.Login.login') ;
     }
 
     /**

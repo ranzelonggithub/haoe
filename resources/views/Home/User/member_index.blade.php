@@ -2,15 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="user-scalable=no">
-    
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
-    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+    <link rel="icon" href="{{asset('Home/images/yahoo_panda_72px_534234_easyicon.net.ico')}}">
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
+    <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('layer/layer.js') }}"></script>
     
+    <link rel="stylesheet" href="{{ asset('Home/css/bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
     <script type="text/javascript">
         
         (function(document, screen) {if (screen.width < 760) {document.location.href="/mobile/";}}(document, screen));
@@ -19,15 +16,6 @@
     <link rel="stylesheet" href="{{asset('Home/css/common.css')}}"/>
     
     <link rel="stylesheet" href="{{asset('Home/css/user_center.css')}}"/>
-
-    <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
-    <!--[if lt IE 9]>
-    <script src="js/respond.js"></script>
-    <script>
-        var e = "abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video, dh-dialog, dh-checkbox".split(', ');
-         var i= e.length;while (i--){document.createElement(e[i])}
-    </script>
-    <![endif]-->
     <title>个人中心 - 账号管理</title>
 </head>
 <body class="day " ng-controller="bodyCtrl"  day-or-night>
@@ -42,16 +30,16 @@
                         <ul class="member logging" ng-init="loginInfo=true">
                             <li><a href="{{asset('/home/list')}}" class="index">首页</a></li>
                             <li class="userName">
-                                <a href="{{asset('/home/user/member_index')}}" rel="nofollow" draw-user>18005151538<em></em></a>
+                                <a href="/home/user/member_index?id={{ $id }}" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="{{asset('/home/user/member_index')}}"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a></p>
+                                    <p><a href="/home/user/member_index?id={{ $id }}"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="/home/user/member_addr?id={{ $id }}"  rel="nofollow">地址管理</a></p>
                                     <p class="no-bo"><a id="logout" href="{{asset('/home/login/login')}}" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
-                            <li class=""><a href="{{asset('/home/user/member_order')}}" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href="{{asset('/home/user/member_collect')}}"  rel="nofollow">我的收藏</a></li>
-                            <li class=""><a href="#"  rel="nofollow">氪星礼品站</a></li>
+                            <li class=""><a href="/home/user/member_order?id={{ $id }}" class="order-center"  rel="nofollow">我的订单</a></li>
+                            <li class=""><a href="/home/user/member_collect?id={{ $id }}"  rel="nofollow">我的收藏</a></li>
+                            
                             <li class="phone-client "><a href="#"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
                     
@@ -77,47 +65,167 @@
             <aside class="fl">
                 <ul>
                     <li class="active">
-                        <a href="{{asset('/home/user/member_index')}}" rel="nofollow">账号管理</a>
+                        <a href="/home/user/member_index?id={{ $id }}" rel="nofollow">账号管理</a>
                     </li>
                     <li >
-                        <a href="{{asset('/home/user/member_order')}}" rel="nofollow">我的订单</a>
+                        <a href="/home/user/member_order?id={{ $id }}" rel="nofollow">我的订单</a>
                     </li>
                     <li >
-                        <a href="{{asset('/home/user/member_collect')}}" rel="nofollow">我的收藏</a>
+                        <a href="/home/user/member_collect?id={{ $id }}" rel="nofollow">我的收藏</a>
                     </li>
                     <li >
-                        <a href="{{asset('/home/user/member_addr')}}"  rel="nofollow">地址管理</a>
+                        <a href="/home/user/member_addr?id={{ $id }}"  rel="nofollow">地址管理</a>
                     </li>
-                    <li >
-                        <a href="gifts.html" rel="nofollow">氪星礼品站</a>
-                    </li>
+                    
                 </ul>
             </aside>
             <article class="fl user-center-main">
                 <header>账号管理</header>
-                
+    @if(count($data) > 0)
+        @foreach($data as $k=>$v)          
+            @if($v)
+             
      <section class="user-account-body">
         <ul class="fs12">
             <li>
-                <label>手机号码：</label>
-                <span>18005151538</span>
+                <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" alt="">
             </li>
             <li>
-                <label>登录密码：</label>
-                <span>**********</span>
-                <i class="icon edit-icon" ng-click="showChangePassword()"></i>
+                <label>手机号码:</label>
+                <span>{{ $v['phone'] }}</span>
+            </li>
+            <li>
+                <label>当前用户:</label>
+                <span id="userName">{{ $v['userName'] }}</span>
+                <!-- <i class="icon edit-icon" onclick="userName_edit({{ $v['userName'] }})"></i> -->
+                <i class="glyphicon glyphicon-edit" onclick="userName_edit({{ $id }})"></i>
+                <!-- <button onclick="userName_edit({{ $v['userName'] }})">修改</button> -->
+            </li>
+            <li>
+                <label>用户性别:</label>
+                <span id="sex">{{ $v['sex'] == 'm' ? '男':'女' }}</span>
+                <i class="glyphicon glyphicon-edit" onclick="sex_edit({{ $id }})"></i>
+            </li>
+            <li>
+                <label>登录密码:</label>
+                <span id="pass">**********</span>
+                @if(empty($v['passWord']))
+                <i class="glyphicon glyphicon-plus" onclick="pass_add({{ $id }})"></i>
+                @else
+                <i class="glyphicon glyphicon-edit" onclick="pass_edit({{ $id }})"></i>
+                @endif
             </li>
             <li>
                 <label>订单信息：</label>
-                <span>总计0单</span>
-                <span>成功0单</span>
+                <span>总计{{ $total_order}}单</span>
+                <span>成功{{ $success_order}}单</span>
             </li>
-            <li><label>氪 星 币：</label><span ng-bind="0|number"></span>个&nbsp;&nbsp;<a href="/account/gift/center/" title="兑换礼品" class="c_f60">兑换礼品</a></li>
+            
         </ul>
      </section>
-
+            @endif
+        @endforeach
+     @endif
 
             </article>
+    <script>
+        //根据id修改用户名
+        function userName_edit(id) {
+            //alert(id) ;
+      
+            /*layer.confirm('修改用户名?', {
+                  btn: ['修改','不修改'] //按钮
+                }, function(name){
+                  layer.open({
+                      type: 2, 
+                      content: "{{ url('Home/user/userName_edit') }}" + '?name=' + name 
+                    }); 
+                }, function(){
+                  layer.msg('也可以这样',{icon:6}) ;
+                });
+
+            }*/
+            layer.open({
+                type: 2,
+                title: '用户名修改',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                // zIndex: layer.zIndex,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                content: "user_edit?id=" + id ,
+                success:function(name) {
+                    $('userName').html(name) ;
+                }
+            });   
+        }
+
+
+        //修改用户性别
+        function sex_edit(id) {
+            
+            layer.open({
+                type: 2,
+                title: '性别修改',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                // zIndex: layer.zIndex,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '360px'], //宽高
+                content:  "sex_edit?id=" + id ,
+                success:function(msg) {
+                    //layer.msg(msg,{icon:6}) ;
+                    var sex = $('sex').val() == '男'?'女':'男' ;
+                    $('sex').html(sex) ;
+                    //layer.msg(msg,{icon:6}) ;
+                }
+            });  
+
+       }
+
+       //若没有密码 添加
+       function pass_add(id){
+            layer.open({
+                type: 2,
+                title: '密码添加',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                // zIndex: layer.zIndex,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['480px', '240px'], //宽高
+                content:  "pass_add?id=" + id ,
+               /* success:function(msg) {
+                    //layer.msg(msg,{icon:6}) ;
+                    
+                    
+                    //layer.msg(msg,{icon:6}) ;
+                }*/
+            }); 
+       }
+       //若有密码了 修改密码
+       function pass_edit(id) {
+            layer.open({
+                type: 2,
+                title: '密码修改',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                // zIndex: layer.zIndex,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['480px', '360px'], //宽高
+                content:  "pass_edit?id=" + id ,
+               /* success:function(msg) {
+                    //layer.msg(msg,{icon:6}) ;
+                   
+                   
+                }*/
+            }); 
+       }
+
+    </script>
         </div>
     </section>
 
@@ -181,51 +289,8 @@
         </div>
     </dh-dialog>
     
-    <dh-dialog class="disnone" header="修改登录密码" height="500" show="showChangePass">
-        <div ng-controller="changePasswordCtrl" class="change-password-box">
-            <div class="form-group">
-                <label>当前密码</label>
-                <div>
-                    <input type="password" ng-class="{error:user.passwordMessage}" onpaste="return false" maxlength="10" placeholder="请输入当前使用的登录密码" ng-model="user.password" />
-                    <span class="vaildate-error" ng-if="user.passwordMessage">
-                        <span ng-bind="user.passwordMessage"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group mb10">
-                <label>新的密码</label>
-                <div>
-                    <input type="password" ng-class="{error:user.newPasswordMessage}" onpaste="return false" maxlength="10"  placeholder="请输入 6-10个字符" ng-model="user.newPassword" />
-                    <span class="vaildate-error" ng-if="user.newPasswordMessage">
-                        <span ng-bind="user.newPasswordMessage"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group mb20">
-                <div>
-                    <input type="password" ng-class="{error:user.newPassword2Message}" onpaste="return false" maxlength="10"  placeholder="请再次输入新的密码" ng-model="user.newPassword2"/>
-                    <span class="vaildate-error" ng-if="user.newPassword2Message">
-                        <span ng-bind="user.newPassword2Message"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="tr">
-                <button class="btn small-btn btn-success" ng-click="changePassSubmit()" ng-disabled="isSubmit" ng-bind="submitText"></button>
-                <button class="btn small-btn btn-cancel" ng-click="changePassCancel()">取消</button>
-            </div>
-        </div>
-    </dh-dialog>
-    <dh-dialog class="disnone" type="alert" height="500" index="1001" header="" show="requestSuccess">
-        <div class="alert-box">
-            <p>修改密码成功</p>
-            <p class="fs12">3秒后自动关闭</p>
-        </div>
-    </dh-dialog>
-    <dh-dialog class="disnone" type="alert" height="500" index="1001" header="" show="requestError">
-        <div class="alert-box error">
-            <p>修改密码失败</p>
-        </div>
-    </dh-dialog>
+    
+    
 
      <ul class="site-fixed">
         <li class="scroll-top"><img src="{{asset('Home/images/scroll_top1.png')}}" alt=""/> </li>
@@ -239,11 +304,11 @@
         </li>
     </ul>
     
-    <script type="text/javascript" src="{{asset('Home/js/angular.min.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{asset('Home/js/angular.min.js')}}"></script>
     <script src="{{asset('Home/js/common.js')}}"></script>
     
      
-    <script src="{{asset('Home/js/service.js')}}"></script>
+    <script src="{{asset('Home/js/service.js')}}"></script> -->
     
     <script>var feedbackUrl = '/ajax/feedback/';var app = angular.module("app", ["dh.dialog", "dh.form", 'dh.service', 'dh.other']);</script>
     <!--[if lt IE 9]><script src="js/fix.js"></script><![endif]-->
@@ -252,7 +317,7 @@
     <script>
         var reviewUrl = "/mobile/ajax/order_review/",favoriteUrl = "/ajax/restaurant/0/favorite/";
     </script>
-    <script src="{{asset('Home/js/user_center.js')}}"></script>
+    <!--<script src="{{asset('Home/js/user_center.js')}}"></script>*/-->
 
     
     <script>angular.bootstrap(document, ["app"]);</script>
