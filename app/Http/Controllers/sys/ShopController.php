@@ -21,7 +21,7 @@ class ShopController extends Controller
             ->join('seller_infos', 'seller_logs.id', '=', 'seller_infos.id')
             ->join('shops', 'seller_logs.id', '=', 'shops.uid')
             ->where('auth','=',1)
-            ->select('seller_logs.*', 'seller_infos.email','shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
+            ->select('seller_logs.*', 'shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
             ->paginate(1);
         //dump($res);
         //

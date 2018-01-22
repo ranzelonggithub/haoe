@@ -4,13 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content=" 上海[半价菜][送可乐]樱花日本料理 简介，最新活动，宋园路地铁站附近餐厅， [半价菜][送可乐]樱花日本料理 外卖，外送电话，叫外卖上外卖超人。" />
-    <meta name="viewport" content="user-scalable=no">
-    
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
-    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+   
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
     
     <script type="text/javascript">
@@ -67,12 +61,14 @@
         
             
 	<section class="menupage-main common-width">
-        
+@if(count($info) > 0)   
+    @foreach($info as $k => $v)
+        @if($v)       
 <header class="nav clearfix">
     <div class="fl clearfix nav-des">
-        <img src="{{asset('Home/images/4e5dddb0a16eb1709881143153ac3jpeg.jpeg')}}" alt="[半价菜][送可乐]樱花日本料理" class="fl" />
+        <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" alt="{{ $v['shopName'] }}" class="fl" />
         <div class="fl nav-des-text">
-            <h2 class="ellipsis" title="[半价菜][送可乐]樱花日本料理">[半价菜][送可乐]樱花日本料理</h2>
+            <h2 class="ellipsis" title="{{ $v['shopName'] }}">{{ $v['shopName'] }}</h2>
             <div class="clearfix">
                 <div class="fl nav-review">
                     <div style="width:65.00px;"></div>
@@ -84,7 +80,7 @@
     <div class="fr clearfix nav-right">
         
         <div class="fl nav-right-blast line-right">
-            <p>150<span style="font-size:12px;color:#999;">元</span></p>
+            <p>{{ $v['initPrice'] }}<span style="font-size:12px;color:#999;">元</span></p>
             <span>起送</span>
         </div>
         
@@ -101,47 +97,42 @@
         </div>
     </div>
 </header>
-
+        @endif
+    @endforeach
+@endif
 <ul class="clearfix menu-nav-list" scroll-position-static="160">
-    <li class="no-line active"><a href="{{asset('/home/shop/shop_intro')}}">餐厅介绍</a></li>
-    <li><a href="{{asset('/home/shop/shop_detail')}}">菜单</a></li>
-    <li  class=""><a href="{{asset('/home/shop/shop_comment')}}">评论</a></li>
-	<li ><a href="{{asset('/home/shop/shop_brand')}}" id='point-tab'>大家都在点</a></li>
+    <li class="no-line active"><a href="/home/shop/shop_intro?id={{ $id }}">餐厅介绍</a></li>
+    <li><a href="/home/shop/shop_detail?id={{ $id }}">菜单</a></li>
+    <li  class=""><a href="/home/shop/shop_comment?id={{ $id }}">评论</a></li>
+	<li ><a href="/home/shop/shop_brand?id={{ $id }}" id='point-tab'>大家都在点</a></li>
     
 </ul>
-
+        
+        @if(count($info) > 0)
+            @foreach($info as $k=>$v)
+                @if($v)
 		<section class="main-box">
 			<div class="restaurant-info clearfix">
-				<!--<div class="restaurant-logo fl">
-					<img src="" alt="[半价菜][送可乐]樱花日本料理" >
-                    
-				</div>-->
+				
 				<div class="restaurant-status fl">
                     
-                        <p class="hours"><label>营业时间 ：</label>[09:00-22:30]</p>
+                        <p class="hours"><label>营业时间 ：</label>[{{ $v['openTime'] }}-{{ $v['closeTime'] }}]</p>
                     
                     
                         <p><label>送餐时间 ：</label>12-62分钟</p>
                     
-					<p><label>餐厅地址 ：</label>宋园路地铁站</p>
-					<!-- <div class="last clearfix">
-                        <label class="fl">活动服务 ：</label>
-                        <div class="fl">
-                                                <ul class="clearfix">
-                                                    
-                                                </ul>
-                        </div>
-                    </div> -->
+					<p><label>餐厅地址 ：</label>{{ $v['address'] }}</p>
+					
 				</div>
 				<div style="width: 298px;height: 244px;" id="iCenter"  class="restaurant-map fr"></div>
 			</div>
-			<article class="collapse">
+		    <article class="collapse">
 				<header>
 					<h3>餐厅介绍</h3>
 				</header>
 				<section class="description fs12 lh15">
                     
-                        樱花日本料理采用东北有机大米。精选食材。纯净水运作。进口调料。。樱花日本料理特色布丁。。油淋鸡等等月月有活动。。。如果网络不行下予定订单。。请来电18964778118订餐。电话订餐O2160517883。。。最终解释权归本店所有
+                        {{ $v['notice'] }}
                     
                 </section>
 			</article>
@@ -153,57 +144,18 @@
 				<section class="pd12-26 clearfix photo" id="photoBox">
                     
                         
-                            <img src="{{asset('Home/images/4e5dddb0a16eb1709881143153ac3jpeg.jpeg')}}" class="fl">
+                            <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" class="fl">
                         
                     
 				</section>
                 
 			</article>
             
-            <!--<article class="collapse restaurant-coupon">
-                <header>
-                    <h3>优惠券</h3>
-                </header>
-                <section class="pd12-26 clearfix coupon">
-                    <div class="coupon-item">
-                        <div>
-                            <div>
-                                <dl>
-                                    <dt>100元代金券</dt>
-                                    <dd>100元可选购任意菜品</dd>
-                                    <dd>(2014.03.15-2014.04.28)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <div class="get fs12"><a href="#">立即领取 ></a></div>
-                    </div>
-                    <div class="coupon-item orange">
-                        <div>
-                            <div>
-                                <dl>
-                                    <dt>100元代金券</dt>
-                                    <dd>100元可选购任意菜品</dd>
-                                    <dd>(2014.03.15-2014.04.28)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <div class="get fs12"><a href="#">立即领取 ></a></div>
-                    </div>
-                    <div class="coupon-item green">
-                        <div>
-                            <div>
-                                <dl>
-                                    <dt>100元代金券</dt>
-                                    <dd>100元可选购任意菜品</dd>
-                                    <dd>(2014.03.15-2014.04.28)</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <div class="get fs12"><a href="#">立即领取 ></a></div>
-                    </div>
-                </section>-->
-			</article>
+            
 		</section>
+                @endif
+            @endforeach
+        @endif
 	</section>
         </section>
     </section>

@@ -61,15 +61,15 @@ Route::group(['prefix'=>'shop','namespace'=>'shop','middleware'=>'shopLogin'],fu
 });
 
 
-
+//加载登陆注册界面
+Route::resource('/login','Home\LoginController') ;
+//前台
 Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
-	 //加载登陆注册界面
-	// Route::get('login','LoginController@index') ;
-	Route::resource('/login/login','LoginController') ;
+	
 	 //加载首页 地图
 	Route::get('map','IndexController@map') ;
 	//加载首页 网站首页
-	Route::get('list','IndexController@index') ;
+	Route::resource('list','IndexController') ;
 	//加载网站首页 链接到的商家合作页面
 	Route::get('coop','IndexController@coop') ;
 
@@ -93,7 +93,29 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		Route::get('member_addr','UserController@member_addr') ;
 		//账号管理 个人中心
 		Route::get('member_index','UserController@member_index') ;
+		//修改用户名
+		Route::get('user_edit','UserController@userName_edit') ;
+		//执行修改
+		Route::get('user_change','UserController@userName_change') ;
+		//修改性别
+		Route::get('sex_edit','UserController@sex_edit') ;
+		//执行性别修改
+		Route::get('sex_change','UserController@sex_change') ;
+		//密码添加 页面
+		Route::get('pass_add','UserController@pass_add') ;
+		//执行密码添加
+		Route::get('pass_add_do','UserController@pass_add_do') ;
+		//密码修改
+		Route::get('pass_edit','UserController@pass_edit') ;
+		//验证密码
+		Route::get('pass_edit_do','UserController@pass_edit_do') ;
+		//执行密码修改
+		Route::get('pass_edit_do_go','UserController@pass_edit_do_go') ;
+
 	}) ;
+	//修改用户名
+	//Route::get('/home/user/user_edit','Home\UserController@userName_edit') ;
+
 	Route::group(['prefix'=>'order','namespace'=>'Home'],function() {
 		//用户下单页面  店铺详情页购物车 跳转过来的
 		Route::get('order','OrderController@order') ;
@@ -102,7 +124,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	}) ;
 
 }) ;
-
 
 
 
@@ -164,7 +185,9 @@ Route::group(['prefix'=>'sys','namespace'=>'sys','middleware'=>'login'],function
 	Route::resource('business','BusinessController');
 });
 
-
+/*DB::listen(function($sql, $bindings, $time) {
+	dump($sql);
+});*/
 
 
 

@@ -113,6 +113,7 @@ class LoginController extends Controller
             echo 0;
         }
 
+
     }
 
     public function logout()
