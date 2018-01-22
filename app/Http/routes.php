@@ -94,9 +94,19 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	//修改用户名
 	//Route::get('/home/user/user_edit','Home\UserController@userName_edit') ;
 
-	Route::group(['prefix'=>'order','namespace'=>'Home'],function() {
+	Route::group(['prefix'=>'order'],function() {
 		//用户下单页面  店铺详情页购物车 跳转过来的
 		Route::get('order','OrderController@order') ;
+		//加载地址添加页面
+		Route::get('order_add','OrderController@order_add') ;
+		//执行地址添加
+		Route::get('order_insert','OrderController@order_insert') ;
+		//地址删除
+		Route::get('order_del','OrderController@order_del') ;
+		//地址修改
+		Route::get('order_edit','OrderController@order_edit') ;
+		//执行地址修改
+		Route::get('order_update','OrderController@order_update') ;
 		//下单成功页面
 		Route::get('order_success','OrderController@order_success') ;
 	}) ;
