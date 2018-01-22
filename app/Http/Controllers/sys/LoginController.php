@@ -33,8 +33,8 @@ class LoginController extends Controller
         // $log['passWord'] = Hash::make($log['passWord']);
         // $res = DB::table('user_logs')->insert($log);
         // dump($res);
+        
         //判断提交是否为空
-
         if(empty($log['userName'] and $log['passWord'] and $log['code'])){
             echo '<script>alert("提交不能为空");location.href="/sys/do"</script>'; 
             return;
@@ -42,9 +42,7 @@ class LoginController extends Controller
 
         //查询登入的信息
         $res = user_log::where('userName',$log['userName'])->first();
-        // dump($res);
-
-        // dump(Hash::check($res['passWord']));
+    
         //判断用户名是否存在
         if(!($res['userName'] == $log['userName'])){
             echo '<script>alert("用户名不存在");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
@@ -52,13 +50,9 @@ class LoginController extends Controller
         }
 
         //判断密码是否正确
-        // dump($log['passWord']);
-        // dump(Hash::check($res['passWord']) == $log['passWord']);
-        // dump(Hash::check($res['passWord'] == $log['passWord']));
         if(!(Hash::check( $log['passWord'],$res['passWord']))){
             echo '<script>alert("用户名或密码错误");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
             return;
-            // return redirect('/sys/do');
         }
 
         // //判断验证码

@@ -21,10 +21,9 @@ class ShopController extends Controller
             ->join('seller_infos', 'seller_logs.id', '=', 'seller_infos.id')
             ->join('shops', 'seller_logs.id', '=', 'shops.uid')
             ->where('auth','=',1)
-            ->select('seller_logs.*', 'shops.auth','seller_infos.busi_license','seller_infos.cate_licence')
+            ->select('seller_logs.*', 'shops.auth','seller_infos.email','seller_infos.busi_license','seller_infos.cate_licence')
             ->paginate(1);
-        //dump($res);
-        //
+
         $data = DB::table('systems')->get();
         
         //加载店家管理页面
@@ -62,9 +61,7 @@ class ShopController extends Controller
     public function show($id)
     {
         //店铺详情页
-        dump($id);
         $res = DB::table('shops')->where('id','=',$id)->first();
-        dump($res);
         return view('system.shop.show',['res'=>$res]);
     }
 
