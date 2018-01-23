@@ -99,6 +99,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		Route::post('min','ShopController@min');
 		//将购物车内的物品全部删除
 		Route::post('clear','ShopController@clear');
+		//加载订单界面
+		Route::get('order','OrderController@order');
 	}) ;
 	Route::group(['prefix'=>'user'],function() {
 		//加载用户订单页面

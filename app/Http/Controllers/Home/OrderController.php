@@ -18,11 +18,12 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order()
-    {
+    public function order(Requset $request)
+    {   
         //加载用户下订单页面 点击购物车结算过来的
-        $uid = 1 ;//用户id
-        $id = 70 ; //购物车id
+        $uid = session('userid'); //用户id
+        $sid = $request->input('id') ; //购物车id
+        $id = cart::where('uid',$uid)->where('sid',$sid)->value('uid');
         /*
             应该是点击结算  购物信息存储在redis里面
             提交订单之后  再写入数据库

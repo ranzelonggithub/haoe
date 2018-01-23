@@ -187,18 +187,18 @@
 
             //增加食物
             $('.food').live('click',function(){
-                
-                // alert({{session('userid')}});
+
                 if({{$state}} == 0){
                     layer.confirm('您还未登录,是否去登录？', {
+                      title:'提示',
                       btn: ['是','否'] //按钮
                     }, function(){
                       location.href="/home1/login";
-                      return;
-                    }, function(){
-                      return;
+                      
                     });
+                    return false;
                 }
+
                 var fid = $(this).attr('fid');
                 $.post("{{url('home/shop/carts')}}",{'_token':'{{csrf_token()}}','fid':fid},function(data){
                     if(data['state'] == 'fail'){
@@ -263,6 +263,9 @@
 
             //全部删除
             $('.clear').live('click',function(){
+                if({{$state}} == 0){
+                    return false;
+                }
                 $.post("{{url('home/shop/clear')}}",{'_token':'{{csrf_token()}}','sid':{{ $shop_info['id']}}},function(data){
                     if(data == 1){
                         $('.list').children().remove();
@@ -319,7 +322,7 @@
                                     <div class="fr">合计：￥<span class='zong'>{{$shop_info['deliPrice']+$payment}}</span></div>
                                 </div>
                                 <div class="checkout">
-                                    <button class="checkout btn sett"  style='background:#0D5F83' {{$num == 0 ? 'disabled' : ''}} >立即下单</button>
+                                    <a href="home/order?id={{$id}}"><button class="checkout btn sett"  style='background:#0D5F83' {{$num == 0 ? 'disabled' : ''}} >立即下单</button></a>
                                 </div>
                             </div>
                         </section>
