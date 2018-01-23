@@ -188,26 +188,42 @@ class ShopController extends Controller
         foreach($good as $k => $v){
             $num += $v['goodsAmount']; //购物车中食物的总数量
         }
-        $good[$fid]['goodsName'] = $food->goodsName;
-        $good[$fid]['price'] = $food->price;
-        $good[$fid]['goodsAmount'] -= 1; //存储形式 食物id['goodsName'=>食物名称,'goodsAmount'=>食物数量,'subtotal'=>小计]
-        if($good[$fid]['goodsAmount'] == 0){
-            unset($good[$fid]);
-            $json_good = json_encode($good);
-            $payment = $cart->payment - $food->price;
-            $res2 = cart::where('uid',1)->where('sid',$food->uid)->update(['goods'=>$json_good,'payment'=>$payment]);
-            $data['state'] = 4;
-            $data['fid'] = $fid;
-            $data['num'] = $num;
-            return $data;//该食物的个数为零,在购物车中将其删除
+        if($num != 0){
+            $good[$fid]['goodsName'] = $food->goodsName;
+            $good[$fid]['price'] = $food->price;
+            $good[$fid]['goodsAmount'] -= 1; //存储形式 食物id['goodsName'=>食物名称,'goodsAmount'=>食物数量,'subtotal'=>小计]
+
+            if($good[$fid]['goodsAmount'] == 0){
+                unset($good[$fid]);
+                $json_good = json_encode($good);
+                $payment = $cart->payment - $food->price;
+                $res2 = cart::where('uid',1)->where('sid',$food->uid)->update(['goods'=>$json_good,'payment'=>$payment]);
+                $data['state'] = 4;
+                $data['fid'] = $fid;
+                $data['num'] = $num;
+                return $data;//该食物的个数为零,在购物车中将其删除
+            }else{
+               $good[$fid]['subtotal'] = $good[$fid]['goodsAmount']*$food->price;
+               $json_good = json_encode($good); //将食物以json的形式存储
+               $payment = $cart->payment - $food->price;
+               $res2 = cart::where('uid',1)->where('sid',$food->uid)->update(['goods'=>$json_good,'payment'=>$payment]);
+               $data = ['goodsName'=>$food->goodsName,'price'=>$good[$fid]['price'],'goodsAmount'=>$good[$fid]['goodsAmount'],'subtotal'=>$good[$fid]['subtotal'],'payment'=>$payment,'num'=>$num]; 
+               $data['state'] = 5;
+               return $data;//若食物仍存在,则将其数量减1,并减少其小计;
+            }
         }else{
-           $good[$fid]['subtotal'] = $good[$fid]['goodsAmount']*$food->price;
-           $json_good = json_encode($good); //将食物以json的形式存储
-           $payment = $cart->payment - $food->price;
-           $res2 = cart::where('uid',1)->where('sid',$food->uid)->update(['goods'=>$json_good,'payment'=>$payment]);
-           $data = ['goodsName'=>$food->goodsName,'price'=>$good[$fid]['price'],'goodsAmount'=>$good[$fid]['goodsAmount'],'subtotal'=>$good[$fid]['subtotal'],'payment'=>$payment,'num'=>$num]; 
-           $data['state'] = 5;
-           return $data;//若食物仍存在,则将其数量减1,并减少其小计;
+            
+            $uid = 1;//???????
+            $res = cart::where('uid',$uid)->where('sid',$food->uid)->delete();
+            if($res){
+                $data['state'] = 6; //将购物车删除 
+                return $data; 
+            }else{
+                $data['state'] = 7; //删除失败,数据未更改,不变
+                return $data;
+            }
+            
+            
         }
     }
 

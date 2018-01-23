@@ -195,14 +195,19 @@
                         $('.list').append("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
                         $('.num').html(data['num']);
                         $('.none').attr('style','display:none');
+                        $('.sett').removeAttr('disabled');
+                        $('.total').removeAttr('style');
+                        $('.total').find(".zong").html(data['payment']+{{$shop_info['deliPrice']}}); 
                     }else if(data['state'] == 2){
                         //在已存在购物车并且所选食物不存在
                         $('.list').append("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
                         $('.num').html(data['num']);
+                        $('.total').find(".zong").html(data['payment']+{{$shop_info['deliPrice']}}); 
                     }else if(data['state'] == 1){
                         //在已存在购物车并且所选食物已存在
                         $('.list').find('[list='+fid+']').replaceWith("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
                         $('.num').html(data['num']);
+                        $('.total').find(".zong").html(data['payment']+{{$shop_info['deliPrice']}}); 
                     }
                 });
             });
@@ -215,16 +220,30 @@
                         //食物的个数为零,在购物车中将其删除
                         $("[list="+fid+"]").remove();
                         $('.num').html(data['num']);
+                        $('.total').find(".zong").html(data['payment']+{{$shop_info['deliPrice']}}); 
                         if(data['num'] == 0){
                           $('.empty').removeAttr('style');
+                          $('.sett').attr('disabled','disabled');
+                          $('.total').attr('style','display:none');
                         }
-                    }else{
+
+                    }else if(data['state'] == 5){
                         //若食物仍存在,则将其数量减1,并减少其小计;
                         $('.list').find('[list='+fid+']').replaceWith("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
                         $('.num').html(data['num']);
+                        $('.total').find(".zong").html(data['payment']+{{$shop_info['deliPrice']}}); 
                         if(data['num'] == 0){
                           $('.empty').removeAttr('style'); 
+                          $('.sett').attr('disabled','disabled');
+                          $('.total').attr('style','display:none');
+                          
                         }
+                    }else if(data['state'] == 6){
+                        $('.list').children().remove();
+                        $('.num').html(0);
+                        $('.sett').attr('disabled','disabled');
+                        $('.empty').removeAttr('style');
+                        $('.total').attr('style','display:none');
                     }
                  });
             });
@@ -235,7 +254,9 @@
                     if(data == 1){
                         $('.list').children().remove();
                         $('.num').html(0);
-                        $('.empty').removeAttr('style'); 
+                        $('.sett').attr('disabled','disabled');
+                        $('.empty').removeAttr('style');
+                        $('.total').attr('style','display:none'); 
                     }
                 }); 
             });
@@ -280,12 +301,12 @@
                                     <div class="cart-item-empty none" {{$num == 0 ? '' : "style=display:none"}}>暂无商品，请在左边的菜单上点单</div>
                                 </div>
                                 <div id="cart-item-list"></div>
-                                <div class="total clearfix " {{$num == 0 ? style="display:none" : ""}} >
+                                <div class="total clearfix " {{$num == 0 ? "style=display:none" :""}}>
                                     <div class="fl">配送费：￥<span >{{$shop_info['deliPrice']}}</span></div>
                                     <div class="fr">合计：￥<span class='zong'>{{$shop_info['deliPrice']+$payment}}</span></div>
                                 </div>
                                 <div class="checkout">
-                                    <button class="checkout btn"  style='background:#0D5F83' >立即下单</button>
+                                    <button class="checkout btn sett"  style='background:#0D5F83' {{$num == 0 ? 'disabled' : ''}} >立即下单</button>
                                 </div>
                             </div>
                         </section>
