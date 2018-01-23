@@ -485,6 +485,16 @@ input.error,textarea.error,select.error{box-shadow:0 0 5px #FF8A73;border:1px so
 	color:black;
 	/*border:1px solid red;*/
 }
+#config{
+	width:100px;
+	height:50px;
+
+}
+#span{
+	font-size:40px;
+	color:red;
+
+}
 
 
 

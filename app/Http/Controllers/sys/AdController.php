@@ -17,8 +17,6 @@ class AdController extends Controller
     public function index()
     {
         $res = DB::table('ads')->get();
-        dump($res);
-
         //加载广告管理视图
         return view('system.ad.design');
     }

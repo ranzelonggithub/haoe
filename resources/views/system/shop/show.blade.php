@@ -78,11 +78,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>状态</th>
+                                <th><i class="require-red">*</i>运营状态</th>
                                 <div>
                                     <td>
                                         <select name="auth" id="">
-                                            <option value="1" <?=$res['auth']==1?'selected':''?>>开启</option>
+                                            <option value="1" <?=$res['auth']==1?'selected':''?>>正常</option>
                                             <option value="0" <?=$res['auth']==0?'selected':''?>>关闭</option>
                                         </select>
                                     </td>

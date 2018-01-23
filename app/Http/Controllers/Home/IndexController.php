@@ -20,6 +20,7 @@ class IndexController extends Controller
     public function map()
     {
         //加载首页 地图
+
         return view('Home/Index/index_map') ;
     }
     public function index()
@@ -87,8 +88,10 @@ class IndexController extends Controller
         //dd($data_sys) ;
         //取店铺信息
         $data_shop = shop::get() ;
+        
+        $res = DB::table('configs')->get();
         //dd($data_shop) ;
-        return view('Home.Index.index',['data_sys'=>$data_sys,'data_shop'=>$data_shop]) ;
+        return view('Home.Index.index',['data_sys'=>$data_sys,'data_shop'=>$data_shop,'res'=>$res]) ;
     }
 
 

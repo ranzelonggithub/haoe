@@ -39,7 +39,8 @@
             <header id="header">
                 <div class="common-width clearfix">
                     <h1 class="fl">
-                        <a class="logo base-logo" href="{{asset('/home/index')}}">外卖超人</a>
+                        <img  id='config' src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$res[0]['logo']}}">
+                        <span id='span'>外卖超人</span>
                     </h1>
                     
                        <ul class="member" login-box>

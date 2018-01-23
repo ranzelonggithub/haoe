@@ -82,6 +82,9 @@
                     <li>
                         <a href="{{asset('/home/user/member_order')}}" rel="nofollow">我的订单</a>
                     </li>
+                    <li>
+                        <a href="{{asset('/home/user/member_assess')}}">待评价订单</a>
+                    </li>
                     <li >
                         <a href="{{asset('/home/user/member_collect')}}" rel="nofollow">我的收藏</a>
                     </li>

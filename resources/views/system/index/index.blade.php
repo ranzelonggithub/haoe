@@ -13,9 +13,6 @@
                 <div class="short-wrap">
                     <a href="{{'/sys/user/create'}}"><i class="icon-font">&#xe001;</i>新增用户</a>
                     <a href="{{'/sys/shop/create'}}"><i class="icon-font">&#xe005;</i>新增店家</a>
-                    <a href="insert.html"><i class="icon-font">&#xe048;</i>新增店家分类</a>
-                    <a href="insert.html"><i class="icon-font">&#xe041;</i>新增商品分类</a>
-                    <a href="#"><i class="icon-font">&#xe01e;</i>作品评论</a>
                 </div>
             </div>
         </div>

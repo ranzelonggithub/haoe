@@ -73,9 +73,9 @@ class CategoryController extends Controller
     public function edit($id)
     {   
         $res = DB::table('user_logs')->where('id',session('id'))->first();
-        dump($res);
+
         $data = DB::table('systems')->where('id',$id)->first();
-        dump($data);
+
         //加载分类管理的视图
         return view('system.category.edit',['res'=>$res,'data'=>$data]);    
     }

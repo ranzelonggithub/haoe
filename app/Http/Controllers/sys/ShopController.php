@@ -51,6 +51,7 @@ class ShopController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->except(['_token']);
     }
 
     /**
@@ -62,9 +63,9 @@ class ShopController extends Controller
     public function show($id)
     {
         //店铺详情页
-        dump($id);
+
         $res = DB::table('shops')->where('id','=',$id)->first();
-        dump($res);
+
         return view('system.shop.show',['res'=>$res]);
     }
 

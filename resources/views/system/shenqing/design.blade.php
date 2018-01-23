@@ -39,7 +39,6 @@
                             <th>店家名称</th>
                             <th>电话</th>
                             <th>邮箱</th>
-                            <th>身份证</th>
                             <th>营业执照</th>
                             <th>餐饮许可证</th>
                             <th>操作</th>
@@ -51,7 +50,6 @@
                             <td>{{$v['sellerName']}}</td>
                             <td>{{$v['phone']}}</td>
                             <td>{{$v['email']}}</td>
-                            <td>{{$v['identify']}}</td>
                             <td><img src="/systems/sysimgs/xukezheng.jpg" style="width:80px"></td>
                             <td><img src="/systems/sysimgs/yingye.jpg" style="width:80px"></td>
                             <td>
