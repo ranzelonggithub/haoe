@@ -21,11 +21,11 @@ Route::group(['prefix'=>'shop','namespace'=>'shop'],function(){
 	Route::post('phone','LoginController@phone');
 	Route::post('code','LoginController@code');
 	Route::post('dologin','LoginController@dologin');
-	
 
 	//普通登录
 	Route::post('plogin','LoginController@plogin');
 });
+
 //商铺路由组
 Route::group(['prefix'=>'shop','namespace'=>'shop','middleware'=>'shopLogin'],function(){
 	
@@ -62,7 +62,17 @@ Route::group(['prefix'=>'shop','namespace'=>'shop','middleware'=>'shopLogin'],fu
 
 
 //加载登陆注册界面
-Route::resource('/login','Home\LoginController') ;
+Route::group(['prefix'=>'home1','namespace'=>'Home'],function(){
+	//手机登录
+	Route::get('login','LoginController@login');
+	Route::post('phone','LoginController@phone');
+	Route::post('code','LoginController@code');
+	Route::post('dologin','LoginController@dologin');
+
+	//普通登录
+	Route::post('plogin','LoginController@plogin');
+});
+
 //前台
 Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	
@@ -83,6 +93,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		Route::get('shop_brand','ShopController@shop_brand') ;
 		//加载店铺简介 页面
 		Route::get('shop_intro','ShopController@shop_intro') ;
+		//执行增加购物车内的食物
+		Route::post('carts','ShopController@carts'); 
+		//执行减少购物车内的食物
+		Route::post('min','ShopController@min');
+		//将购物车内的物品全部删除
+		Route::post('clear','ShopController@clear');
 	}) ;
 	Route::group(['prefix'=>'user'],function() {
 		//加载用户订单页面

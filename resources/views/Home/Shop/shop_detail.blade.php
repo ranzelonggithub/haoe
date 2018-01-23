@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('Home/css/common.css')}}"/>
     
     <link rel="stylesheet" href="{{asset('Home/css/menuPage.css')}}"/>
-
+    <script type="text/javascript" src="{{asset('shops/js/jquery-1.8.3.min.js')}}"></script>
     <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
     <!--[if lt IE 9]>
     <script src="js/respond.js"></script>
@@ -61,14 +61,13 @@
         
             
     <section class="menupage-main common-width" ng-init="city_name='上海'">
-@if(count($shop_info) > 0)       
-    @foreach($shop_info as $k_shop=>$v_shop)
-        @if($v_shop)
+      
+
 <header class="nav clearfix">
     <div class="fl clearfix nav-des">
-        <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" alt="{{ $v_shop['shopName'] }}" class="fl" />
+        <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" alt="{{ $shop_info['shopName'] }}" class="fl" />
         <div class="fl nav-des-text">
-            <h2 class="ellipsis" title="{{ $v_shop['shopName'] }}">{{ $v_shop['shopName'] }}</h2>
+            <h2 class="ellipsis" title="{{ $shop_info['shopName'] }}">{{ $shop_info['shopName'] }}</h2>
             <div class="clearfix">
                 <div class="fl nav-review">
                     <div style="width:65.00px;"></div>
@@ -80,7 +79,7 @@
     <div class="fr clearfix nav-right">
         
         <div class="fl nav-right-blast line-right">
-            <p>{{ $v_shop['initPrice'] }}<span style="font-size:12px;color:#999;">元</span></p>
+            <p>{{ $shop_info['initPrice'] }}<span style="font-size:12px;color:#999;">元</span></p>
             <span>起送</span>
         </div>
         
@@ -97,9 +96,8 @@
         </div>
     </div>
 </header>
-        @endif
-    @endforeach
-@endif
+
+
 
 <ul class="clearfix menu-nav-list" scroll-position-static="160">
     <li class="no-line "><a href="/home/shop/shop_intro?id={{ $id }}">餐厅介绍</a></li>
@@ -112,87 +110,7 @@
         <section class="main-box clearfix" lazy-img-load>
             <div class="main fl">
                 <div class="inner-main">
-                    <!-- <nav class="menu-nav link fs12 clearfix" scroll-position-static="130">
-                        <ul class="fl" menutoggle>
-                            <li data-toggle="section-all" class="active">
-                                <a href="javascript:void(0);">显示全部</a>
-                            </li>
-                            
-                                 <li data-toggle="section-39215">
-                                    <a href="javascript:void(0);">店主推荐(6)</a>
-                            
-                            
-                                <li data-toggle="section-189417">
-                                    <a href="javascript:void(0);">份份减6元活动专区(8)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25305">
-                                    <a href="javascript:void(0);">冷面系列(9)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25301">
-                                    <a href="javascript:void(0);">【八五折便当区】(23)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25300">
-                                    <a href="javascript:void(0);">一品料理(22)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25302">
-                                    <a href="javascript:void(0);">盖浇饭系列(9)</a>
-                                </li>
-                            
-                                <li data-toggle="section-122476">
-                                    <a href="javascript:void(0);">日式沾沾面类(3)</a>
-                                </li>
-                            
-                                <li data-toggle="section-168983">
-                                    <a href="javascript:void(0);">寿喜锅系列(6)</a>
-                                </li>
-                            
-                                <li data-toggle="section-168984">
-                                    <a href="javascript:void(0);">寿喜锅套餐系列(4)</a>
-                                </li>
-                            
-                                <li data-toggle="section-168980">
-                                    <a href="javascript:void(0);">刺身系列(3)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25308">
-                                    <a href="javascript:void(0);">特色煎饺(3)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25299">
-                                    <a href="javascript:void(0);">特色油淋鸡/布丁(2)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25304">
-                                    <a href="javascript:void(0);">蔬菜色拉系列(5)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25306">
-                                    <a href="javascript:void(0);">炒面系列(1)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25307">
-                                    <a href="javascript:void(0);">烤物系列(5)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25310">
-                                    <a href="javascript:void(0);">米饭(2)</a>
-                                </li>
-                            
-                                <li data-toggle="section-25311">
-                                    <a href="javascript:void(0);">饮料(12)</a>
-                                </li>
-                            
-                                <li data-toggle="section-56459">
-                                    <a href="javascript:void(0);">酒水(3)</a>
-                                </li>
-                            
-                        </ul>
-                        <i class="icon expand-icon fr" toogle-nav-menu="39"></i>
-                    </nav>-->
+                   
                     <nav class="list-order-nav clearfix" id="list-order-nav">
                         <ul class="fl">
                             <li>菜单排序：</li>
@@ -219,8 +137,8 @@
                                 {{ $v }}
                                 
                             </h3>
-                            <span ng-if="sectionCount['25305']" ng-class="{disinbl:sectionCount['25305']}"
-                                  class="badge disnone" ng-bind="sectionCount['25305']"></span>
+                           <!--  <span ng-if="sectionCount['25305']" ng-class="{disinbl:sectionCount['25305']}"
+                                  class="badge disnone" ng-bind="sectionCount['25305']"></span> -->
                             <i class="icon shrink-icon position"></i>
                         </header>
                         <section>
@@ -230,17 +148,17 @@
                                 @if(count($data) > 0)    
                                     @foreach($data as $k_foods=>$v_foods)
                                         @if($v_foods['cate'] == $k)
-                                <li title="{{ $v_foods['goodsName'] }}" class="menu-item hasImg" accessorykey="25305-559095" data-sale="2" data-price="{{ $v_foods['price'] }}">
+                                <li title="{{ $v_foods['goodsName'] }}" class="menu-item hasImg food" fid="{{$v_foods['id']}}" data-sale="2" data-price="{{ $v_foods['price'] }}">
                                     <div class="menu-item-img"> 
-                                        <img src="http://p2dtot555.bkt.clouddn.com//shop/shop/logo.jpg" style="border:1px solid #EEE" width="200" height="200" />
+                                        <img src="http://p2dtot555.bkt.clouddn.com//shop/foods/{{$v_foods['picture']}}" style="border:1px solid #EEE" width="200" height="200" />
                                     </div>
                                     <div class="meun-item-name"><span class="ellipsis">{{ $v_foods['goodsName'] }}</span></div>
                                     <p class="ellipsis meun-item-des"></p>
                                     <div class="meun-item-sale clearfix">
                                         <span class="last"></span>
                                         <span class="price">￥{{ $v_foods['price'] }}</span>
-                                        <span ng-if="menuItemCount['25305-559095']" ng-class="{disinbl:menuItemCount['25305-559095']}"
-                                              class="badge disnone" ng-bind="menuItemCount['25305-559095']"></span>
+                                        <!-- <span ng-if="menuItemCount['25305-559095']" ng-class="{disinbl:menuItemCount['25305-559095']}"
+                                              class="badge disnone" ng-bind="menuItemCount['25305-559095']"></span> -->
                                         <span class="fr">已售{{ $v_foods['amount'] }}份</span>
                                         
                                     </div>
@@ -260,11 +178,68 @@
                             @endif
                         @endforeach
                     @endif
-                
           
                     </div>
                 </div>
             </div>
+        <script type="text/javascript">
+
+            //增加食物
+            $('.food').live('click',function(){
+                var fid = $(this).attr('fid');
+                $.post("{{url('home/shop/carts')}}",{'_token':'{{csrf_token()}}','fid':fid},function(data){
+                    if(data['state'] == 'fail'){
+
+                    }else if(data['state'] == 3){
+                        //购物车不存在,加入一件食物
+                        $('.list').append("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
+                        $('.num').html(data['num']);
+                        $('.none').attr('style','display:none');
+                    }else if(data['state'] == 2){
+                        //在已存在购物车并且所选食物不存在
+                        $('.list').append("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
+                        $('.num').html(data['num']);
+                    }else if(data['state'] == 1){
+                        //在已存在购物车并且所选食物已存在
+                        $('.list').find('[list='+fid+']').replaceWith("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
+                        $('.num').html(data['num']);
+                    }
+                });
+            });
+
+            //减少食物
+            $('.min').live('click',function(){
+                var fid = $(this).attr('fid');
+                 $.post("{{url('home/shop/min')}}",{'_token':'{{csrf_token()}}','fid':fid},function(data){
+                    if(data['state'] == 4){
+                        //食物的个数为零,在购物车中将其删除
+                        $("[list="+fid+"]").remove();
+                        $('.num').html(data['num']);
+                        if(data['num'] == 0){
+                          $('.empty').removeAttr('style');
+                        }
+                    }else{
+                        //若食物仍存在,则将其数量减1,并减少其小计;
+                        $('.list').find('[list='+fid+']').replaceWith("<div list="+fid+" style='width:99%;height:40px;border:1px double #ddd'><div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"+data['goodsName']+"</div><div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'><button class='min' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button><input type='text' value='"+data['goodsAmount']+"'style='text-align:center;width:20px;height:20px;padding:0px;margin:0px' onkeydup='this.value=this.value.replace(/\D/gi,"+''+")' onafterpaste='this.value=this.value.replace(/\D/g,"+''+")'><button class='food' fid='"+fid+"' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button></div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['price']+"</div><div style='width:20%;height:40px;float:left;line-height:40px'>￥"+data['subtotal']+"</div></div>");
+                        $('.num').html(data['num']);
+                        if(data['num'] == 0){
+                          $('.empty').removeAttr('style'); 
+                        }
+                    }
+                 });
+            });
+
+            //全部删除
+            $('.clear').live('click',function(){
+                $.post("{{url('home/shop/clear')}}",{'_token':'{{csrf_token()}}','sid':{{ $shop_info['id']}}},function(data){
+                    if(data == 1){
+                        $('.list').children().remove();
+                        $('.num').html(0);
+                        $('.empty').removeAttr('style'); 
+                    }
+                }); 
+            });
+        </script>
             <aside class="fl">
                 <article class="cart" scroll-position-static="160" top="42">
                     <div class="menu-cart">
@@ -272,7 +247,9 @@
                             <!-- <h4 class="ellipsis w100p" title="[半价菜][送可乐]樱花日本料理">[半价菜][送可乐]樱花日本料理</h4> -->
                             <h5>
                                 购物车
-                                <i class="icon trash-can-icon fr " ng-click="clearCart()"></i>
+                                <span class='num'style='margin-left:120px;padding:2px;display:inline;border:1px solid #DEA274;border-radius:3px'>{{$num}}</span>
+                                
+                                <i class="icon trash-can-icon fr clear" ></i>
                             </h5>
                         </header>
                         <section>
@@ -283,50 +260,32 @@
                                     <div class="goods-price fs16">单价</div>
                                     <div class="goods-subtotal fs16">小计</div>
                                 </div>
-                                <div class="cart-item-list select-none">
-                                    <div class="disnone" ng-class="{disnone:isEmpty}">
-                                        <div class="cart-item cart-data clearfix" ng-repeat="obj in cartDatas">
-                                            <div class="goods-name ellipsis" ng-bind="obj.name"></div>
-                                            <div class="goods-count clearfix ellipsis">
-                                                <span class="goods-sub icon sub-icon fl" sub-goods="[[$index]]"></span>
-                                                <span class="goods-nums fl" ng-bind="obj.quantity"></span>
-                                                <span class="goods-add icon add-icon fl" ng-click="addGoodsNum($index)"></span>
+                                <div class="cart-item-list select-none list">
+                                @if(count($good)!=0)
+                                    @foreach($good as $k => $v)
+                                        <div style='width:99%;height:40px;border:1px double #ddd' list='{{$k}}'>
+                                            <div style='padding-left:5px;width:20%;height:40px;float:left;line-height:40px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>{{$v['goodsName']}}</div>
+                                            <div style='width:35%;height:40px;float:left;line-height:40px;text-align:center'>
+                                                <button class='min' fid='{{$k}}' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>-</button>
+                                                <input type="text" style='text-align:center;width:20px;height:20px;padding:0px;margin:0px'value="{{$v['goodsAmount']}}" onkeydup='this.value=this.value.replace(/\D/gi,"")' onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                                <button class='food' fid='{{$k}}' style='cursor:pointer;margin:0px;width:20px;height:20px;background:#fff;border:1px solid #ddd'>+</button>
                                             </div>
-                                            <div class="goods-price">￥<span ng-bind="obj.price|number:2"></span></div>
-                                            <div class="goods-subtotal">￥<span ng-bind="(obj.quantity * obj.price)|number:2"></span></div>
-
-                                            <div class="accessory-item" ng-class="{firstitem:$first}" ng-repeat="item in obj.options">
-                                                <div class="cart-item clearfix">
-                                                    <div class="goods-name ellipsis" ng-bind="item.name"></div>
-                                                    <div class="goods-count fs20">
-                                                       <span class="goods-sub fl"></span>
-                                                       <span class="goods-nums fl" ng-bind="item.quantity"></span>
-                                                    </div>
-                                                    <div class="goods-price">￥<span ng-bind="item.price|number:2"></span></div>
-                                                    <div class="goods-subtotal">￥<span ng-bind="(item.price * item.quantity)|number:2"></span></div>
-                                                </div>
-                                            </div>
+                                            <div style='width:20%;height:40px;float:left;line-height:40px'>￥{{$v['price']}}</div>
+                                            <div style='width:20%;height:40px;float:left;line-height:40px'>￥{{$v['subtotal']}}</div>
                                         </div>
-                                        <!--附加物-->
-                                        <div class="cart-item cart-item-addendum cart-data clearfix" ng-repeat="addition in additions">
-                                            <div class="goods-name ellipsis" ng-bind="addition.name"></div>
-                                            <div class="goods-count clearfix ellipsis">
-                                                <span class="goods-nums fl" ng-bind="addition.quantity"></span>
-                                            </div>
-                                            <div class="goods-price">￥<span ng-bind="addition.price|number:2"></span></div>
-                                            <div class="goods-subtotal">￥<span ng-bind="(addition.price * addition.quantity)|number:2"></span></div>
-                                        </div>
-                                        <!--附加物-->
-                                    </div>
-                                    <div class="cart-item-empty">暂无商品，请在左边的菜单上点单</div>
+                                    @endforeach
+                                @endif                                         
+                                </div>
+                                
+                                    <div class="cart-item-empty none" {{$num == 0 ? '' : "style=display:none"}}>暂无商品，请在左边的菜单上点单</div>
                                 </div>
                                 <div id="cart-item-list"></div>
-                                <div class="total clearfix disnone" ng-class="{disnone:isEmpty}">
-                                    <div class="fl">配送费：￥<span ng-bind="deliveryCost|number:2"></span></div>
-                                    <div class="fr">合计：￥<span ng-bind="total|number:2"></span></div>
+                                <div class="total clearfix " {{$num == 0 ? style="display:none" : ""}} >
+                                    <div class="fl">配送费：￥<span >{{$shop_info['deliPrice']}}</span></div>
+                                    <div class="fr">合计：￥<span class='zong'>{{$shop_info['deliPrice']+$payment}}</span></div>
                                 </div>
                                 <div class="checkout">
-                                    <button class="checkout btn" ng-disabled="isPlaceOrder" ng-click="createOrder()" ng-bind="createOrderBtnName">立即下单</button>
+                                    <button class="checkout btn"  style='background:#0D5F83' >立即下单</button>
                                 </div>
                             </div>
                         </section>
@@ -342,8 +301,6 @@
                                 
                                     <li><i class="status-icon"></i><span>餐厅支持在线支付</span></li>
                                 
-                                
-                                    
                                     <li><img src="{{asset('Home/images/Fg-4kUvXVpR1DRR0O3VFr73KHEQr.png')}}" alt="" /><span>每单赠送价值15元进口果汁1瓶！</span></li>
                                     
                                     <li><img src="{{asset('Home/images/Fg-4kUvXVpR1DRR0O3VFr73KHEQr.png')}}" alt="" /><span>活动菜品立减6元，多点多减！</span></li>

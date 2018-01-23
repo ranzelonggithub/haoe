@@ -6,83 +6,120 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Flc\Dysms\Client;
+use Flc\Dysms\Request\SendSms;
+use App\Model\user_log;
+use Hash;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //显示登录界面
+    public function login()
     {
-        //加载登陆注册界面
-        return view('Home.Login.login') ;
+        return view('Home.login.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    //检查电话号码是否正确
+    public function phone(Request $request)
     {
-        //
+        $phone = $request->input('phone');  
+        if(!preg_match("/^1[34578]{1}\d{9}$/",$phone)){  
+            echo "not"; //不是电话号码
+        }else{  
+             $res = user_log::where('phone',$phone)->first();
+             if($res){
+                echo 'ok'; //电话可用
+             }else{
+               $res = user_log::insert(['phone'=>$phone]);
+               if($res){
+                    echo 'ok';
+               }else{
+                    echo 'not';
+               }
+             }
+        }  
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    //发送验证码
+    public function code(Request $request)
     {
-        //
+        $phone = $request->input('phone');
+        $config = [
+            'accessKeyId'    => 'LTAIoIL9CepmtlBW',
+            'accessKeySecret' => 'y8cJCQJazGlX1KIhLbNrPw4O3kYomW',
+        ];
+
+        $client  = new Client($config);
+        $sendSms = new SendSms;
+        $sendSms->setPhoneNumbers($phone);
+        $sendSms->setSignName('冉泽龙');
+        $sendSms->setTemplateCode('SMS_120405864');
+        $code = rand(100000, 999999);
+        $sendSms->setTemplateParam(['code' => $code]);
+        $sendSms->setOutId('demo');
+        session(['code'=>$code]);
+        $client->execute($sendSms);
+        echo 1;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    //执行登录
+    public function dologin(Request $request)
     {
-        //
+        $code = $request->input('code');
+        $phone = $request->input('phone');
+        $userid = user_log::where('phone',$phone)->value('id');
+        session(['userid'=>$userid]);
+        if($code == session('code')){
+            echo 1;
+        }else{
+            echo 0;
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function plogin(Request $request)
+    {   
+        $flag = 0;
+        $txtUser = $request->input('txtUser');
+        $password = $request->input('password');
+        $password1 = user_log::where('userName',$txtUser)->value('passWord');
+        $password2 = user_log::where('phone',$txtUser)->value('passWord');
+        $password3 = user_log::where('email',$txtUser)->value('passWord');
+        // echo password1;
+        if(!empty($password1)){
+            if(Hash::check($password, $password1)){
+                $flag = 1;
+                $userid = user_log::where('userName',$txtUser)->value('id');
+            }
+        }
+
+        if(!empty($password2)){
+            if(Hash::check($password, $password2)){
+                $flag = 1;
+                $userid = user_log::where('phone',$txtUser)->value('id');
+            }
+        }
+
+        if(!empty($password3)){
+            if(Hash::check($password, $password3)){
+                $flag = 1;
+                $userid = user_log::where('email',$txtUser)->value('id');
+            }
+        }
+
+        if($flag){
+            session(['userid'=>$userid]);
+            echo 1;
+        }else{
+            echo 0;
+        }
+
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function logout()
     {
-        //
+        session(['userid'=>null]);
+        return view('Home.login.login');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
