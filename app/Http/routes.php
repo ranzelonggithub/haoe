@@ -49,7 +49,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	//加载首页 网站首页
 	Route::resource('list','IndexController') ;
 	//加载网站首页 链接到的商家合作页面
-	Route::get('coop','IndexController@coop') ;
+	//Route::get('coop','IndexController@coop') ;
 
 	//店铺信息
 	Route::group(['prefix'=>'shop'],function() {
@@ -109,6 +109,18 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		Route::get('order_update','OrderController@order_update') ;
 		//下单成功页面
 		Route::get('order_success','OrderController@order_success') ;
+	}) ;
+	Route::group(['prefix'=>'coop'],function() {
+		//注册商家页面
+		Route::resource('index','CooperationController') ;
+		//注册表单提交
+		Route::post('index_form','CooperationController@index_form') ;
+		//图片上传
+		Route::post('index/up','CooperationController@upload') ;
+		Route::post('index/up1','CooperationController@upload1') ;
+		Route::post('index/up2','CooperationController@upload2') ;
+
+
 	}) ;
 
 }) ;

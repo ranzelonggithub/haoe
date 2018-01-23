@@ -261,7 +261,7 @@
 			<p class="tr fs17 pink">需要付款：<b>￥ {{ ($payment + $deliPrice)}}<span ></span></b></p>
 			<p class="tr last">
 				
-				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)" ng-click="commitOrder()" class="btn btn-success fs20">提交订单 <i class="icon arrows-right"></i></button>
+				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)"  class="btn btn-success fs20" onclick="location='/home/order/order_success'">提交订单 <i class="icon arrows-right"></i></button>
 			</p>
 		</section>
 	</section>

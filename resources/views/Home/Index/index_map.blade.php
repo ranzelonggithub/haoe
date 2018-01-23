@@ -3,12 +3,9 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content="首页" />
-    <meta name="viewport" content="user-scalable=no">
-    
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
+    <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('layer/layer.js') }}"></script>
+
     <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
     <link rel="stylesheet" type="text/css" href="">
@@ -359,8 +356,8 @@
         </div>
     </dh-dialog>
     
-    <a href="javascript:void(0)" animate-top="-65" class="merchants-icon" ng-click="merchantsShow=true;merchants={};merchants.checkbox=true;"></a>
-    
+    <a href="/home/coop/index" animate-top="-65" class="merchants-icon" onclick="coop()"></a>
+ 
 <dh-dialog class="disnone" type='login' height="500" header="登录" show="loginShow" >
     <form class="login-form" novalidate name="loginForm" ng-controller="loginCtrl">
         <div class="form-group">
