@@ -146,7 +146,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		//执行地址修改
 		Route::get('order_update','OrderController@order_update') ;
 		//下单成功页面
-		Route::get('order_success','OrderController@order_success') ;
+		Route::post('order_success','OrderController@order_success') ;
 	}) ;
 	Route::group(['prefix'=>'coop'],function() {
 		//注册商家页面

@@ -63,29 +63,35 @@ class ShopController extends Controller
         $data = food::where('uid',$id)->get() ;
         
         //当前登录用户id
-        // $userid = session('userid');
-        $userid = 1; ///????????
-
-        //购物车食物件数
-        $cart = cart::where('uid',$userid)->where('sid',$id)->first();
-        if($cart){
-            $payment = $cart->payment;
-            $good = json_decode($cart->goods,true);
-            $num = 0;
-            foreach($good as $k => $v){
-                $num += $v['goodsAmount'];
-                $good[$k]['price'] = food::where('uid',$id)->where('goodsName',$v['goodsName'])->first()->price;
+        if(null != session('userid')){
+            $userid = session('userid');
+            $state = 1;
+            //购物车食物件数
+            $cart = cart::where('uid',$userid)->where('sid',$id)->first();
+            if($cart){
+                $payment = $cart->payment;
+                $good = json_decode($cart->goods,true);
+                $num = 0;
+                foreach($good as $k => $v){
+                    $num += $v['goodsAmount'];
+                    $good[$k]['price'] = food::where('uid',$id)->where('goodsName',$v['goodsName'])->first()->price;
+                }
+            }else{
+                $payment = 0;
+                $num = 0;
+                $good = array(); 
             }
+
         }else{
             $payment = 0;
             $num = 0;
-            $good = array(); 
+            $good = array();
+            $userid = '';
+            $state = 0;
         }
 
-
-
        //加载店铺详情页
-        return view('Home.Shop.shop_detail',['cates'=>$cates,'data'=>$data,'shop_info'=>$shop_info,'id'=>$id,'userid'=>$userid,'num'=>$num,'good'=>$good,'payment'=>$payment]) ;
+        return view('Home.Shop.shop_detail',['cates'=>$cates,'data'=>$data,'shop_info'=>$shop_info,'id'=>$id,'userid'=>$userid,'num'=>$num,'good'=>$good,'payment'=>$payment,'state'=>$state]) ;
     }
 
     public function shop_comment() 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Model\cart ;
 use App\Model\address ;
 use App\Model\shop ;
+use App\Model\order;
 
 class OrderController extends Controller
 {
@@ -20,8 +21,8 @@ class OrderController extends Controller
     public function order()
     {
         //加载用户下订单页面 点击购物车结算过来的
-        $uid = 5 ;//用户id
-        $id = 1 ; //购物车id
+        $uid = 1 ;//用户id
+        $id = 70 ; //购物车id
         /*
             应该是点击结算  购物信息存储在redis里面
             提交订单之后  再写入数据库
@@ -72,33 +73,33 @@ class OrderController extends Controller
 
         //根据uid 查询address表
         $addrs = address::where('uid',$uid)->get() ; 
-        //dump($addrs) ;
+      
         //根据id查询cart表 获取购物车商品信息
         //备注  填写完保存订单表
         //商品名
-        $goodsName = cart::where('id',$id)->value('goodsName') ;
-        $goodsNames = explode('&',$goodsName)  ;
-        //数量
-        $goodsAmount = cart::where('id',$id)->value('goodsAmount') ;
-        $goodsAmounts = explode('&',$goodsAmount) ;
+        $cart = cart::where('id',$id)->first();
+        $goods = $cart->goods;
+        // $goodsNames = explode('&',$goodsName)  ;
+        $goods = json_decode($goods,true);
+        $goodsNames = [];   //食品名称
+        $goodsAmounts = []; //食品数量
+        $prices = [];       //食品单价
+        $subtotals = [];    //食品小计
+        foreach($goods as $k => $v){
+            $goodsNames[] = $v['goodsName'];
+            $goodsAmounts[] = $v['goodsAmount'];
+            $prices [] = $v['price'];
+            $subtotals[] = $v['subtotal'];
+        }
 
-        //单价
-        $price = cart::where('id',$id)->value('price') ;
-        $prices = explode('&',$price) ;
-        //小计
-        $subtotal = cart::where('id',$id)->value('subtotal') ;
-        $subtotals = explode('&',$subtotal) ;
+        
         //总计
-        $payment = cart::where('id',$id)->value('payment') ;
-      /*  dump($goodsNames) ;
-        dump($goodsAmounts) ;
-        dump($prices) ;
-        dump($subtotals) ;
-        dump($payment) ;*/
+        $payment = $cart->payment;
+
         //根据店铺id sid=1 查询店铺配送费
         $sid = 1 ;
         $deliPrice = shop::where('id',$sid)->value('deliPrice') ;
-        return view('Home.Order.order',['addrs'=>$addrs,'id'=>$uid,'goodsNames'=>$goodsNames,'goodsAmounts'=>$goodsAmounts,'prices'=>$prices,'subtotals'=>$subtotals,'payment'=>$payment,'deliPrice'=>$deliPrice]) ;
+        return view('Home.Order.order',['addrs'=>$addrs,'id'=>$uid,'cartid'=>$id,'goodsNames'=>$goodsNames,'goodsAmounts'=>$goodsAmounts,'prices'=>$prices,'subtotals'=>$subtotals,'payment'=>$payment,'deliPrice'=>$deliPrice]) ;
     }
     //加载新增地址页面
     public function order_add(Request $req) 
@@ -166,10 +167,107 @@ class OrderController extends Controller
 
 
     //加载下单成功页面order_success
-     public function order_success()
-    {
+     public function order_success(Request $request)
+    {   
+        // $comment = $request->input('com');
+        // $uid = $request->input('userid'); //用户id;
+        // $cartid = $request->input('cartid'); //购物车id
+        // $aid = $request->input('addrid'); //地址id
+        // $cart = cart::where('id',$cartid)->first();
+        // $kid = $cart->sid; //店铺id;
+
+        
+        // $goods = $cart->goods;
+        // // $goodsNames = explode('&',$goodsName)  ;
+        // $goods = json_decode($goods,true);
+        // $fid = array_keys($goods);
+        // $fid = implode('&',$fid); //食品id
+        // $picture = shop::where('id',$kid)->value('logo'); //店铺图片
+        // $picture = shop::where('id',$kid)->value('shopName'); //店铺名称
+        // $shopPhone = shop::where('id',$kid)->value('shopPhone'); //店铺电话
+        // $orderNum = time().rand(100000,999999); //订单号
+        // $goodsNames = [];   //食品名称
+        // $goodsAmounts = []; //食品数量
+        // $prices = [];       //食品单价
+        // $subtotals = [];    //食品小计
+        // foreach($goods as $k => $v){
+        //     $goodsNames[] = $v['goodsName'];
+        //     $goodsAmounts[] = $v['goodsAmount'];
+        //     $prices [] = $v['price'];
+        //     $subtotals[] = $v['subtotal'];
+        // }
+
+        // $goodsNames = implode('&',$goodsNames );   //食品名称
+        // $goodsAmounts = implode('&',$goodsAmounts ); //食品数量
+        // $prices = implode('&',$prices );       //食品单价
+        // $subtotals =implode('&',$subtotals );    //食品小计
+        
+        
+        // $payment = $cart->payment; //实际支付
+        // $deliPrice =  shop::where('id',$kid)->value('deliPrice'); //配送费
+        // //根据uid 查询address表
+        // $addrs = address::where('uid',$aid)->first() ;
+        // $recName  = $addrs->recName; //收货人姓名
+        // $recPhone = $addrs->recPhone;
+        // $autoAddr = $addrs->autoAddr;
+        // $detailAddr = $addrs->detailAddr;
+        // $recSex = $addrs->recSex;
+
+        $data['comment'] = $request->input('com');
+        $data['uid'] = $request->input('userid'); //用户id;
+        $uid = $request->input('userid'); //用户id;
+        $cartid = $request->input('cartid'); //购物车id
+        $data['aid'] = $request->input('addrid'); //地址id
+        $aid = $request->input('addrid'); //地址id
+        $cart = cart::where('id',$cartid)->first();
+        $data['kid'] = $cart->sid; //店铺id;
+        $kid = $cart->sid;//店铺id;
+
+        
+        $goods = $cart->goods;
+        // $goodsNames = explode('&',$goodsName)  ;
+        $goods = json_decode($goods,true);
+        $fid = array_keys($goods);
+        $data['fid'] = implode('&',$fid); //食品id
+        $data['picture'] = shop::where('id',$kid)->value('logo'); //店铺图片
+        $data['shopName'] = shop::where('id',$kid)->value('shopName'); //店铺名称
+        $data['shopPhone'] = shop::where('id',$kid)->value('shopPhone'); //店铺电话
+        $data['orderNum'] = time().rand(100000,999999); //订单号
+        $goodsNames = [];   //食品名称
+        $goodsAmounts = []; //食品数量
+        $prices = [];       //食品单价
+        $subtotals = [];    //食品小计
+        foreach($goods as $k => $v){
+            $goodsNames[] = $v['goodsName'];
+            $goodsAmounts[] = $v['goodsAmount'];
+            $prices [] = $v['price'];
+            $subtotals[] = $v['subtotal'];
+        }
+
+        $data['goodsName'] = implode('&',$goodsNames );   //食品名称
+        $data['goodsAmount'] = implode('&',$goodsAmounts ); //食品数量
+        $data['price'] = implode('&',$prices );       //食品单价
+        $data['subtotal'] =implode('&',$subtotals );    //食品小计
+        
+        
+        $data['payment'] = $cart->payment; //实际支付
+        $data['deliPrice'] =  shop::where('id',$kid)->value('deliPrice'); //配送费
+        //根据uid 查询address表
+        $addrs = address::where('id',$aid)->first() ;
+        $data['recName']  = $addrs->recName; //收货人姓名
+        $data['recPhone'] = $addrs->recPhone;
+        $data['autoAddr'] = $addrs->autoAddr;
+        $data['detailAddr'] = $addrs->detailAddr;
+        $data['recSex'] = $addrs->recSex;
+        $res = order::insert($data);
+        if($res){
+            echo 111111111;
+        }else{
+            echo 222222222;
+        }
+
         //加载用户下订单页面
-        return view('Home/Order/order_success') ;
+        // return view('Home/Order/order_success') ;
     }
 
     

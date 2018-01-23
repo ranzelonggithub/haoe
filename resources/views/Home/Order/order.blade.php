@@ -77,7 +77,7 @@
             <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}">
                 @if(count($addrs) > 0)
                     @foreach($addrs as $k=>$v_address)
-                <li ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl" >
+                <li  a="{{$v_address['id']}}" ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl address" >
                     <div class="clearfix">
                         <h3 class="fl" >收货人:{{ $v_address['recName'] }}</h3>
                         <span class="fr"><a href="javascript:;"  class="link" onclick="order_edit({{ $v_address['id'] }})">修改</a></span>
@@ -94,6 +94,8 @@
                 </li>
             </ul>
             <script>
+                
+          
                 function  new_addr(id) {
 
                     layer.open({
@@ -173,6 +175,8 @@
                     }) ;
                    
                 }
+
+                
             </script>
 			<form novalidate="true" name="orderForm" class="order-form inline">
                 <div ng-show="userAddressList.length == 0">
@@ -215,7 +219,7 @@
 				<div class="form-group row mb10">
 					<label class="col-2">备注信息：</label>
 					<div class="col-8">
-						<input type="text" maxlength="150" placeholder="如：多米饭，不吃辣等口味需求" ng-model="comment">
+						<input class='com' type="text" maxlength="150" placeholder="如：多米饭，不吃辣等口味需求" ng-model="comment">
 					</div>
 				</div>
 			</form>
@@ -260,12 +264,34 @@
             <p class="tr fs14">配送费用： <span>￥{{ $deliPrice }}</span></p>
 			<p class="tr fs17 pink">需要付款：<b>￥ {{ ($payment + $deliPrice)}}<span ></span></b></p>
 			<p class="tr last">
-				
-				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)"  class="btn btn-success fs20" onclick="location='/home/order/order_success'">提交订单 <i class="icon arrows-right"></i></button>
+				<form action="/home/order/order_success" method='post'>
+                    {{csrf_field()}}
+                    <input type="hidden" name='userid' value="{{$id}}">            
+                    <input type="hidden" name='cartid' value="{{$cartid}}">            
+                    <input class='addrid' type="hidden" name='addrid' value="">
+                    <input type="hidden" name='com' value=''>            
+                    <button   class="btn btn-success fs20 addr" style='float:right' disabled='disabled' >提交订单 </button>
+                </form>
 			</p>
 		</section>
 	</section>
+    <script type="text/javascript">
+        $('.addr').attr('disabled','disabled');
+        $('.address').click(function(){
+            var address = $(this);
+            $('.address').removeAttr('style');
+            address.attr('style','border:1px solid gold');
+            var addrid = address.attr('a');
+            $('.addrid').val(addrid); 
+            $('.addr').removeAttr('disabled');
+        });
 
+        //提取备注
+        $('.com').keydown(function(){
+            var com = $(this).val();
+            $('[name=com]').val(com);
+        });
+    </script>
         </div>
     </section>
     

@@ -16,6 +16,7 @@
     
     <link rel="stylesheet" href="{{asset('Home/css/menuPage.css')}}"/>
     <script type="text/javascript" src="{{asset('shops/js/jquery-1.8.3.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
     <!--[if lte IE 7]><script>window.onload=function(){location.href="/ie6warning/"}</script><![endif]-->
     <!--[if lt IE 9]>
     <script src="js/respond.js"></script>
@@ -186,6 +187,18 @@
 
             //增加食物
             $('.food').live('click',function(){
+                
+                // alert({{session('userid')}});
+                if({{$state}} == 0){
+                    layer.confirm('您还未登录,是否去登录？', {
+                      btn: ['是','否'] //按钮
+                    }, function(){
+                      location.href="/home1/login";
+                      return;
+                    }, function(){
+                      return;
+                    });
+                }
                 var fid = $(this).attr('fid');
                 $.post("{{url('home/shop/carts')}}",{'_token':'{{csrf_token()}}','fid':fid},function(data){
                     if(data['state'] == 'fail'){
