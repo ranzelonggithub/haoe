@@ -66,15 +66,17 @@ class ShopController extends Controller
         return view('Home.Shop.shop_detail',['cates'=>$cates,'data'=>$data,'shop_info'=>$shop_info,'id'=>$id]) ;
     }
 
-    public function shop_comment() 
+    public function shop_comment(Request $req) 
     {
+        $id = $req->input('id') ;
         //加载店铺评论页
-        return view('Home/Shop/shop_comment') ;
+        return view('Home/Shop/shop_comment',['id'=>$id]) ;
     }
-    public function shop_brand() 
+    public function shop_brand(Request $req) 
     {
+        $id = $req->input('id') ;
         //加载店铺大家都在点 页面
-        return view('Home/Shop/shop_brand') ;
+        return view('Home/Shop/shop_brand',['id'=>$id]) ;
     }
      public function shop_intro(Request $req) 
     {

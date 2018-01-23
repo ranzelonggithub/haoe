@@ -25,8 +25,8 @@
 	<h1>门店信息</h1>
 	<hr />
 	<div id="box">
-		<form class="form-horizontal" id="myform"  action="/home/coop/index_form" method="post" enctype="multipart/form-data">
-
+		<form class="form-horizontal" id="myform"  action="/home/coop/index_form" method='post' enctype="multipart/form-data">
+			{{ csrf_field() }}
 		  	<div class="form-group">
 		    	<label for="shopN" class="col-sm-2 control-label">店铺名称:</label>
 			    <div class="col-sm-10">
@@ -62,7 +62,7 @@
 		  	<select name="shopCate" multiple class="form-control">
 			 @if(count($cateName) > 0)
 			 	@foreach($cateName as $k=>$v)
-			  <option value="{{ $k + 1 }}">{{ $v['cateName'] }}</option>
+			  <option value="{{ $v['id'] }}">{{ $v['cateName'] }}</option>
 			  	@endforeach
 			 @endif
 			 
@@ -158,7 +158,7 @@
 
 			<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-primary">提交 继续下一步</button>
+			      <button type="submit" class="btn btn-primary" onclick="sub()">提交 继续下一步</button>
 			    </div>
 			</div>
 		</form>
@@ -363,7 +363,13 @@
 	    
 	    }
 
-
+	   /* function sub() {
+	    	var formData = new FormData($('#myform')[0]) ;
+	    	$.ajax({
+	    		type:'post',
+	    		url:"{{ url('/home/coop/index_form') }}"
+	    	}) ;
+	    }*/
 	    
 	</script>>
 </body>

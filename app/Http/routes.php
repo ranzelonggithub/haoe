@@ -44,8 +44,10 @@ Route::resource('/login','Home\LoginController') ;
 //前台
 Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 	
-	 //加载首页 地图
+	//加载首页 地图
 	Route::get('map','IndexController@map') ;
+	//遍历 市区 商圈
+	Route::post('map/list','IndexController@map_list') ;
 	//加载首页 网站首页
 	Route::resource('list','IndexController') ;
 	//加载网站首页 链接到的商家合作页面

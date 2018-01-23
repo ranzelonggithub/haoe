@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
     <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
     <script src="{{ asset('layer/layer.js') }}"></script>
-
+  
     
     <script type="text/javascript">
         
@@ -77,7 +77,7 @@
             <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}">
                 @if(count($addrs) > 0)
                     @foreach($addrs as $k=>$v_address)
-                <li ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl" >
+                <li ng-class="{active:item.active,userAddressHover:mobileAny}" onclick="addr()" id="addrs" class="user-address-item fl" >
                     <div class="clearfix">
                         <h3 class="fl" >收货人:{{ $v_address['recName'] }}</h3>
                         <span class="fr"><a href="javascript:;"  class="link" onclick="order_edit({{ $v_address['id'] }})">修改</a></span>
@@ -173,6 +173,8 @@
                     }) ;
                    
                 }
+
+              
             </script>
 			<form novalidate="true" name="orderForm" class="order-form inline">
                 <div ng-show="userAddressList.length == 0">
