@@ -17,7 +17,7 @@
                                 <th><i class="require-red">*</i>头像：</th>
                                 <td>
                                     <input type="file" name="photo" id="update" value="">
-                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$res['photo']}}" style="width:80px"></p>
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/home/user/{{$res['photo']}}" style="width:80px"></p>
                                 </td>
                             <tr>
                             <tr>

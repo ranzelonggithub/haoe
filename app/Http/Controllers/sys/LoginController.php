@@ -52,13 +52,9 @@ class LoginController extends Controller
         }
 
         //判断密码是否正确
-        // dump($log['passWord']);
-        // dump(Hash::check($res['passWord']) == $log['passWord']);
-        // dump(Hash::check($res['passWord'] == $log['passWord']));
         if(!(Hash::check( $log['passWord'],$res['passWord']))){
             echo '<script>alert("用户名或密码错误");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
             return;
-            // return redirect('/sys/do');
         }
 
         // //判断验证码
@@ -70,7 +66,6 @@ class LoginController extends Controller
         // //将登入成功的用户id存入session 
         session(['id'=>$res['id']]);
 
-        //dump(Session('id'));
         return redirect('/sys/index');
 
     	

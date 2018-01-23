@@ -60,13 +60,20 @@ class UserController extends Controller
         $hz = $file->getClientOriginalExtension();
 
         $filename = md5(time()+rand(0,99999)).'.'.$hz;
-        // dump($filename);        
+        // dump($filename); 
+     
         //上传图像七牛
         $disk = \Storage::disk('qiniu');
-        $res = $disk->put("/systems/sysimgs/".$filename,file_get_contents($filepath));
+        $res = $disk->put("/home/user/".$filename,file_get_contents($filepath));
         
         $data = $request->except(['_token','_method','photo','auth','repass']); 
-
+        
+        $user = DB::table('user_logs')->where('userName','=',$data['userName'])->first();
+        
+        if($data['userName'] == $user['userName']){
+            echo '<script>alert("用户名已存在");location.href="'.$_SERVER['HTTP_REFERER'].'"</script>';
+            return;
+        }
         //获取插入返回的id
         $res = DB::table('user_logs')->insertGetid($data);
 
@@ -132,7 +139,7 @@ class UserController extends Controller
         $filename = md5(time()+rand(0,99999)).'.'.$hz;
 
         $disk = \Storage::disk('qiniu');
-        $res = $disk->put('/systems/sysimgs/'.$filename,file_get_contents($filepath));
+        $res = $disk->put('/home/user/'.$filename,file_get_contents($filepath));
 
         //获取auth
         $info = $request->only('auth');
@@ -142,7 +149,8 @@ class UserController extends Controller
         $infos = DB::table('user_infos')->where('id',$id)->update($info);
   
         $data = $request->except(['_token','_method','photo','auth','repass']); 
-
+        $data['passWord'] = Hash::make($data['passWord']);
+        
         $res = DB::table('user_logs')->where('id',$id)->update($data);
 
         if($res && $infos){

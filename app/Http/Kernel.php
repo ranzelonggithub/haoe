@@ -33,6 +33,7 @@ class Kernel extends HttpKernel
         'shopLogin' => \App\Http\Middleware\shopLoginMiddleware::class,
 
         'login' => \App\Http\Middleware\LoginMiddleware::class,
+        'config'=> \App\Http\Middleware\ConfigMiddleware::class,
 
     ];
 }

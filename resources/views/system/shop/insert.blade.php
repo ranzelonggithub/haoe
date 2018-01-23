@@ -8,7 +8,8 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="/sys/shop" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    {{csrf_field()}}
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
                             <th width="120"><i class="require-red">*</i>分类：</th>
@@ -27,7 +28,7 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>密码：</th>
                                 <td>
-                                    <input type="password" name='password' value=''>
+                                    <input type="password" name='passWord' value=''>
                                 </td>
                             </tr>
                             <tr>
@@ -39,25 +40,25 @@
                             <tr>
                                 <th width="120"><i class="require-red">*</i>手机号:</th>
                                 <td>
-                                    <input type="text" name='sex' value=''>
+                                    <input type="text" name='phone' value=''>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>邮箱：</th>
                                 <td>
-                                    <input type="text" name='phone'>
+                                    <input type="text" name='email'>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>营业执照：</th>
                                 <td>
-                                    <input type="file" name='photo' multiple="multiple">
+                                    <input type="file" name='busi_license' multiple="multiple">
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>餐饮许可证：</th>
                                 <td>
-                                    <input type="file" name='photo' multiple="multiple">
+                                    <input type="file" name='cate_licence' multiple="multiple">
                                 </td>
 
                             </tr>

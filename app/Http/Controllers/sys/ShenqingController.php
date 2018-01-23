@@ -60,7 +60,6 @@ class ShenqingController extends Controller
     {
         //
         $res = DB::table('shops')->where('id',$id)->first();
-        dump($res); 
         return view('/system/shenqing/show',['res'=>$res]);
     }
 
@@ -86,7 +85,6 @@ class ShenqingController extends Controller
     public function update(Request $request, $id)
     {
         //执行修改
-        dump($id);
          
         $auth = $request->only('auth');
         $res = DB::table('shops')->where('id',$id)->update($auth);

@@ -196,5 +196,9 @@ class UserController extends Controller
             echo '密码修改失败' ;
         }
     }
-    
+    public function member_assess(Request $request)
+    {
+        return view('/Home/User/member_addr');   
+    }
+
 }

@@ -22,16 +22,16 @@
                             </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站关键字：</th>
-                                    <td><input type="text" name='keywords' vlaue=''></td>
+                                    <td><input type="text" name='keywords' value='{{$v["keywords"]}}'></td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站logo：</th>
                                     <td><input type="file" name='logo' multiple="multiple" id="logo">
-                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$v['logo']}}" style="width:80px;height:90px"></p>
+                                    <p><img  id="imgs" src="http://p2dtot555.bkt.clouddn.com/systems/sysimgs/{{$v['logo']}}" style="height:90px"></p>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>网站版权：</th>
-                                    <td><input type="text" name='copy' value=''></td>
+                                    <td><input type="text" name='copy' value='{{$v["copy"]}}'></td>
                                 </tr>
                                 <tr>
                                    <th><i class="require-red">*</i>网站状态：</th>  

@@ -1,50 +1,19 @@
-body{background: #f7f7f7}
-    .main{border-top: 2px solid #cdcdcd;}
-    .main-inner{width: 718px; margin:0 auto 50px;}
-    .passwd-nav-box{
-    padding-top: 35px;
-        height: 77px;
-    }
-    .passwd-nav{
-        height: 42px;
-        position: relative;
-    }
-    .passwd-nav li{
-        float: left;
-        display: inline;
-        height: 41px;
-        font-size: 14px;
-        width: 50%;
-        background: url("../images/pic-line.png") repeat-x 0 17px;
-    }
-    .passwd-nav .done{
-        background: url("../images/pic-line2.png") repeat-x 0 17px;
-    }
-    .passwd-nav .first{}
-    .passwd-nav .middle{ margin-left: -75px;}
-    .passwd-nav .last{
-        width: auto!important;
-        position: absolute;
-        right: 0;
-    }
-    .passwd-nav span{
-        float: left;
-        width: auto;
-        padding:0 5px;
-        background-color: #f7f7f7;
-    }
-    .passwd-nav span i{
-        position: relative;
-        width: 41px;
-        height: 41px;
-        background: url("../images/pic.png") -41px top no-repeat;
-        text-align: center;
-        line-height: 41px;
-        font-style: inherit;
-        color: white;
-        font-size: 20px;
-        float: left;
-    }
+body{background: #f7f7f7}     .main{border-top: 2px solid #cdcdcd;}     .main-
+inner{width: 718px; margin:0 auto 50px;}     .passwd-nav-box{     padding-top:
+35px;         height: 77px;     }     .passwd-nav{         height: 42px;
+position: relative;     }     .passwd-nav li{         float: left;
+display: inline;         height: 41px;         font-size: 14px;         width:
+50%;         background: url("../images/pic-line.png") repeat-x 0 17px;     }
+.passwd-nav .done{         background: url("../images/pic-line2.png") repeat-x
+0 17px;     }     .passwd-nav .first{}     .passwd-nav .middle{ margin-left:
+-75px;}     .passwd-nav .last{         width: auto!important;
+position: absolute;         right: 0;     }     .passwd-nav span{
+float: left;         width: auto;         padding:0 5px;         background-
+color: #f7f7f7;     }     .passwd-nav span i{         position: relative;
+width: 41px;         height: 41px;         background:
+url("../images/pic.png") -41px top no-repeat;         text-align: center;
+line-height: 41px;         font-style: inherit;         color: white;
+font-size: 20px;         float: left;     }
 
     .passwd-nav span em{
         float: left;
