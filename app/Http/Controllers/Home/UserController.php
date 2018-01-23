@@ -54,8 +54,10 @@ class UserController extends Controller
         return view('Home/User/member_collect',['id'=>$uid,'data'=>$data,'goodsNames'=>$goodsNames,'goodsAmounts'=>$goodsAmounts,'subtotals'=>$subtotals]) ;
     }
     //用户地址管理member_addr
-     public function member_addr()
+     public function member_addr(Request $req)
     {
+        $id = $req->input('id') ;
+        dump($id) ;
         return view('Home/User/member_addr') ;
     }
     //账号管理  个人中心member_index

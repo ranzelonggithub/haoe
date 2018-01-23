@@ -3,14 +3,12 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="user-scalable=no">
-    
-    <meta name="google-site-verification" content="BstJA3X9z6f9HcvoN9AZTwaKo_9Abj_j7dVBPfy640s" />
-    <meta name="baidu-site-verification" content="IYCrtVH0i1" />
-    <meta property="wb:webmaster" content="239d3d1dbdde1b2c" />
+   
+    <link rel="icon" href="{{asset('Home/images/yahoo_panda_72px_534234_easyicon.net.ico')}}">
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
+    <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('layer/layer.js') }}"></script>
+
     
     <script type="text/javascript">
         
@@ -77,21 +75,105 @@
 		<header class="brtrl">送餐信息 (*为必填项)</header>
 		<section class="user-info">
             <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}">
-                <li ng-repeat="item in userAddressList" ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl">
+                @if(count($addrs) > 0)
+                    @foreach($addrs as $k=>$v_address)
+                <li ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl" >
                     <div class="clearfix">
-                        <h3 class="fl" ng-bind="item.customer_name"></h3>
-                        <span class="fr"><a href="javascript:;" ng-click="updateUserAddress($index);$event.stopPropagation();" class="link">修改</a></span>
-                        <span class="fr"><a href="javascript:;" ng-click="deleteUserAddress($index);$event.stopPropagation();" class="link">删除</a></span>
+                        <h3 class="fl" >收货人:{{ $v_address['recName'] }}</h3>
+                        <span class="fr"><a href="javascript:;"  class="link" onclick="order_edit({{ $v_address['id'] }})">修改</a></span>
+                        <span class="fr"><a href="javascript:;"  class="link" id="{{ $v_address['id'] }}" onclick="order_del({{ $v_address['id'] }})">删除</a></span>
                     </div>
-                    <p class="user-address" ng-bind="item.delivery_address"></p>
-                    <p class="user-phone" ng-bind="item.customer_phone"></p>
+                    <p class="user-address" >收货地址:{{ $v_address['autoAddr']  }} --- {{ $v_address['detailAddr'] }}</p>
+                    <p class="user-phone" >收货人电话:{{ $v_address['recPhone'] }}</p>
                 </li>
+                    @endforeach
+                @endif
 
-
-                <li ng-if="userAddressList.length > 0 && userAddressList.length < 8" class="user-address-item address-add-box fl">
-                    <div ng-click="addUserAddress()"><i>+</i>使用新地址</div>
+                <li  class="user-address-item address-add-box fl">
+                    <div onclick='new_addr({{ $id }})'><i>+</i>使用新地址</div>
                 </li>
             </ul>
+            <script>
+                function  new_addr(id) {
+
+                    layer.open({
+                       type: 2,
+                        title: '收货地址新增',
+                        shadeClose: true,
+                        shade: false,
+                        maxmin: false, //开启最大化最小化按钮
+                        // zIndex: layer.zIndex,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['480px', '360px'], //宽高
+                        content: "order_add?id=" + id  ,
+                    });
+                }
+
+                function order_del(id) {
+                    layer.confirm('确认删除吗？', {
+                            btn: ['删除','取消'] //按钮
+                        }, function(){
+                            $.ajax({
+                                type:'get',
+                                url:"{{ url('/home/order/order_del') }}" + '?id=' + id ,
+                                success:function(data) {
+                                    layer.msg(data) ;
+                                    $('#' + id).parent().parent().parent().remove() ;
+                                }
+                            }) ;
+                        }, function(){
+                              layer.msg('看清楚在操作 浪费感情', {
+                                time: 2000, //20s后自动关闭
+                                
+                              });
+                        });
+                }
+
+                function order_edit(id) {
+                    layer.confirm('确认修改吗？', {
+                            btn: ['修改','取消'] //按钮
+                        }, function(){
+                            $.ajax({
+                                type:'get',
+                                url:"{{ url('/home/order/order_edit') }}" + '?id=' + id ,
+                                success:function(data) {
+                                    for(var i in data) {
+                                        layer.open({
+                                          type: 1,
+                                          skin: 'layui-layer-rim', //加上边框
+                                          area: ['420px', '240px'], //宽高
+                                          content: '<table><tr><td><label for="user">收货人姓名:</label></td><td><input type="text" name="recName" value=" ' + data[i]["recName"] + '"  id="user" placeholder="输入收货人姓名..."></td></tr><tr><td><label for="tel">收货人手机号:</label></td><td><input type="text" name="recPhone" value="'+ data[i]["recPhone"]+'" id="tel" placeholder="输入收货人手机号..."></td><tr><td><label for="addr">收货人地址:</label></td><td><input type="text" name="detailAddr" value="' + data[i]["autoAddr"] + '---' + data[i]["detailAddr"] + '" id="addr" placeholder="输入收货人地址..."></td></tr><tr><td colspan=2><button class="btn btn-info btn-block" onclick="up('+ data[i]['id'] +')">修改</button></td></tr>' ,
+                                          
+                                        });
+                                    }
+                                    
+                                   
+                                }
+                            }) ;
+                        }, function(){
+                              layer.msg('静坐常思己过 闲谈莫伦人非', {
+                                time: 2000, //20s后自动关闭
+                                
+                              });
+                        });
+                }
+
+                function up(id) {
+                    var recName = $('#user').val() ;
+                    var recPhone = $('#tel').val() ;
+                    var detailAddr = $('#addr').val() ;
+                    //alert(id + recName + recPhone + detailAddr) ;
+                    $.ajax({
+                        type:'get',
+                        url:"/home/order/order_update" ,
+                        data:{'id':id,'recName':recName,'recPhone':recPhone,'detailAddr':detailAddr} ,
+                        success:function(data) {
+                            layer.msg(data) ;
+                        }
+                    }) ;
+                   
+                }
+            </script>
 			<form novalidate="true" name="orderForm" class="order-form inline">
                 <div ng-show="userAddressList.length == 0">
                     <div class="form-group row mb10">
@@ -128,19 +210,8 @@
                         </div>
                     </div>
                 </div>
-				<div class="form-group row mb10">
-					<label class="col-2">送餐时间：</label>
-					<dh-select class="col-8" data="selectObj" selectedindex="datetimeIndex"></dh-select>
-				</div>
-                <div class="form-group row mb10 relative">
-                    <label class="col-2">支付方式：</label>
-                    
-                    <dh-radio class="col-2" model="payType" value="0" title="餐到付款"></dh-radio>
-                    <em ng-init="payType=0"></em>
-                    
-                    
-                    
-                </div>
+				
+          
 				<div class="form-group row mb10">
 					<label class="col-2">备注信息：</label>
 					<div class="col-8">
@@ -163,22 +234,20 @@
 					<div class="goods-total">小计</div>
 				</div>
 				<div class="order-body">
-                    
+                        @if(count($goodsNames) > 0) 
+                            @foreach($goodsNames as $k=>$v)
                         <div class="order-item clearfix">
-                            <div class="goods-name">蛋黄虾仁馄饨十可口可乐一瓶</div>
-                            <div class="goods-count">2</div>
-                            <div class="goods-price">￥22.00</div>
-                            <div class="goods-total">￥44.00</div>
+                            <div class="goods-name">{{ $goodsNames[$k] }}</div>
+                            <div class="goods-count">{{ $goodsAmounts[$k] }}</div>
+                            <div class="goods-price">￥{{ $prices[$k] }}</div>
+                            <div class="goods-total">￥{{ $subtotals[$k] }}</div>
                         </div>
+                            @endforeach
+                        @endif
                         
                     
                     
-                        <div class="order-item order-item-addendum clearfix">
-                            <div class="goods-name">点我呀，减6元 ！</div>
-                            <div class="goods-count">2</div>
-                            <div class="goods-price">￥-6.00</div>
-                            <div class="goods-total">￥-12.00</div>
-                        </div>
+                      
                     
 				</div>
 			</div>
@@ -186,13 +255,13 @@
 		<section class="total-sum">
 			
 			
-			<p class="tr fs14">订单金额： <span>￥32.00</span></p>
+			<p class="tr fs14">订单金额： <span>￥{{ $payment }}</span></p>
             <p ng-if="isVaildateCouponSuccess" class="tr fs14">优惠券： <span ng-bind="couponMoney|number:2|currency:'￥-'"></span></p>
-            <p class="tr fs14">配送费用： <span>￥0.00</span></p>
-			<p class="tr fs17 pink">需要付款： <b>￥<span ng-init="orderTotal=32.00" ng-bind="orderTotal|number:2"></span></b></p>
+            <p class="tr fs14">配送费用： <span>￥{{ $deliPrice }}</span></p>
+			<p class="tr fs17 pink">需要付款：<b>￥ {{ ($payment + $deliPrice)}}<span ></span></b></p>
 			<p class="tr last">
-				<a href="/shanghai/ji-xiang-hun-tun-gao-an-lu-dian/menu/?gid=602341" class="fs15 link"><i class="icon arrows-left"></i> 返回修改订单</a>
-				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)" ng-click="commitOrder()" class="btn btn-success fs20">提交订单 <i class="icon arrows-right"></i></button>
+				
+				<button ng-disabled="!(name && phone && address&&couponCheck&&commitCheck)"  class="btn btn-success fs20" onclick="location='/home/order/order_success'">提交订单 <i class="icon arrows-right"></i></button>
 			</p>
 		</section>
 	</section>
