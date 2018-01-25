@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Model\shop ;
 use App\Model\system ;
 use DB ;
+use App\Model\business ;
+use App\Model\user_log ;
 
 class IndexController extends Controller
 {
@@ -19,12 +21,44 @@ class IndexController extends Controller
      */
     public function map()
     {
+
+       
+        //市 
+        $city = business::where('pid',0)->get() ;
+        //dump($cities) ;
+        //区
+        $distract = [] ;
+        $trade = [] ;
         //加载首页 地图
 
-        return view('Home/Index/index_map') ;
+        return view('Home/Index/index_map',['city'=>$city,'distract'=>$distract,'trade'=>$trade]) ;
+
     }
-    public function index()
+    public function map_list(Request $request) 
     {
+
+        $cid = $request->input('city');
+        $did =  $request->input('distract');
+        
+        if(!empty($cid)){
+            $data = business::where('pid',$cid)->get();
+        }
+
+
+        if(!empty($did)){
+            $data = business::where('pid',$did)->get();
+        }
+        return $data;
+    }
+
+    public function index(Request $req)
+    {
+
+        $trade_id = $req->input('trade') ;
+        // dd( $trade_id) ;
+        //根据id查询business表
+        $trade = business::where('id',$trade_id)->value('area') ;
+        // dump($trade) ;
         //加载首页 网站首页
        //取菜品分类
         //system::get() ;
@@ -46,7 +80,7 @@ class IndexController extends Controller
             //门户logo
             $tmp['logo'] = 'logo.jpg' ;
             //店铺类别
-            $tmp['shopCate'] = $shopCate[mt_rand(0,count($shopCate) - 1)] ;
+            $tmp['shopCate'] = $shopCate[mt_rand(0,7)] ;
             //店内照片
             $tmp['insidePic'] = 'logo.jpg' ;
             //门脸照片
@@ -54,8 +88,8 @@ class IndexController extends Controller
             //食物照片
             $tmp['goodPic'] = 'logo.jpg' ;
             //实物类别
-            shuffle($cate) ;
-            $tmp['cate'] = $cate[0].'&'.$cate[1].'&'.$cate[2].'&'.$cate[3].'&'.$cate[4] ;
+           
+            $tmp['cate'] = $cate[mt_rand(0,13)].'&'.$cate[mt_rand(0,13)].'&'.$cate[mt_rand(0,13)].'&'.$cate[mt_rand(0,13)].'&'.$cate[mt_rand(0,13)] ;
             //配送费
             $tmp['deliPrice'] =  mt_rand(0,100) ;
             //起步价
@@ -79,6 +113,14 @@ class IndexController extends Controller
             $tmp['auth'] = mt_rand(0,1) ;
             //店铺开关状态 0 出租/转让 1 正常开店
             $tmp['state'] = mt_rand(0,1) ;
+           /*市id
+            $tmp['city'] = mt_rand(1,2) ;
+            //区
+            $tmp['distract'] = mt_rand(3,8) ;
+            //商圈
+            $tmp['trade'] = mt_rand(9,27) ;
+            
+
             shop::insert($tmp) ;
         }*/
        //取菜品分类
@@ -87,11 +129,16 @@ class IndexController extends Controller
         $data_sys = system::lists('cateName') ;
         //dd($data_sys) ;
         //取店铺信息
-        $data_shop = shop::get() ;
-        
+        if(session('userid') != null) {
+            $user_log = user_log::where('id',session('user_id'))->select('userName','phone')->first() ;
+        }else {
+            $user_log['userName'] = '张三' ;
+        }
+        $data_shop = shop::where('auth',1)->get() ;
         $res = DB::table('configs')->get();
         //dd($data_shop) ;
-        return view('Home.Index.index',['data_sys'=>$data_sys,'data_shop'=>$data_shop,'res'=>$res]) ;
+        return view('Home.Index.index',['data_sys'=>$data_sys,'data_shop'=>$data_shop,'trade'=>$trade,'res'=>$res,'user_log'=>$user_log]) ;
+
     }
 
 
@@ -111,7 +158,7 @@ class IndexController extends Controller
             $shops->where('shopCate',$id) ;
         }
         
-        $data_shop = $shops->get();
+        $data_shop = $shops->where('auth',1)->get();
         // dd($data_shop) ;
         // $msg = json_encode($data_shop) ;
 
@@ -123,7 +170,7 @@ class IndexController extends Controller
     public function store(Request $req)
     {
         //销量降序 配送费升序 取36条
-        $shops = shop::orderby('amount','desc')->orderby('initPrice','asc')->take(36)->get() ;
+        $shops = shop::where('auth',1)->orderby('amount','desc')->orderby('initPrice','asc')->take(36)->get() ;
         return $shops ;
     }
     /*
@@ -132,7 +179,7 @@ class IndexController extends Controller
     public function create()
     {
         //起步价升序 配送费降序 取36条initPrice
-        $shops = shop::orderby('initPrice','asc')->orderby('deliPrice','asc')->take(36)->get() ;
+        $shops = shop::where('auth',1)->orderby('initPrice','asc')->orderby('deliPrice','asc')->take(36)->get() ;
         return $shops ;
     }
     public function edit($id)

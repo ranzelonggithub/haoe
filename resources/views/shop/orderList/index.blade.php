@@ -71,7 +71,7 @@
                             <td>{{$v['recName']}}</td>
                             <td>{{$v['recSex'] == 0 ? '男' : '女'}}</td>
                             <td>{{$v['recPhone']}}</td>
-                            <td>{{$v['created_at']}}</td>
+                            <td>{{$v['time']}}</td>
                         @if($v['state'] == 1)
                             <td style='color:red'>待发送</td>
                         @elseif($v['state'] == 2)

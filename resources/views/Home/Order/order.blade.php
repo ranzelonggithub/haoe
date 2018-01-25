@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="{{asset('Home/images/favicon.ico')}}"/>
     <script src="{{ asset('Home/js/jquery-1.8.3.min.js') }}"></script>
     <script src="{{ asset('layer/layer.js') }}"></script>
-
+  
     
     <script type="text/javascript">
         
@@ -43,13 +43,13 @@
                             <li class="userName">
                                 <a href="/account/center/manage/" rel="nofollow" draw-user>18005151538<em></em></a>
                                 <div>
-                                    <p><a href="/account/center/manage/"  rel="nofollow">账号管理</a></p>
-                                    <p><a href="/account/center/address/"  rel="nofollow">地址管理</a></p>
+                                    <p><a href="/home/user/member_index?id={{ $uid }}"  rel="nofollow">账号管理</a></p>
+                                    <p><a href="/home/user/member_collect?id={{ $uid }}"  rel="nofollow">地址管理</a></p>
                                     <p class="no-bo"><a id="logout" href="/account/logout/" referer-url rel="nofollow">退出</a></p>
                                 </div>
                             </li>
-                            <li class=""><a href="/account/center/orders/" class="order-center"  rel="nofollow">我的订单</a></li>
-                            <li class=""><a href="/account/center/favorite/"  rel="nofollow">我的收藏</a></li>
+                            <li class=""><a href="/home/user/member_order?id={{ $uid }}" class="order-center"  rel="nofollow">我的订单</a></li>
+                            <li class=""><a href="/home/user/member_collect?id={{ $uid }}"  rel="nofollow">我的收藏</a></li>
                             <li class=""><a href="/account/gift/center/"  rel="nofollow">氪星礼品站</a></li>
                             <li class="phone-client "><a href="/app/"  rel="nofollow" target="_blank"><span>手机客户端</span></a></li>
                         </ul>
@@ -77,7 +77,10 @@
             <ul class="user-address-list clearfix disnone" ng-class="{disblock: userAddressList.length != 0}">
                 @if(count($addrs) > 0)
                     @foreach($addrs as $k=>$v_address)
+
                 <li  a="{{$v_address['id']}}" ng-class="{active:item.active,userAddressHover:mobileAny}" ng-click="changeActiveAddress($index)" class="user-address-item fl address" >
+
+               
                     <div class="clearfix">
                         <h3 class="fl" >收货人:{{ $v_address['recName'] }}</h3>
                         <span class="fr"><a href="javascript:;"  class="link" onclick="order_edit({{ $v_address['id'] }})">修改</a></span>
@@ -90,7 +93,7 @@
                 @endif
 
                 <li  class="user-address-item address-add-box fl">
-                    <div onclick='new_addr({{ $id }})'><i>+</i>使用新地址</div>
+                    <div onclick='new_addr({{ $uid }})'><i>+</i>使用新地址</div>
                 </li>
             </ul>
             <script>
@@ -107,7 +110,7 @@
                         // zIndex: layer.zIndex,
                         skin: 'layui-layer-rim', //加上边框
                         area: ['480px', '360px'], //宽高
-                        content: "order_add?id=" + id  ,
+                        content: "{{ url('/home/order/order_add')}}" + "?id=" + id  ,
                     });
                 }
 
@@ -176,7 +179,6 @@
                    
                 }
 
-                
             </script>
 			<form novalidate="true" name="orderForm" class="order-form inline">
                 <div ng-show="userAddressList.length == 0">
@@ -263,7 +265,7 @@
 			<p class="tr last">
 				<form action="/home/order/order_success" method='post'>
                     {{csrf_field()}}
-                    <input type="hidden" name='userid' value="{{$id}}">            
+                    <input type="hidden" name='userid' value="{{$uid}}">            
                     <input type="hidden" name='cartid' value="{{$cartid}}">            
                     <input class='addrid' type="hidden" name='addrid' value="">
                     <input type="hidden" name='com' value=''>            

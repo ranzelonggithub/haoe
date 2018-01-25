@@ -11,6 +11,7 @@ use App\Model\business ;
 use App\Model\shop ;
 use Qiniu\Storage\UploadManager;
 use Qiniu\Auth;
+use App\Model\seller_log ;
 
 class CooperationController extends Controller
 {
@@ -38,6 +39,7 @@ class CooperationController extends Controller
     //form表单提交
     public function index_form(Request $req) 
     {
+        //dd('123213123') ;
         //店铺名 shop
         $shopName = $req->input('shopName') ;
         //店铺电话 shop
@@ -68,16 +70,10 @@ class CooperationController extends Controller
         if($res) {
             $res2 = seller_log::insert(['sellerName'=>$sellerName,'phone'=>$phone]) ;
             if($res2) {
-                return true ;
-            }else {
-                return false ;
+                echo '插入成功' ;
             }
-        }else {
-            return ;
         }
-
-
-        
+        return view('Home.Coop.two') ;
     }
 
     /**

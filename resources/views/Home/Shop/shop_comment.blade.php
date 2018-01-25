@@ -102,10 +102,10 @@
 </header>
 
 <ul class="clearfix menu-nav-list" scroll-position-static="160">
-    <li class="no-line "><a href="{{asset('shop/shop_intro')}}">餐厅介绍</a></li>
-    <li><a href="{{asset('/shop/shop_detail')}}">菜单</a></li>
-    <li  class="active"><a href="{{asset('/shop/shop_comment')}}">评论</a></li>
-	<li ><a href="{{asset('/shop/shop_brand')}}" id='point-tab'>大家都在点</a></li>
+    <li class="no-line "><a href="shop/shop_intro?id={{ $id }}">餐厅介绍</a></li>
+    <li><a href="/shop/shop_detail?id={{ $id }}">菜单</a></li>
+    <li  class="active"><a href="/shop/shop_comment?id={{ $id }}">评论</a></li>
+	<li ><a href="/shop/shop_brand?id={{ $id }}" id='point-tab'>大家都在点</a></li>
     
 </ul>
 		<section class="main-box">

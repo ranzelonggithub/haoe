@@ -34,6 +34,7 @@ class Kernel extends HttpKernel
 
         'login' => \App\Http\Middleware\LoginMiddleware::class,
         'config'=> \App\Http\Middleware\ConfigMiddleware::class,
+        'homelogin'=> \App\Http\Middleware\HomeLoginMiddleware::class,
 
     ];
 }

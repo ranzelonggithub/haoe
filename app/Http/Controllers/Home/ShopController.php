@@ -72,8 +72,10 @@ class ShopController extends Controller
                 $payment = $cart->payment;
                 $good = json_decode($cart->goods,true);
                 $num = 0;
+                // dump($good);
                 foreach($good as $k => $v){
                     $num += $v['goodsAmount'];
+                    
                     $good[$k]['price'] = food::where('uid',$id)->where('goodsName',$v['goodsName'])->first()->price;
                 }
             }else{
@@ -90,19 +92,22 @@ class ShopController extends Controller
             $state = 0;
         }
 
+
        //加载店铺详情页
         return view('Home.Shop.shop_detail',['cates'=>$cates,'data'=>$data,'shop_info'=>$shop_info,'id'=>$id,'userid'=>$userid,'num'=>$num,'good'=>$good,'payment'=>$payment,'state'=>$state]) ;
     }
 
-    public function shop_comment() 
+    public function shop_comment(Request $req) 
     {
+        $id = $req->input('id') ;
         //加载店铺评论页
-        return view('Home/Shop/shop_comment') ;
+        return view('Home/Shop/shop_comment',['id'=>$id]) ;
     }
-    public function shop_brand() 
+    public function shop_brand(Request $req) 
     {
+        $id = $req->input('id') ;
         //加载店铺大家都在点 页面
-        return view('Home/Shop/shop_brand') ;
+        return view('Home/Shop/shop_brand',['id'=>$id]) ;
     }
      public function shop_intro(Request $req) 
     {

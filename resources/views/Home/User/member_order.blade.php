@@ -114,9 +114,9 @@
                         <span class="fl">餐厅电话：{{ $v['shopPhone'] }}</span>
                     </p>
                 </div>
-                <div class="fl order-type padding-margin">
+                <div class="fl order-type padding-margin " >
                     <p>配送方式：{{ $v['delivery'] }}</p>
-                    <p>订单状态：{{ $state[$v['state']-1]}}</p>
+                    <p a="{{ $v['id'] }}">订单状态：{{ $state[$v['state']-1]}}</p>
                 </div>
                 <div class="fl order-total padding-margin">
                     <p>订单金额</p>
@@ -124,10 +124,13 @@
                 </div>
                 <div class="padding-margin">
                     <button class="btn btn-info" onclick="location='/home/user/member_collect?uid={{ $id }}&order_id={{ $v['id'] }}'">订单详情</button>
-                    @if($v['comState'] == '1')
+                   <!--  @if($v['comState'] == '1')
                     <button class="btn btn-info">待 评 论</button>
                     @else
                     <button class="btn btn-info">已 评 论</button>
+                    @endif -->
+                    @if($state[$v['state']-1] != '已接受')
+                    <button class="btn btn-info"  id="{{ $v['id'] }}"  onclick="confi({{ $v['id'] }})">确认收货</button>
                     @endif
                 </div>
             </div>
@@ -137,6 +140,25 @@
             @endforeach
         @endif
 
+            <script>
+            function confi(id) {
+                $.ajax({
+                    type:'get',
+                    url:"{{ url('/home/user/member_collect_state')}}" + '?order_id=' + id ,
+                    success:function(msg) {
+                        if(msg == 1){
+                            $("#"+id).remove();
+                            $("[a="+id+"]").html('订单状态：已接收');
+                            layer.msg('确认成功') ;
+                        }else{
+                            layer.msg('未成功确认');
+                        }
+                    }
+                }) ;
+            }
+            </script>
+     
+    
     </section>
 
 

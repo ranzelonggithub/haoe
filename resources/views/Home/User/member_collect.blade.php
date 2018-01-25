@@ -191,10 +191,14 @@
                     </tr>
         
                 </table>
+
+                 @if($v['state'] != '3') 
+                <button class="btn btn-info btn-block" onClick="history.go(-1)" >返回</button>
+                @endif
                     @endforeach
                 @endif
   
-    
+
 
 
             </article>

@@ -62,7 +62,6 @@
                             <td>{{$v['recPhone']}}</td>
                             <td><?=$v['comState']==1?'已接收':'正在配送'?></td>
                             <td>
-                                <button><a class="link-update" href="#">修改</a></button>
                                 <form action="/sys/order/{{$v['id']}}" method='post' style='display :inline;'>
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}

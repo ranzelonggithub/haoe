@@ -119,7 +119,8 @@ class LoginController extends Controller
     public function logout()
     {
         session(['userid'=>null]);
-        return view('Home.login.login');
+        return redirect('/home/list');
     }
+
 
 }

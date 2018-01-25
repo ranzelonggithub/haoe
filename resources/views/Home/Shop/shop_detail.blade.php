@@ -322,7 +322,7 @@
                                     <div class="fr">合计：￥<span class='zong'>{{$shop_info['deliPrice']+$payment}}</span></div>
                                 </div>
                                 <div class="checkout">
-                                    <a href="home/order?id={{$id}}"><button class="checkout btn sett"  style='background:#0D5F83' {{$num == 0 ? 'disabled' : ''}} >立即下单</button></a>
+                                    <a href="/home/shop/order?id={{$id}}&userid={{ session( 'userid' )}}"><button class="checkout btn sett"  style='background:#0D5F83' {{$num == 0 ? 'disabled' : ''}} >立即下单</button></a>
                                 </div>
                             </div>
                         </section>

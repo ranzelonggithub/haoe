@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function member_order(Request $req)
     {
-        $id = $req->input('id') ;
+        $id = session('userid') ;
         //根据用户id查询 订单表order
         $data = order::where('uid',$id)->get() ;
         // dump($data) ;
@@ -50,8 +50,23 @@ class UserController extends Controller
         //小计
         $subtotal = order::where('id',$order_id)->value('subtotal') ;
         $subtotals = explode('&',$subtotal) ;
+        // //状态
+        // $state = order::where('id',$order_id)->value('state') ;
         //dump($subtotals) ;
         return view('Home/User/member_collect',['id'=>$uid,'data'=>$data,'goodsNames'=>$goodsNames,'goodsAmounts'=>$goodsAmounts,'subtotals'=>$subtotals]) ;
+    }
+
+    public function member_collect_state(Request $req) 
+    {
+        $order_id = $req->input('order_id') ;
+       // echo $order_id ;
+        $state = 3 ;
+        $res = order::where('id',$order_id)->update(['state'=>$state]) ;
+        if($res) {
+            echo 1 ;
+        }else {
+            echo 0 ;
+        }
     }
     //用户地址管理member_addr
      public function member_addr(Request $req)

@@ -27,7 +27,7 @@ class UserController extends Controller
         $res = DB::table('user_logs')
             ->join('user_infos', 'user_logs.id', '=', 'user_infos.uid')
             ->select('user_logs.*', 'user_infos.auth')
-            ->paginate(4);
+            ->paginate(2);
         //加载用户管理视图
         return view('system.user.design',['res'=>$res]);
 

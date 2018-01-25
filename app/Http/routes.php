@@ -73,11 +73,19 @@ Route::group(['prefix'=>'home1','namespace'=>'Home'],function(){
 	Route::post('plogin','LoginController@plogin');
 });
 
+Route::group(['prefix'=>'home1','namespace'=>'Home','middleware'=>'homelogin'],function(){
+	//退出登录
+	Route::get('logout','LoginController@logout');
+});
+
 //前台
 Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
+
 	
-	 //加载首页 地图
+	//加载首页 地图
 	Route::get('map','IndexController@map') ;
+	//遍历 市区 商圈
+	Route::post('map/list','IndexController@map_list') ;
 	//加载首页 网站首页
 	Route::resource('list','IndexController') ;
 	//加载网站首页 链接到的商家合作页面
@@ -92,7 +100,11 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		////加载店铺大家都在点 页面
 		Route::get('shop_brand','ShopController@shop_brand') ;
 		//加载店铺简介 页面
-		Route::get('shop_intro','ShopController@shop_intro') ;
+
+	}) ;
+	//店铺信息
+	Route::group(['prefix'=>'shop','middleware'=>'homelogin'],function() {
+		
 		//执行增加购物车内的食物
 		Route::post('carts','ShopController@carts'); 
 		//执行减少购物车内的食物
@@ -102,11 +114,13 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		//加载订单界面
 		Route::get('order','OrderController@order');
 	}) ;
-	Route::group(['prefix'=>'user'],function() {
+	Route::group(['prefix'=>'user','middleware'=>'homelogin'],function() {
 		//加载用户订单页面
 		Route::get('member_order','UserController@member_order') ;
 		//加载用户收藏页面
 		Route::get('member_collect','UserController@member_collect') ;
+		//修改订单状态member_collect_state
+		Route::get('member_collect_state','UserController@member_collect_state') ;
 		//用户地址管理
 		Route::get('member_addr','UserController@member_addr') ;
 		//账号管理 个人中心
@@ -130,11 +144,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function() {
 		//执行密码修改
 		Route::get('pass_edit_do_go','UserController@pass_edit_do_go') ;
 
+
 	}) ;
 	//修改用户名
 	//Route::get('/home/user/user_edit','Home\UserController@userName_edit') ;
 
-	Route::group(['prefix'=>'order'],function() {
+	Route::group(['prefix'=>'order','middleware'=>'homelogin'],function() {
 		//用户下单页面  店铺详情页购物车 跳转过来的
 		Route::get('order','OrderController@order') ;
 		//加载地址添加页面
